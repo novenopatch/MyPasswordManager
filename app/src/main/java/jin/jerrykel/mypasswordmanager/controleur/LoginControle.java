@@ -28,4 +28,10 @@ public class LoginControle {
 
 
     }
+    public  boolean connectIdTest(String user, String password){
+       if(user.equals("jin")&& password.equals("jo")){
+           return true;
+       }
+       return false;
+    }
 }

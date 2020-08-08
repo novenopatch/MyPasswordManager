@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import jin.jerrykel.mypasswordmanager.R;
 
-public class AppBord extends AppCompatActivity {
+public class AppBordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
