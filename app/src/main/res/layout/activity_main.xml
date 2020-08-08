@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E43F3F"
+    android:background="#64acab"
     tools:context=".vue.MainActivity">
 
    <RelativeLayout
@@ -42,12 +42,14 @@
             android:hint="Mot de passe"
             android:inputType="textPassword"/>
         <Button
+            android:id="@+id/btnconnect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="Connection"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:background="@drawable/custom_btn_connect"
             android:onClick="ConnectionAction"
             />
 

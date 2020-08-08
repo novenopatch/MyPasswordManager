@@ -23,7 +23,7 @@ public class LoginControle {
         }
         return  LoginControle.instance;
     }
-    public void creerProfile(String username,String password, int questionSecret,String reponseQuestion){
+    public void creerUsere(String username,String password, int questionSecret,String reponseQuestion){
         User user = new User(username,password, questionSecret,reponseQuestion);
 
 
