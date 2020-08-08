@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E43F3F"
     tools:context=".vue.MainActivity">
 
    <RelativeLayout
@@ -19,7 +20,8 @@
            android:layout_centerInParent="true"
            android:gravity="center"
            android:text="Connection"
-           android:textSize="30sp"/>
+           android:textSize="30sp"
+           android:textColor="#fff"/>
    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,14 +30,16 @@
         android:orientation="vertical"
         android:layout_margin="30sp">
         <EditText
+            android:id="@+id/editTextIdentifiant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="username"
+            android:hint="Identifiant"
             android:inputType="textEmailAddress"/>
         <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
+            android:hint="Mot de passe"
             android:inputType="textPassword"/>
         <Button
             android:layout_width="wrap_content"
@@ -44,6 +48,7 @@
             android:text="Connection"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:onClick="ConnectionAction"
             />
 
     </LinearLayout>

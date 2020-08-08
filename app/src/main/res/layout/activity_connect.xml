@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E43F3F"
+    tools:context=".vue.ConnectActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="Connection"
+            android:textSize="30sp"
+            android:textColor="#fff"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:layout_margin="30sp">
+        <EditText
+            android:id="@+id/Identifiant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Identifiant"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/Password1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"/>
+        <EditText
+            android:id="@+id/Password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmer Mot de passe"
+            android:inputType="textPassword"/>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:textAlignment="center" />
+        <EditText
+            android:id="@+id/Answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Answer"
+            android:inputType="textEmailAddress"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="S'inscrire"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:onClick="ConnectionAction"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
