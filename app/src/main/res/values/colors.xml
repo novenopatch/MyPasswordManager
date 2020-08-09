@@ -3,9 +3,10 @@
     <color name="colorPrimary">#6200EE</color>
 
     <color name="colorPrimaryDarka">#3700B3</color>
+    <color name="colorPrimaryDarkn">#E12929</color>
     <color name="colorAccenta">#03DAC5</color>
 
-    <color name="colorPrimaryDarkn">#E12929</color>
+
     <color name="colorPrimaryDark">#64acab</color>
     <color name="colorAccent">#FFF</color>
 </resources>

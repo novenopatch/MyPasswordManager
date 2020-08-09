@@ -22,6 +22,7 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         initElement();
+
     }
     public void initElement(){
         loginControle = LoginControle.getInstance();
@@ -32,7 +33,8 @@ public class SaveActivity extends AppCompatActivity {
         Button btnconnect = findViewById(R.id.btnconnect);
         if(!editTextIdentifiant.getText().toString().isEmpty() && !editTextPassword.getText().toString().isEmpty()){
             if(loginControle.connectIdTest(editTextIdentifiant.getText().toString(),editTextPassword.getText().toString()) ){
-               Intent intent = new Intent(SaveActivity.this, AppBordActivity.class);
+
+                Intent intent = new Intent(SaveActivity.this, AppBordActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -52,4 +54,13 @@ public class SaveActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        editTextIdentifiant.setText("");
+        editTextPassword.setText("");
+
+    }
+
 }

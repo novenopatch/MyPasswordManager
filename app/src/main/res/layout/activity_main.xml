@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--  android:background="#FeFAD4" -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FeFAD4"
+    android:background="#64acab"
     tools:context=".vue.MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             android:gravity="center"
             android:text="Password Manager"
             android:textSize="30sp"
-            android:textColor="#4D5E72"/>
+            android:textColor="#fff"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
         android:orientation="vertical"
         android:layout_margin="30sp">
         <Button
-            android:id="@+id/editTextIdentifiant"
+            android:id="@+id/btnGenerer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -38,9 +39,10 @@
             android:text="Génerer"
             android:gravity="center"
             android:textColor="#fff"
+            android:onClick="btnaction"
            />
         <Button
-            android:id="@+id/editTextPassword"
+            android:id="@+id/btnSauveugarder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -48,9 +50,10 @@
             android:text="Sauveugarder"
             android:gravity="center"
             android:textColor="#fff"
+            android:onClick="btnaction"
            />
         <Button
-            android:id="@+id/btnconnect"
+            android:id="@+id/btnNoter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -58,6 +61,7 @@
             android:text="Noter"
             android:gravity="center"
             android:textColor="#fff"
+            android:onClick="btnaction"
             />
 
     </LinearLayout>
