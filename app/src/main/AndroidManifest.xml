@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vue.GenererPasswordActivity"/>
+
         <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.SaveActivity" />
-        <activity android:name=".vue.AppBordActivity" />
-        <activity android:name=".vue.ConnectActivity" />
+        <activity android:name=".vue.GenererPasswordActivity"
+            android:parentActivityName=".vue.MainActivity"/>
+        <activity android:name=".vue.SaveActivity"
+            android:parentActivityName=".vue.MainActivity">
+        </activity>
+
+        <activity android:name=".vue.AppBordActivity"
+            android:parentActivityName=".vue.SaveActivity"/>
+        <activity android:name=".vue.ConnectActivity"
+            android:parentActivityName=".vue.SaveActivity"/>
     </application>
 
 </manifest>
