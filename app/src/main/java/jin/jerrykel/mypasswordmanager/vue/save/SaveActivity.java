@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue;
+package jin.jerrykel.mypasswordmanager.vue.save;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.LoginControle;
+import jin.jerrykel.mypasswordmanager.vue.save.appBord.AppBordActivity;
 
 public class SaveActivity extends AppCompatActivity {
     private EditText editTextIdentifiant;

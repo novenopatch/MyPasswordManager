@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#317589"
-    tools:context=".vue.SaveActivity">
+    tools:context=".vue.save.SaveActivity"
+    android:padding="16dp">
 
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_weight="0.5"
        android:orientation="vertical"
+
        >
        <TextView
            android:layout_width="match_parent"
@@ -21,26 +23,43 @@
            android:gravity="center"
            android:text="Connection"
            android:textSize="30sp"
+
            android:textColor="#fff"/>
    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:orientation="vertical"
         android:layout_margin="30sp">
-        <EditText
-            android:id="@+id/editTextIdentifiant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Identifiant"
-            android:inputType="textEmailAddress"/>
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mot de passe"
-            android:inputType="textPassword"/>
+
+                <EditText
+                    android:id="@+id/editTextIdentifiant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Identifiant"
+                    android:ems="10"
+                    android:padding="12dp"
+                    android:textColor="@color/colorAccent"
+                    android:drawableStart="@drawable/identifiant_icone"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:padding="12dp"
+                    android:textColor="@color/colorAccent"
+                    android:hint="Mot de passe"
+                    android:drawableStart="@drawable/password_icone"
+                    android:inputType="textPassword"/>
+
+
         <Button
             android:id="@+id/btnconnect"
             android:layout_width="wrap_content"

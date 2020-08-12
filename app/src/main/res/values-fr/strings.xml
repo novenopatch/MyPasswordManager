@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Password Manager+</string>
+    <string name="first_textview_menu">Password Manager</string>
+    <string name="menu_string_generer"> Generer</string>
+    <string name="menu_sauveugarder"> Sauvegader</string>
+    <string name="menu_noter">Noter</string>
+</resources>

@@ -17,16 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.GenererPasswordActivity"
+        <activity android:name=".vue.generer.GenererPasswordActivity"
             android:parentActivityName=".vue.MainActivity"/>
-        <activity android:name=".vue.SaveActivity"
+        <activity android:name=".vue.save.SaveActivity"
             android:parentActivityName=".vue.MainActivity">
         </activity>
 
-        <activity android:name=".vue.AppBordActivity"
-            android:parentActivityName=".vue.SaveActivity"/>
-        <activity android:name=".vue.ConnectActivity"
-            android:parentActivityName=".vue.SaveActivity"/>
+        <activity android:name=".vue.save.appBord.AppBordActivity"
+            android:parentActivityName=".vue.save.SaveActivity"/>
+        <activity android:name=".vue.save.createLogin.ConnectActivity"
+            android:parentActivityName=".vue.save.SaveActivity"/>
     </application>
 
 </manifest>

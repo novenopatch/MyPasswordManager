@@ -15,11 +15,12 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/textv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="Password Manager"
+            android:text="@string/first_textview_menu"
             android:textSize="30sp"
             android:textColor="#fff"/>
     </RelativeLayout>
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_btn1"
-            android:text="Génerer"
+            android:text="@string/menu_string_generer"
             android:gravity="center"
             android:textColor="#fff"
             android:onClick="btnaction"
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_btn2"
-            android:text="Sauveugarder"
+            android:text="@string/menu_sauveugarder"
             android:gravity="center"
             android:textColor="#fff"
             android:onClick="btnaction"
@@ -58,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_btn3"
-            android:text="Noter"
+            android:text="@string/menu_noter"
             android:gravity="center"
             android:textColor="#fff"
             android:onClick="btnaction"

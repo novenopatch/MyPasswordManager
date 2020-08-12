@@ -1,14 +1,15 @@
-package jin.jerrykel.mypasswordmanager.vue;
+package jin.jerrykel.mypasswordmanager.vue.save.createLogin;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import jin.jerrykel.mypasswordmanager.R;
 
-public class GenererPasswordActivity extends AppCompatActivity {
+public class ConnectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generer_password);
+        setContentView(R.layout.activity_connect);
     }
 }
