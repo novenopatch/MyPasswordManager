@@ -11,16 +11,6 @@
         android:theme="@style/AppTheme">
 
         <!-- A child of the main activity -->
-        <activity
-            android:name=".vue.DetailActivity"
-            android:label="Detail"
-            android:parentActivityName=".vue.MainActivity" >
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".vue.MainActivity" />
-        </activity>
         <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

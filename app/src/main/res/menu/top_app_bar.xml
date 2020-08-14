@@ -1,12 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/favorite"
-        android:icon="@drawable/ic_favorite_24dp"
-        android:title="favorite"
-        android:contentDescription="content_description_favorite"
-        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/search"

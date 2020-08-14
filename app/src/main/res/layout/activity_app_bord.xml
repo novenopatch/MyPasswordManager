@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- style="@style/Widget.MaterialComponents.Toolbar.Primary" -->
 <!--
+           <com.google.android.material.tabs.TabItem
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:icon="@drawable/ic_favorite_24dp"
+               android:text="@string/menu_string_generer"
+
+               />
+
+           <com.google.android.material.tabs.TabItem
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:icon="@drawable/ic_table2_24dp"
+               android:text="@string/menu_sauveugarder" />
+           -->
+<!--
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,6 +40,7 @@
             />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/activity_main_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#B6C9F1"
@@ -33,19 +49,7 @@
             app:tabSelectedTextColor="#fff"
             app:tabTextColor="#D4E0F8">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_favorite_24dp"
-                android:text="@string/menu_string_generer"
 
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_table2_24dp"
-                android:text="@string/menu_sauveugarder" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -53,7 +57,7 @@
 
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -67,14 +71,24 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout> -->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    -->
 <LinearLayout
+    android:id="@+id/fragment_page_rootview"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".vue.save.appBord.AppBordActivity">
+    tools:context=".vue.save.appBord.AppBordActivity"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/fragment_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
 
 </LinearLayout>

@@ -3,24 +3,18 @@ package jin.jerrykel.mypasswordmanager.vue;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.vue.fragment.MainFragment;
-import jin.jerrykel.mypasswordmanager.vue.generer.GenererPasswordActivity;
-import jin.jerrykel.mypasswordmanager.vue.save.SaveActivity;
+import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
 //couleur cool "#ddd"
 /*
 implementation "org.passay:passay:1.6.0"
@@ -40,34 +34,96 @@ implementation "org.passay:passay:1.6.0"
         <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="android:textColorHint">@color/colorAccent</item>
  */
-//public class MainActivity extends AppCompatActivity {
-public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
+public class MainActivity extends AppCompatActivity {
+// public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
     private Button btnGenerer;
     private Button btnSauveugarder;
     private Button btnNoter;
     private Button imageViewOC;
 
 
-    // 1 - Declare main fragment
-    private MainFragment mainFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // 2 - Configure and show home fragment
-        this.configureAndShowMainFragment();
 
-
-        //init();
-    }
-    /*
-    private void init(){
         //1 - Configuring Toolbar
         this.configureToolbar();
 
-        //2 - Serialise & confige imageView
-        this.configureImageView();
+
+        //init();
+       // 3 - Configure ViewPager
+        //this.configureViewPager();
+        this.configureViewPagerAndTabs();
+    }
+
+
+
+
+
+
+
+
+
+
+    private void configureToolbar(){
+        // Get the toolbar view inside the activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar
+        setSupportActionBar(toolbar);
+
+        //// Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //2 - Inflate the menu and add it to the Toolbar
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //3 - Handle actions on menu items
+        switch (item.getItemId()) {
+            case R.id.menu_activity_main_params:
+                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_activity_main_search:
+                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void configureViewPager(){
+        // 1 - Get ViewPager from layout
+        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
+        // 2 - Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager() ));
+    }
+    private void configureViewPagerAndTabs(){
+        //Get ViewPager from layout
+        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
+        //Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+
+        // 1 - Get TabLayout from layout
+        TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
+        // 2 - Glue TabLayout and ViewPager together
+        tabs.setupWithViewPager(pager);
+        // 3 - Design purpose. Tabs have the same width
+        tabs.setTabMode(TabLayout.MODE_FIXED);
+    }
+
+
+      /*
+    private void init(){
 
         btnGenerer = findViewById(R.id.btnGenerer);
         btnSauveugarder = findViewById(R.id.btnSauveugarder);
@@ -106,84 +162,5 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnBu
 
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //2 - Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
-    }
-
-    // ----
-    private void configureToolbar(){
-        // Get the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // Sets the Toolbar
-        setSupportActionBar(toolbar);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //3 - Handle actions on menu items
-        switch (item.getItemId()) {
-            case R.id.menu_activity_main_params:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_activity_main_search:
-                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void configureImageView(){
-        this.imageViewOC = (Button) this.findViewById(R.id.btnconnect);
-        // Set OnClick Listener on it
-        imageViewOC.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                // Serialise ImageView
-
-                //Launch Detail Activity
-                launchDetailActivity();
-            }
-        });
-    }
-
-    // ----
-
-    private void launchDetailActivity(){
-        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
-        this.startActivity(myIntent);
-    }
-
-
-
-
-     */
-    // --------------
-    // FRAGMENTS
-    // --------------
-
-    private void configureAndShowMainFragment(){
-        // A - Get FragmentManager (Support) and Try to find existing instance of fragment in FrameLayout container
-        mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_main);
-
-        if (mainFragment == null) {
-            // B - Create new main fragment
-            mainFragment = new MainFragment();
-            // C - Add it to FrameLayout container
-            getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_main, mainFragment).commit();
-        }
-    }
-    @Override
-    public void onButtonClicked(View view) {
-        Log.e(getClass().getSimpleName(),"Button clicked !");
-
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
-
+   */
 }

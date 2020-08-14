@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        app:menu="@menu/top_app_bar"
 
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText"
+    app:navigationIcon="@drawable/ic_baseline_menu_24"
+
     />
