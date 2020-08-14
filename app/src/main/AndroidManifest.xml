@@ -6,10 +6,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/mon_icone"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/mon_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".vue.MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,16 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.generer.GenererPasswordActivity"
-            android:parentActivityName=".vue.MainActivity"/>
-        <activity android:name=".vue.save.SaveActivity"
-            android:parentActivityName=".vue.MainActivity">
-        </activity>
-
-        <activity android:name=".vue.save.appBord.AppBordActivity"
-            android:parentActivityName=".vue.save.SaveActivity"/>
-        <activity android:name=".vue.save.createLogin.ConnectActivity"
-            android:parentActivityName=".vue.save.SaveActivity"/>
+        <activity
+            android:name=".vue.generer.GenererPasswordActivity"
+            android:parentActivityName=".vue.MainActivity" />
+        <activity
+            android:name=".vue.save.SaveActivity"
+            android:parentActivityName=".vue.MainActivity"></activity>
+        <activity
+            android:name=".vue.save.appBord.AppBordActivity"
+            android:parentActivityName=".vue.save.SaveActivity" />
+        <activity
+            android:name=".vue.save.createLogin.ConnectActivity"
+            android:parentActivityName=".vue.save.SaveActivity" />
     </application>
 
 </manifest>

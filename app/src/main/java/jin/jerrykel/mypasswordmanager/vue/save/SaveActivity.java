@@ -3,9 +3,13 @@ package jin.jerrykel.mypasswordmanager.vue.save;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -31,7 +35,32 @@ public class SaveActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
     }
     public void ConnectionAction(View view){
-        Button btnconnect = findViewById(R.id.btnconnect);
+       // Button btnconnect = findViewById(R.id.btnconnect);
+        TranslateAnimation animation = new TranslateAnimation(0,100,0,0);
+        animation.setDuration(200);
+
+        view.startAnimation(animation);
+        /*
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:{
+                        v.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:{
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+         */
         if(!editTextIdentifiant.getText().toString().isEmpty() && !editTextPassword.getText().toString().isEmpty()){
             if(loginControle.connectIdTest(editTextIdentifiant.getText().toString(),editTextPassword.getText().toString()) ){
 
@@ -53,6 +82,11 @@ public class SaveActivity extends AppCompatActivity {
         translateAnimation.setDuration(500);
         // btnconnect.startAnimation(translateAnimation);
 
+
+
+        //Animation shake = AnimationUtils.loadAnimation(this, R.anim.shakeanimation);
+
+        //btnconnect.setAnimation(shake);
 
     }
 

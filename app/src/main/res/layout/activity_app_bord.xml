@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- style="@style/Widget.MaterialComponents.Toolbar.Primary" -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vue.save.appBord.AppBordActivity">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="Ca fonctionne "/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/page_title"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/ic_menu_24dp"
+
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        android:background="#B6C9F1"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabTextColor="#D4E0F8"
+        app:tabSelectedTextColor="#fff"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_1"
+            android:icon="@drawable/ic_favorite_24dp"
+
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_2"
+            android:icon="@drawable/ic_music_24dp"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_3"
+            android:icon="@drawable/ic_search_24dp"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+    <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
 </LinearLayout>
