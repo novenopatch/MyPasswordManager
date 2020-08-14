@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--  android:background="#FeFAD4" -->
-<!-- Importation de notre Toolbar -->
-<!--
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +8,6 @@
     android:orientation="vertical"
     android:background="#64acab"
     tools:context=".vue.MainActivity">
-
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,10 +68,3 @@
     </LinearLayout>
 
 </LinearLayout>
-    -->
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_layout_main"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"/>

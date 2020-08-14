@@ -9,10 +9,18 @@
         android:roundIcon="@mipmap/mon_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- A child of the main activity -->
         <activity
-            android:name=".vue.MainActivity2"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".vue.DetailActivity"
+            android:label="Detail"
+            android:parentActivityName=".vue.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".vue.MainActivity" />
+        </activity>
         <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +33,7 @@
             android:parentActivityName=".vue.MainActivity" />
         <activity
             android:name=".vue.save.SaveActivity"
-            android:parentActivityName=".vue.MainActivity"></activity>
+            android:parentActivityName=".vue.MainActivity" />
         <activity
             android:name=".vue.save.appBord.AppBordActivity"
             android:parentActivityName=".vue.save.SaveActivity" />
