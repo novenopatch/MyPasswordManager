@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_page_news_rootview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".vue.fragment.GenererFragment">
+    tools:context=".vue.fragment.SaveFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="string/generer"
+        android:text="string/Save"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="#000"
@@ -26,7 +25,7 @@
         android:layout_height="0dp"
         android:layout_margin="20dip"
         android:layout_weight="1"
-        android:background="#000"
+        android:background="#eb1000"
         android:gravity="center"
         android:text="Nous pourrions afficher un fil d'actualité ici non ?"
         android:textAlignment="center"
@@ -34,5 +33,4 @@
         android:textSize="25sp"
         android:textStyle="bold"
         tools:ignore="RtlCompat" />
-
 </LinearLayout>

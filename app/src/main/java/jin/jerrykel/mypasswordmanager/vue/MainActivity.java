@@ -8,7 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -63,19 +63,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // 6 - Configure all views
 
-
-        this.configureDrawerLayout();
-
-
-        //1 - Configuring Toolbar
-        this.configureToolbar();
-
-
         //init();
        // 3 - Configure ViewPager
         //this.configureViewPager();
-        this.configureViewPagerAndTabs();
+
+
+
+
+        this.configureDrawerLayout();
+        this.configureToolbar();
         this.configureNavigationView();
+        this.configureViewPagerAndTabs();
+    }
+
+    // 2 - Configure Drawer Layout
+    private void configureDrawerLayout(){
+        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void configureToolbar(){
@@ -89,6 +95,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
     }
+
+    // 3 - Configure NavigationView
+    private void configureNavigationView(){
+        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void configureViewPagerAndTabs(){
+        //Get ViewPager from layout
+        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
+        //Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+
+        // 1 - Get TabLayout from layout
+        TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
+        // 2 - Glue TabLayout and ViewPager together
+        tabs.setupWithViewPager(pager);
+        // 3 - Design purpose. Tabs have the same width
+        tabs.setTabMode(TabLayout.MODE_FIXED);//Mode_Fixed
+    }
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
@@ -111,29 +141,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                else drawerLayout.closeDrawer(Gravity.END);
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-private DrawerLayout getDrawerLayout(){
-        return this.drawerLayout;
-}
-    private void configureViewPager(){
-        // 1 - Get ViewPager from layout
-        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
-        // 2 - Set Adapter PageAdapter and glue it together
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager() ));
-    }
-    private void configureViewPagerAndTabs(){
-        //Get ViewPager from layout
-        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
-        //Set Adapter PageAdapter and glue it together
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
-
-        // 1 - Get TabLayout from layout
-        TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
-        // 2 - Glue TabLayout and ViewPager together
-        tabs.setupWithViewPager(pager);
-        // 3 - Design purpose. Tabs have the same width
-        tabs.setTabMode(TabLayout.MODE_FIXED);
     }
     @Override
     public void onBackPressed() {
@@ -167,25 +174,6 @@ private DrawerLayout getDrawerLayout(){
 
         return true;
     }
-
-    // ---------------------
-    // CONFIGURATION
-    // ---------------------
-
-    // 2 - Configure Drawer Layout
-    private void configureDrawerLayout(){
-        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-    }
-
-    // 3 - Configure NavigationView
-    private void configureNavigationView(){
-        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
 
       /*
     private void init(){

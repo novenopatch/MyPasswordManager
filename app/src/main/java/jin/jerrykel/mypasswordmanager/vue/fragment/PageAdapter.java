@@ -16,24 +16,13 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     }
 
+
     @Override
     public int getCount() {
         return (2); // 2- number of page to show
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "1Fil d'a";
-            case 1:
-                return "2";
-            default:
-                return null;
-        }
 
-
-    }
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -41,9 +30,24 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return GenererFragment.newInstance();
             case 1:
-                return GenererFragment.newInstance();
+                return SaveFragment.newInstance();
             default:
                 return  null;
         }
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return  GenererFragment.getStringTile();
+            case 1:
+                return SaveFragment.getStringTile();
+            default:
+                return null;
+        }
+
+
+    }
+
 }

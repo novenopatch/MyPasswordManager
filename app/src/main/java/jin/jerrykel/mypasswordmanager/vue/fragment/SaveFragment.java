@@ -16,40 +16,34 @@ import jin.jerrykel.mypasswordmanager.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GenererFragment#newInstance} factory method to
+ * Use the {@link SaveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GenererFragment extends Fragment {
+public class SaveFragment extends Fragment {
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private static String pageTitle= "Save";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+
 
     //FOR DESIGN
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static String pageTitle="Generer";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public static GenererFragment newInstance() {
-        return (new GenererFragment());
-    }
-
-    public static String getStringTile() {
-        return pageTitle;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_generer, container, false);
-    }
-    public GenererFragment() {
+    public SaveFragment() {
         // Required empty public constructor
+    }
+    public static SaveFragment newInstance() {
+        return new SaveFragment();
     }
 
     /**
@@ -58,9 +52,10 @@ public class GenererFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GenererFragment.
+     * @return A new instance of fragment SaveFragment.
      */
     // TODO: Rename and change types and number of parameters
+
     public static GenererFragment newInstance(String param1, String param2) {
         GenererFragment fragment = new GenererFragment();
         Bundle args = new Bundle();
@@ -69,7 +64,6 @@ public class GenererFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +72,18 @@ public class GenererFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_save, container, false);
+    }
+    public static String getStringTile(){
+
+        return pageTitle;
+    }
+
 
 
 }
