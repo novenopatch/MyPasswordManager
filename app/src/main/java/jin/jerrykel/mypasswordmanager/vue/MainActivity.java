@@ -1,16 +1,22 @@
 package jin.jerrykel.mypasswordmanager.vue;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
@@ -34,13 +40,18 @@ implementation "org.passay:passay:1.6.0"
         <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="android:textColorHint">@color/colorAccent</item>
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 // public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
     private Button btnGenerer;
     private Button btnSauveugarder;
     private Button btnNoter;
     private Button imageViewOC;
 
+    //FOR DESIGN
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
 
 
@@ -48,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // 6 - Configure all views
+
+
+        this.configureDrawerLayout();
+
 
         //1 - Configuring Toolbar
         this.configureToolbar();
@@ -57,16 +75,8 @@ public class MainActivity extends AppCompatActivity {
        // 3 - Configure ViewPager
         //this.configureViewPager();
         this.configureViewPagerAndTabs();
+        this.configureNavigationView();
     }
-
-
-
-
-
-
-
-
-
 
     private void configureToolbar(){
         // Get the toolbar view inside the activity layout
@@ -96,11 +106,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
             default:
+               if(!this.drawerLayout.isDrawerOpen(Gravity.START))
+                   drawerLayout.openDrawer(Gravity.START);
+               else drawerLayout.closeDrawer(Gravity.END);
                 return super.onOptionsItemSelected(item);
         }
     }
 
-
+private DrawerLayout getDrawerLayout(){
+        return this.drawerLayout;
+}
     private void configureViewPager(){
         // 1 - Get ViewPager from layout
         ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
@@ -119,6 +134,56 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(pager);
         // 3 - Design purpose. Tabs have the same width
         tabs.setTabMode(TabLayout.MODE_FIXED);
+    }
+    @Override
+    public void onBackPressed() {
+        // 5 - Handle back click to close menu
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        // 4 - Handle Navigation Item Click
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.activity_main_drawer_news :
+                break;
+            case R.id.activity_main_drawer_profile:
+                break;
+            case R.id.activity_main_drawer_settings:
+                break;
+            default:
+                break;
+        }
+
+        this.drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+    // ---------------------
+    // CONFIGURATION
+    // ---------------------
+
+    // 2 - Configure Drawer Layout
+    private void configureDrawerLayout(){
+        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    // 3 - Configure NavigationView
+    private void configureNavigationView(){
+        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
 
