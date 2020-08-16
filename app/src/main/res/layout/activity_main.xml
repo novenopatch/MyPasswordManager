@@ -102,61 +102,18 @@
         android:fitsSystemWindows="true"
     >
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/ToolBarStyle">
-            <include
-                layout="@layout/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!--
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="@string/first_textview_menu"
-                app:menu="@menu/top_app_bar"
-                app:navigationIcon="@drawable/ic_baseline_menu_24"
-
-                />
-                 -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/activity_main_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#B6C9F1"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="#fff"
-                app:tabTextColor="#D4E0F8">
+       <include
+           layout="@layout/app_bar_main"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
 
 
-            </com.google.android.material.tabs.TabLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/main_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <!-- 1 | MainActivity RootView -->
 
 
 
-    </LinearLayout>
+
     <!--  <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

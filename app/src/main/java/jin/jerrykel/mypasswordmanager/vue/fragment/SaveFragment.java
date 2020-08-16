@@ -14,11 +14,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import jin.jerrykel.mypasswordmanager.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SaveFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SaveFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

@@ -36,18 +36,7 @@
         android:orientation="vertical"
         android:layout_margin="30sp">
 
-                <EditText
-                    android:id="@+id/editTextIdentifiant"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="Identifiant"
-                    android:ems="10"
-                    android:padding="12dp"
-                    android:textColor="@color/colorAccent"
-                    android:drawableStart="@drawable/identifiant_icone"
-                    android:inputType="textEmailAddress"/>
-                <EditText
+        <EditText
                     android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

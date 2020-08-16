@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
 //couleur cool "#ddd"
 /*
@@ -40,7 +44,8 @@ implementation "org.passay:passay:1.6.0"
         <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="android:textColorHint">@color/colorAccent</item>
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener ,NavDrawerMenuTestFragment.OnFragmentInteractionListener{
 
 // public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
     private Button btnGenerer;
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+
         }
     }
 
@@ -159,8 +165,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // 4 - Handle Navigation Item Click
         int id = item.getItemId();
 
+        //open new fragment
+        Fragment fragment = null;
+
         switch (id){
             case R.id.activity_main_drawer_news :
+                fragment = new NavDrawerMenuTestFragment();
+                TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
+                tabLayout.setVisibility(View.INVISIBLE);
+
                 break;
             case R.id.activity_main_drawer_profile:
                 break;
@@ -169,11 +182,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 break;
         }
-
+        if(fragment != null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_viewpager, fragment);
+            ft.commit();
+        }
         this.drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
+    @Override
+    public void OnFragmentInteractionChangeTitle(String title) {
+        getSupportActionBar().setTitle(title);
+
+    }
+
 
       /*
     private void init(){

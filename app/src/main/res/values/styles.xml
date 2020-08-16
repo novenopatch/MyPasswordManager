@@ -35,17 +35,15 @@
         <!-- Color of the title text in the Toolbar -->
         <item name="android:textColorPrimary">@color/colorAccent</item>
     </style>
-    <!-- Toolbar theme. -->
-    <style name="ToolBarStyle" parent="AppTheme">
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="colorControlNormal">@android:color/white</item>
-    </style>
+   s
 
 
     <!-- TOOLBAR TITLE THEME -->
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">italic</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
