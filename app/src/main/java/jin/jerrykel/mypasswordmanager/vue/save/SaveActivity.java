@@ -31,8 +31,8 @@ public class SaveActivity extends AppCompatActivity {
     }
     public void initElement(){
         loginControle = LoginControle.getInstance();
-        editTextIdentifiant = findViewById(R.id.editTextIdentifiant);
-        editTextPassword = findViewById(R.id.editTextPassword);
+        //editTextIdentifiant = findViewById(R.id.editTextIdentifiant);
+       // editTextPassword = findViewById(R.id.editTextPassword);
     }
     public void ConnectionAction(View view){
        // Button btnconnect = findViewById(R.id.btnconnect);

@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
     }
+    @SuppressLint("WrongConstant")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
@@ -170,12 +173,20 @@ public class MainActivity extends AppCompatActivity
 
         switch (id){
             case R.id.activity_main_drawer_news :
-                fragment = new NavDrawerMenuTestFragment();
-                TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
-                tabLayout.setVisibility(View.INVISIBLE);
+               // fragment = new NavDrawerMenuTestFragment();
+               // TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
+                //tabLayout.setVisibility(View.INVISIBLE);
 
+                Intent intent2 = new Intent(MainActivity.this, MainActivity2.class);
+                //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent2);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_profile:
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_settings:
                 break;

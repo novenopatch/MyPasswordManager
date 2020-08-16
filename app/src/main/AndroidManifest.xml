@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/mon_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".vue.MainActivity2"></activity>
         <!-- A child of the main activity -->
         <activity android:name=".vue.MainActivity">
             <intent-filter>
@@ -17,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.generer.GenererPasswordActivity" />
         <activity android:name=".vue.save.SaveActivity" />
         <activity android:name=".vue.save.appBord.AppBordActivity" />
         <activity android:name=".vue.save.createLogin.ConnectActivity" />
