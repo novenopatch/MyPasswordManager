@@ -1,5 +1,7 @@
 package jin.jerrykel.mypasswordmanager.vue.fragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -36,7 +38,7 @@ public class GenererFragment extends Fragment {
     private Button buttonGenerate;
     private EditText editTextPasswordGenerate;
     private static String pageTitle="Generer";
-
+    private Context context;
 
 
 
@@ -47,8 +49,12 @@ public class GenererFragment extends Fragment {
     private View.OnClickListener btnGenerateListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            editTextPasswordGenerate.setText(setPassword());
-            Toast.makeText(v.getContext(), "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+            String password = setPassword();
+            editTextPasswordGenerate.setText(password);
+            ClipboardManager clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("copy Text",password);
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(v.getContext(), "ajouter au presse-papier...", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -75,6 +81,7 @@ public class GenererFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+       this.context = context;
 
 
     }

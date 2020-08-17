@@ -55,6 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp"
                 android:orientation="vertical">
 
                 <Button
@@ -72,7 +74,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/custom_btn_connect">
+                    android:background="@drawable/custom_btn_connect"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp">
 
                     <EditText
                         android:id="@+id/editTextPasswordGenerate"
@@ -80,7 +84,8 @@
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:inputType="textLongMessage" />
+                        android:inputType="textLongMessage"
+                         />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -99,14 +104,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp">
 
                 <Switch
                     android:id="@+id/switch1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:text="custom"
+                    android:paddingBottom="10sp"
+                    android:text="Default"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -152,7 +160,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
 
                         <CheckBox
                             android:id="@+id/checkBox4"
@@ -179,7 +188,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
 
                         <TextView
                             android:id="@+id/textView4"
