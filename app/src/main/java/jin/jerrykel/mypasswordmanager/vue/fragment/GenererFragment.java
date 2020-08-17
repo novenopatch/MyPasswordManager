@@ -24,23 +24,26 @@ import jin.jerrykel.mypasswordmanager.vue.MainActivity;
 
 public class GenererFragment extends Fragment {
 
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static String pageTitle="Generer";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
 
 
     private View rootView ;
     private Button buttonGenerate;
     private EditText editTextPasswordGenerate;
+    private static String pageTitle="Generer";
 
+
+
+
+
+
+
+    //bouton Listener
     private View.OnClickListener btnGenerateListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -62,10 +65,9 @@ public class GenererFragment extends Fragment {
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_generer, container, false);
-        buttonGenerate =(Button) rootView.findViewById(R.id.buttonGenerate);
-        editTextPasswordGenerate = (EditText) rootView.findViewById(R.id.editTextPasswordGenerate);
 
-        buttonGenerate.setOnClickListener(btnGenerateListener);
+        //this methode intialise graphique element
+        initView();
         return rootView;
     }
 
@@ -80,8 +82,7 @@ public class GenererFragment extends Fragment {
         // Required empty public constructor
     }
 
-  
-    // TODO: Rename and change types and number of parameters
+
     public static GenererFragment newInstance(String param1, String param2) {
         GenererFragment fragment = new GenererFragment();
         Bundle args = new Bundle();
@@ -99,6 +100,15 @@ public class GenererFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public void initView(){
+        buttonGenerate =(Button) rootView.findViewById(R.id.buttonGenerate);
+        editTextPasswordGenerate = (EditText) rootView.findViewById(R.id.editTextPasswordGenerate);
+
+        buttonGenerate.setOnClickListener(btnGenerateListener);
+    }
+
+
+    //this methode set password
     public String setPassword(){
         RandomPasswordGenerator passGen = new RandomPasswordGenerator();
         String password = passGen.generatePassayPassword();
