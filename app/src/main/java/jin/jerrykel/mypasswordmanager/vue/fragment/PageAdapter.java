@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import jin.jerrykel.mypasswordmanager.vue.fragment.GenererFragment;
-
 public class PageAdapter extends FragmentPagerAdapter {
-
 
     // 2 - Default Constructor
     public PageAdapter(@NonNull FragmentManager fm) {
@@ -49,5 +46,6 @@ public class PageAdapter extends FragmentPagerAdapter {
 
 
     }
+
 
 }

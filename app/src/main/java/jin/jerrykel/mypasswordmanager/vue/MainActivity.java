@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.vue.fragment.GenererFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
 //couleur cool "#ddd"
@@ -208,6 +209,8 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(title);
 
     }
+
+
 
 
       /*

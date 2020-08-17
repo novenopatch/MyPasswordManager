@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Password Manager+</string>
-    <string name="first_textview_menu">Password Manager</string>
+    <string name="app_name">SafePass</string>
+    <string name="first_textview_menu">SafePass</string>
     <string name="menu_string_generer"> Generate </string>
     <string name="menu_sauveugarder"> Save </string>
     <string name="menu_noter">Rate</string>
