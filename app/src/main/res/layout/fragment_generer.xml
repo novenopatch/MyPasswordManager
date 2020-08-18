@@ -104,16 +104,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingLeft="10sp"
-                android:paddingRight="10sp">
+                android:orientation="vertical">
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switch_custom_or_default"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:paddingBottom="10sp"
+                    android:paddingBottom="2sp"
                     android:text="Default"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -132,7 +130,7 @@
                         android:orientation="horizontal">
 
                         <CheckBox
-                            android:id="@+id/checkBox2"
+                            android:id="@+id/checkBox_lowerCase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -140,7 +138,7 @@
                             android:text="Lowercase" />
 
                         <CheckBox
-                            android:id="@+id/checkBox"
+                            android:id="@+id/checkBox_upperCase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -148,7 +146,7 @@
                             android:text="Upercase" />
 
                         <CheckBox
-                            android:id="@+id/checkBox3"
+                            android:id="@+id/checkBox_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -160,11 +158,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp">
+                        android:orientation="horizontal">
 
                         <CheckBox
-                            android:id="@+id/checkBox4"
+                            android:id="@+id/checkBox_special_chars"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -173,11 +170,10 @@
                             android:text="Special chars" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName"
+                            android:id="@+id/editTextText_special_chars"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:ems="10"
                             android:focusable="false"
                             android:inputType="text"
                             android:text="#$%^&amp;* ()__+"
@@ -188,11 +184,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp">
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/textView_pass_lenght"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -200,7 +195,7 @@
                             android:text="length " />
 
                         <EditText
-                            android:id="@+id/editTextNumber"
+                            android:id="@+id/editText_pass_lenght"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -216,22 +211,26 @@
                             android:orientation="horizontal">
 
                             <ImageButton
-                                android:id="@+id/btnListSuppr"
+                                android:id="@+id/imgBtn_remove"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/ic_baseline_remove_circle_outline_24"
-                                tools:ignore="VectorDrawableCompat" />
+                                tools:ignore="VectorDrawableCompat"
+                                android:onClick="clickAction"
+                                />
 
                             <Space
                                 android:layout_width="20dp"
                                 android:layout_height="wrap_content" />
 
                             <ImageButton
-                                android:id="@+id/btnListAdd"
+                                android:id="@+id/imgBtn_add"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/ic_baseline_add_circle_24"
-                                tools:ignore="VectorDrawableCompat" />
+                                tools:ignore="VectorDrawableCompat"
+                                android:onClick="clickAction"
+                                />
 
                         </LinearLayout>
                     </LinearLayout>
