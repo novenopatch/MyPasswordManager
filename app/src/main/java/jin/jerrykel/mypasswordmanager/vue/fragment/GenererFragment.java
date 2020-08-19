@@ -69,7 +69,6 @@ public class GenererFragment extends Fragment {
         @Override
         public void onClick(View v) {
             View[] viewsche = {editTextSpecialchars,textViewPassLenght,editTextPasswordLength,checkBoxUpperCase,checkBoxLowerCase ,checkBoxNumber,checkBoxSpicalChars,imgBtnAdd,imgBtnRemove};
-
             String password = "";
             if(switch_custom_or_default.isChecked()){
                 switch_custom_or_default.setText("Custom");
@@ -83,14 +82,19 @@ public class GenererFragment extends Fragment {
                 if(checkBoxUpperCase.isChecked() && checkBoxLowerCase.isChecked()
                         && checkBoxNumber.isChecked() && checkBoxSpicalChars.isChecked()  ) {
                     password = passGen.generatePassayPassword(Integer.parseInt( editTextPasswordLength.getText().toString() ));
-                    Log.d("1probleme", password);
-                    
-                }
 
+
+                    testPassword(password);
+                }
 
 
             }else{
                 switch_custom_or_default.setText("Default");
+                for(View view : viewsche){
+                    if(v instanceof CheckBox)
+                        ((CheckBox) v).setChecked(true);
+                }
+                editTextPasswordLength.setText(String.valueOf(12));
                 for(View view : viewsche){
                     view.setVisibility(View.INVISIBLE);
                     view.setEnabled(false);
@@ -103,15 +107,62 @@ public class GenererFragment extends Fragment {
 
 
             }
-            editTextPasswordGenerate.setText(password);
-            ClipboardManager clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clipData = ClipData.newPlainText("copy Text",password);
-            clipboardManager.setPrimaryClip(clipData);
-            Toast.makeText(v.getContext(), "ajouter au presse-papier...", Toast.LENGTH_LONG).show();
+            updateEditTextPasswordGenerate(password);
+            copyInClipboardAndNotify(password,v);
 
         }
     };
+    public void testPassword(String password){
+        int specialCharCount = 0;
+        int nombre =0;
+        int upperCase = 0;
+        int lowerCase = 0;
+        char[] chars = {'#','$','%','^','&','*',';','(',')','_',' ','+'};
+        char[] nombrechars = {'1','2','3','4','5','6','7','8','9','0'};
+        char[] upper = {'A','B','C','D','E','F','G','H','I','J','K','M','N','O','P','Q','R','S','T','V','W','X','Y','Z'};
+        char[] lower = {'a','b','c','d','e','f','g','h','i','j','k','m','n','o','p','q','r','s','t','v','w','x','y','z'};
+        for (char c : password.toCharArray()) {
+            for (char s : chars) {
+                if (c == s) {
+                    specialCharCount++;
+                }
+            }
+            for (char s : nombrechars) {
+                if (c == s) {
+                    nombre++;
+                }
+            }
+            for (char s : upper) {
+                if (c == s) {
+                    upperCase++;
+                }
+            }
+            for (char s : lower) {
+                if (c == s) {
+                    lowerCase++;
+                }
+            }
 
+
+        }
+        Log.d("1probleme", "\n____passlenght____ " + String.valueOf(password.length()) +
+                "\n____specialChars_____"+String.valueOf(specialCharCount)
+                +
+                "\n____upperChars_____"+String.valueOf(upperCase)+
+                "\n____lowerChars_____"+String.valueOf(lowerCase)
+                +
+                "\n____nombre_____"+String.valueOf(nombre));
+    }
+    public void updateEditTextPasswordGenerate(String password){
+        editTextPasswordGenerate.setText(password);
+    }
+    public  void copyInClipboardAndNotify(String text, View v){
+        ClipboardManager clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("copy Text",text);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(v.getContext(), "ajouter au presse-papier...", Toast.LENGTH_LONG).show();
+
+    }
     public void updateImgButton(View v){
         if(v.getId() == imgBtnAdd.getId() || v.getId() == imgBtnRemove.getId()){
             switch (v.getId()){
