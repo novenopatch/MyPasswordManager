@@ -18,14 +18,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.RandomPasswordGenerator;
+import jin.jerrykel.mypasswordmanager.utils.AccesLocal;
+import jin.jerrykel.mypasswordmanager.vue.HistoListAdapter;
 import jin.jerrykel.mypasswordmanager.vue.MainActivity;
 
 
@@ -101,7 +107,7 @@ public class GenererFragment extends Fragment {
 
                 }
                 if(v.getId() == buttonGenerate.getId()){ 
-                    password = passGen.generatePassayPassword();
+                    password = returnPassword();
                     
                 }
 
@@ -202,6 +208,7 @@ public class GenererFragment extends Fragment {
 
         //this methode intialise graphique element
         initView();
+        creerListe();
         return rootView;
     }
 
@@ -264,20 +271,27 @@ public class GenererFragment extends Fragment {
 
 
     }
-    public void clickAction(View view){
 
-    }
 
 
     //this methode set password
-    public String setPassword(){
+    public String returnPassword(){
 
         String password = passGen.generatePassayPassword();
         return password;
     }
 
 
-
+    private  void creerListe(){
+        AccesLocal accesLocal = new AccesLocal(context);
+        //ArrayList<Profile> lesProfils = controle.getLesprofils();
+        ArrayList<GeneratePassword> lesProfils = accesLocal.recupAllPassword();
+        if(lesProfils != null){
+            ListView lstHisto = (ListView)rootView.findViewById(R.id.miniHistoGenerate);
+            HistoListAdapter adapter = new HistoListAdapter(context, lesProfils);
+            lstHisto.setAdapter(adapter);
+        }
+    }
 
 
 }

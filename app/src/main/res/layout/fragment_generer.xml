@@ -14,7 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -37,14 +38,14 @@
             android:id="@+id/miniHistoGenerate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0.5" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center|center_horizontal|center_vertical"
-        android:layout_weight="1">
+        android:layout_weight="0.5">
 
         <LinearLayout
             android:id="@+id/cora"

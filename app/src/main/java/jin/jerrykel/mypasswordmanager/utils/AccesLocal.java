@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.Date;
 
+import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.User;
 
 
@@ -77,6 +78,28 @@ public class AccesLocal {
         }
         curseur.close();
         return lesUsers;
+    }
+    public  ArrayList<GeneratePassword> recupAllPassword(){
+        ArrayList<GeneratePassword> lespassword = new  ArrayList<GeneratePassword>();
+        bd = accesBD.getReadableDatabase();
+        GeneratePassword password = null;
+        String req = "select * from User";
+        Cursor curseur = bd.rawQuery(req, null);
+        //curseur.moveToLast();
+        //curseur.move(0);
+        while (curseur.moveToNext()){
+            // Date date  = MesOutils.covertStringToDate(curseur.getString(0));
+            Integer poids = curseur.getInt(1);
+            Integer taille = curseur.getInt(2);
+            Integer age = curseur.getInt(3);
+            Integer sexe = curseur.getInt(4);
+
+            //user = new User(date,poids,taille,age,sexe);
+            lespassword.add(password);
+
+        }
+        curseur.close();
+        return lespassword;
     }
     public void removeUser(User user){
         bd = accesBD.getWritableDatabase();
