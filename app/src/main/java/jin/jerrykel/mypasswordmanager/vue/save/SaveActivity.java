@@ -3,25 +3,20 @@ package jin.jerrykel.mypasswordmanager.vue.save;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.EditText;
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.controleur.LoginControle;
+import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.vue.save.appBord.AppBordActivity;
 
 public class SaveActivity extends AppCompatActivity {
     private EditText editTextIdentifiant;
     private EditText  editTextPassword;
-    private LoginControle loginControle;
+    private Controler controler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +25,7 @@ public class SaveActivity extends AppCompatActivity {
 
     }
     public void initElement(){
-        loginControle = LoginControle.getInstance();
+        controler = Controler.getInstance(this);
         //editTextIdentifiant = findViewById(R.id.editTextIdentifiant);
        // editTextPassword = findViewById(R.id.editTextPassword);
     }
@@ -62,7 +57,7 @@ public class SaveActivity extends AppCompatActivity {
 
          */
         if(!editTextIdentifiant.getText().toString().isEmpty() && !editTextPassword.getText().toString().isEmpty()){
-            if(loginControle.connectIdTest(editTextIdentifiant.getText().toString(),editTextPassword.getText().toString()) ){
+            if(controler.connectIdTest(editTextIdentifiant.getText().toString(),editTextPassword.getText().toString()) ){
 
                 Intent intent = new Intent(SaveActivity.this, AppBordActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);

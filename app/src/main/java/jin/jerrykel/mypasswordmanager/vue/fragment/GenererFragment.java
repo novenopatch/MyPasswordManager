@@ -1,16 +1,21 @@
 package jin.jerrykel.mypasswordmanager.vue.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +23,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
-import jin.jerrykel.mypasswordmanager.model.RandomPasswordGenerator;
-import jin.jerrykel.mypasswordmanager.utils.AccesLocal;
-import jin.jerrykel.mypasswordmanager.vue.HistoListAdapter;
-import jin.jerrykel.mypasswordmanager.vue.MainActivity;
+import jin.jerrykel.mypasswordmanager.controleur.Controler;
+import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 
 public class GenererFragment extends Fragment {
@@ -44,9 +45,8 @@ public class GenererFragment extends Fragment {
 
 
 
-
-
     int defaultPasswordLength = 12;
+    LinearLayout linearleayoutCustom;
     private TextView textViewPassLenght;
     private View rootView ;
     private Button buttonGenerate;
@@ -61,116 +61,228 @@ public class GenererFragment extends Fragment {
     private CheckBox checkBoxSpicalChars;
     private ImageButton imgBtnAdd;
     private ImageButton imgBtnRemove;
+    private ImageButton superImgbtncopy;
 
 
-    private boolean aBoolean = false;
+    private Controler controle;
+
+
+    private RecyclerView recycleView;
+    private RecyclerView.LayoutManager layoutManager;
+    private PasswordGenerateListAdapter passwordGenerateListAdapter;
+
+
+    boolean booleanCheckBoxUpperCase = true;
+    boolean  booleanCheckBoxLowerCase  = true;
+    boolean  booleanCheckBoxNumber  = true;
+    boolean  booleanCheckBoxSpicalChars  = true;
+    boolean customActived = false;
+
+
+    //return color
+    public static String getStringColor() {
+        return  "#ff4b4c";
+    }
+
+
+    /**
+     * initialise all view element
+     * @param view
+     */
+
+    public void initView(View view){
+
+        buttonGenerate =(Button) view.findViewById(R.id.buttonGenerate);
+        switch_custom_or_default = (Switch)  view.findViewById(R.id.switch_custom_or_default);
+
+        editTextPasswordGenerate = (EditText)  view.findViewById(R.id.editTextPasswordGenerate);
+
+        editTextSpecialchars = (EditText)  view.findViewById(R.id.editTextText_special_chars);
+        editTextPasswordLength = (EditText)  view.findViewById(R.id.editText_pass_lenght);
+
+        checkBoxUpperCase = (CheckBox) view.findViewById(R.id.checkBox_upperCase);
+        checkBoxLowerCase = (CheckBox) view.findViewById(R.id.checkBox_lowerCase);
+        checkBoxNumber  = (CheckBox) view.findViewById(R.id.checkBox_number);
+        checkBoxSpicalChars  = (CheckBox) view.findViewById(R.id.checkBox_special_chars);
+
+        imgBtnAdd = (ImageButton)  view.findViewById(R.id.imgBtn_add);
+        imgBtnRemove = (ImageButton)  view.findViewById(R.id.imgBtn_remove);
+        superImgbtncopy = (ImageButton)  view.findViewById(R.id.superImgbtncopy);
+
+        textViewPassLenght = (TextView)  view.findViewById(R.id.textView_pass_lenght);
+
+        linearleayoutCustom = (LinearLayout) view.findViewById(R.id.linearleayoutCustom);
 
 
 
+        //add histopassword recicler
+        createListView(view);
 
-    private   RandomPasswordGenerator passGen = new RandomPasswordGenerator();
 
-    //bouton Listener
-    private View.OnClickListener btnGenerateListener = new View.OnClickListener() {
+        //btn generate listener
+        buttonGenerate.setOnClickListener(btnGenerateListener);
+        //checkboxe tab
+        CheckBox[] checkBoxes1 = {checkBoxLowerCase,checkBoxUpperCase,checkBoxNumber,checkBoxSpicalChars};
+        for(CheckBox v : checkBoxes1){
+            v.setOnClickListener(checkBoxesListener);
+        }
+
+        //img btn and switch tab
+        View[] viewsBoxes = {switch_custom_or_default,imgBtnAdd,imgBtnRemove,superImgbtncopy,
+                editTextPasswordGenerate};
+        for(View v : viewsBoxes){
+            v.setOnClickListener(ImgbtnListener);
+        }
+
+        linearleayoutCustom.setVisibility(View.INVISIBLE);
+
+
+
+    }
+    /**
+     * create content of RecyclerView
+     * @param view
+     */
+    public void createListView(View view){
+        recycleView = (RecyclerView)view.findViewById(R.id.miniHistoGenerate);
+        layoutManager = new LinearLayoutManager(view.getContext());
+        recycleView.setLayoutManager(layoutManager);
+
+        passwordGenerateListAdapter = new PasswordGenerateListAdapter(controle.getGeneratePasswordArrayList(),view.getContext());
+
+        recycleView.setAdapter(passwordGenerateListAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
+        recycleView.addItemDecoration(dividerItemDecoration);
+
+        //Drag and drop et swipe
+        ItemTouchHelper.Callback itemToucherHelperCallback = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+                return makeMovementFlags(dragFlags,swipeFlags);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                Collections.swap(passwordGenerateListAdapter.generatePasswordArrayList, viewHolder.getAdapterPosition(),target.getAdapterPosition());
+                passwordGenerateListAdapter.notifyItemMoved(viewHolder.getAdapterPosition(),target.getAdapterPosition());
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                passwordGenerateListAdapter.generatePasswordArrayList.remove(position);
+                passwordGenerateListAdapter.notifyItemRemoved(position);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemToucherHelperCallback);
+        itemTouchHelper.attachToRecyclerView(recycleView);
+    }
+
+
+    /**
+     * checBoxesListener
+     */
+    private View.OnClickListener checkBoxesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            View[] viewsche = {editTextSpecialchars,textViewPassLenght,editTextPasswordLength,checkBoxUpperCase,checkBoxLowerCase ,checkBoxNumber,checkBoxSpicalChars,imgBtnAdd,imgBtnRemove};
-            String password = "";
-            if(switch_custom_or_default.isChecked()){
-                switch_custom_or_default.setText("Custom");
-                for(View view : viewsche){
-                    view.setVisibility(View.VISIBLE);
-                    view.setEnabled(true);
-                }
 
-                updateImgButton(v);
-                //changement de la longueur du password
-                if(checkBoxUpperCase.isChecked() && checkBoxLowerCase.isChecked()
-                        && checkBoxNumber.isChecked() && checkBoxSpicalChars.isChecked()  ) {
-                    password = passGen.generatePassayPassword(Integer.parseInt( editTextPasswordLength.getText().toString() ));
-
-
-                    testPassword(password);
-                }
-
-
-            }else{
-                switch_custom_or_default.setText("Default");
-                for(View view : viewsche){
-                    if(v instanceof CheckBox)
-                        ((CheckBox) v).setChecked(true);
-                }
-                editTextPasswordLength.setText(String.valueOf(12));
-                for(View view : viewsche){
-                    view.setVisibility(View.INVISIBLE);
-                    view.setEnabled(false);
-
-                }
-                if(v.getId() == buttonGenerate.getId()){ 
-                    password = returnPassword();
-                    
-                }
-
-
-            }
-            updateEditTextPasswordGenerate(password);
-            copyInClipboardAndNotify(password,v);
+            if(!checkBoxUpperCase.isChecked())
+                booleanCheckBoxUpperCase = false;
+            if(!checkBoxLowerCase.isChecked())
+                booleanCheckBoxLowerCase = false;
+            if(!checkBoxNumber.isChecked())
+                booleanCheckBoxNumber = false;
+            if(!checkBoxSpicalChars.isChecked())
+                booleanCheckBoxSpicalChars = false;
 
         }
     };
-    public void testPassword(String password){
-        int specialCharCount = 0;
-        int nombre =0;
-        int upperCase = 0;
-        int lowerCase = 0;
-        char[] chars = {'#','$','%','^','&','*',';','(',')','_',' ','+'};
-        char[] nombrechars = {'1','2','3','4','5','6','7','8','9','0'};
-        char[] upper = {'A','B','C','D','E','F','G','H','I','J','K','M','N','O','P','Q','R','S','T','V','W','X','Y','Z'};
-        char[] lower = {'a','b','c','d','e','f','g','h','i','j','k','m','n','o','p','q','r','s','t','v','w','x','y','z'};
-        for (char c : password.toCharArray()) {
-            for (char s : chars) {
-                if (c == s) {
-                    specialCharCount++;
-                }
-            }
-            for (char s : nombrechars) {
-                if (c == s) {
-                    nombre++;
-                }
-            }
-            for (char s : upper) {
-                if (c == s) {
-                    upperCase++;
-                }
-            }
-            for (char s : lower) {
-                if (c == s) {
-                    lowerCase++;
-                }
-            }
 
+    /**
+     * my btn Onclicklistern of generate fragment
+     */
+    private View.OnClickListener btnGenerateListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            String password = "";
+            if(customActived){
+
+                //si changement uniquement de la longueur du password
+                if(booleanCheckBoxUpperCase && booleanCheckBoxLowerCase
+                        && booleanCheckBoxNumber && booleanCheckBoxSpicalChars ) {
+                    password = controle.getPassword(Integer.parseInt( editTextPasswordLength.getText().toString() ));
+
+
+                }
+
+                else if(!booleanCheckBoxUpperCase && !booleanCheckBoxLowerCase
+                        && booleanCheckBoxNumber && booleanCheckBoxSpicalChars ) {
+                    password = controle.getPassword(
+                            true,
+                            true,
+                            true,
+                            true,
+                            Integer.parseInt( editTextPasswordLength.getText().toString() ));
+
+
+                }
+                //pas de 111 et {}3
+                else if(booleanCheckBoxLowerCase && booleanCheckBoxLowerCase
+                        && !booleanCheckBoxNumber && !booleanCheckBoxSpicalChars){
+                    password = controle.getPassword(
+                            false,
+                            Integer.parseInt(editTextPasswordLength.getText().toString() ));
+                }
+
+                //si l'on considere booleanCheckBoxNumber booleanCheckBoxSpicalChars
+
+                //trois trois
+                else  if(booleanCheckBoxUpperCase && booleanCheckBoxLowerCase
+                        && booleanCheckBoxNumber && !booleanCheckBoxSpicalChars ) {
+                    password = controle.getPassword(
+                            "",
+                            Integer.parseInt( editTextPasswordLength.getText().toString() ));
+
+
+                }
+                else if(booleanCheckBoxUpperCase && booleanCheckBoxLowerCase
+                        && !booleanCheckBoxNumber && booleanCheckBoxSpicalChars ) {
+                    password = controle.getPassword( 1234,
+                            Integer.parseInt(editTextPasswordLength.getText().toString() ));
+
+
+                }
+                else{
+                    //make toat for user
+                    Toast.makeText(v.getContext(), "Certain combinaison sont ignoré pour raison de securité...", Toast.LENGTH_LONG).show();
+                    password = controle.getPassword(Integer.parseInt( editTextPasswordLength.getText().toString() ));
+                }
+
+            }else{
+
+                    password = controle.getPassword();
+
+
+            }
+            updatePassword(password);
+
+            //testPassword(password);
 
         }
-        Log.d("1probleme", "\n____passlenght____ " + String.valueOf(password.length()) +
-                "\n____specialChars_____"+String.valueOf(specialCharCount)
-                +
-                "\n____upperChars_____"+String.valueOf(upperCase)+
-                "\n____lowerChars_____"+String.valueOf(lowerCase)
-                +
-                "\n____nombre_____"+String.valueOf(nombre));
-    }
-    public void updateEditTextPasswordGenerate(String password){
-        editTextPasswordGenerate.setText(password);
-    }
-    public  void copyInClipboardAndNotify(String text, View v){
-        ClipboardManager clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("copy Text",text);
-        clipboardManager.setPrimaryClip(clipData);
-        Toast.makeText(v.getContext(), "ajouter au presse-papier...", Toast.LENGTH_LONG).show();
+    };
+    /**
+     * imgbtn and switch listerner
+     */
+    private View.OnClickListener ImgbtnListener = new View.OnClickListener() {
 
-    }
-    public void updateImgButton(View v){
-        if(v.getId() == imgBtnAdd.getId() || v.getId() == imgBtnRemove.getId()){
+        @SuppressLint("ResourceAsColor")
+        @Override
+        public void onClick(View v) {
             switch (v.getId()){
                 case R.id.imgBtn_add:
 
@@ -183,19 +295,84 @@ public class GenererFragment extends Fragment {
 
                     }
                     break;
+                case R.id.superImgbtncopy:
+                    if(!editTextPasswordGenerate.getText().toString().isEmpty()){
+                        Utils.copyPasswordInclipBoard(getString(R.string.toastText),
+                                editTextPasswordGenerate.getText().toString(),v.getContext()
+                        );
+                    }
+                    break;
+                case R.id.switch_custom_or_default:
+                    if (switch_custom_or_default.isChecked()){
+                        customActived= true;
+                        switch_custom_or_default.setText("Custom");
+                        linearleayoutCustom.setVisibility(View.VISIBLE);
+                        linearleayoutCustom.setBackgroundColor(Color.parseColor("#CECECE"));
+                    }
+                    else {
+                        customActived= false;
+                        switch_custom_or_default.setText("Default");
+                        linearleayoutCustom.setVisibility(View.INVISIBLE);
+                        if(v instanceof CheckBox)
+                            ((CheckBox) v).setChecked(true);
+
+                        editTextPasswordLength.setText(String.valueOf(12));
+
+                    }
+                    break;
+                case R.id.editTextPasswordGenerate:
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        editTextPasswordGenerate.setFocusable(View.FOCUSABLE_AUTO);
+                        editTextPasswordGenerate.getFocusable();
+                    }
+                    else {
+                        editTextPasswordGenerate.setFocusable(true);
+
+
+
+                    }
+                    editTextPasswordGenerate.hasFocusable();
+                    break;
+
                 default:
                     break;
             }
             editTextPasswordLength.setText(Integer.toString(defaultPasswordLength));
-
         }
+    };
+
+    /**
+     * update password and add password to collection
+     * @param password
+     */
+    public void updatePassword(String password){
+        if(controle.getGeneratePasswordArrayList().size()>=4){
+            controle.getGeneratePasswordArrayList().remove(0);
+        }
+        controle.addGeneratepassword( password);
+        //pour reverser la listr
+        Collections.reverse(controle.getGeneratePasswordArrayList());
+        passwordGenerateListAdapter.notifyDataSetChanged();
+        updateEditTextPasswordGenerate(password);
+        // copyInClipboardAndNotify(password,v);
     }
+
+
+    /**
+     *  update EditText PasswordGenerate
+     * @param password
+     */
+    public void updateEditTextPasswordGenerate(String password){
+        editTextPasswordGenerate.setText(password);
+    }
+
+
 
     public static GenererFragment newInstance() {
         return (new GenererFragment());
     }
 
-    public static String getStringTile() {
+    public static String getStringTitle() {
         String pageTitle = "Generer";
         return pageTitle;
     }
@@ -205,10 +382,12 @@ public class GenererFragment extends Fragment {
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_generer, container, false);
-
+        this.context = rootView.getContext();
+        //get Context
+        this.controle = Controler.getInstance(rootView.getContext());
         //this methode intialise graphique element
-        initView();
-        creerListe();
+        initView(rootView);
+        //creerListe(rootView.getContext());
         return rootView;
     }
 
@@ -216,8 +395,6 @@ public class GenererFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-       this.context = context;
-
 
     }
     public GenererFragment() {
@@ -227,12 +404,10 @@ public class GenererFragment extends Fragment {
 
     public static GenererFragment newInstance(String param1, String param2) {
         GenererFragment fragment = new GenererFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -242,56 +417,20 @@ public class GenererFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    public void initView(){
-         buttonGenerate =(Button) rootView.findViewById(R.id.buttonGenerate);
-         switch_custom_or_default = (Switch) rootView.findViewById(R.id.switch_custom_or_default);
-
-         editTextPasswordGenerate = (EditText) rootView.findViewById(R.id.editTextPasswordGenerate);
-
-         editTextSpecialchars = (EditText) rootView.findViewById(R.id.editTextText_special_chars);
-         editTextPasswordLength = (EditText) rootView.findViewById(R.id.editText_pass_lenght);
-
-         checkBoxUpperCase = (CheckBox)rootView.findViewById(R.id.checkBox_upperCase);
-         checkBoxLowerCase = (CheckBox)rootView.findViewById(R.id.checkBox_lowerCase);
-         checkBoxNumber  = (CheckBox)rootView.findViewById(R.id.checkBox_number);
-         checkBoxSpicalChars  = (CheckBox)rootView.findViewById(R.id.checkBox_special_chars);
-
-         imgBtnAdd = (ImageButton) rootView.findViewById(R.id.imgBtn_add);
-         imgBtnRemove = (ImageButton) rootView.findViewById(R.id.imgBtn_remove);
-
-         textViewPassLenght = (TextView) rootView.findViewById(R.id.textView_pass_lenght);
 
 
 
-         View[] viewsBoxes = {switch_custom_or_default, buttonGenerate,imgBtnAdd,imgBtnRemove};
-         for(View v : viewsBoxes){
-             v.setOnClickListener(btnGenerateListener);
-         }
 
 
 
-    }
 
 
 
-    //this methode set password
-    public String returnPassword(){
-
-        String password = passGen.generatePassayPassword();
-        return password;
-    }
 
 
-    private  void creerListe(){
-        AccesLocal accesLocal = new AccesLocal(context);
-        //ArrayList<Profile> lesProfils = controle.getLesprofils();
-        ArrayList<GeneratePassword> lesProfils = accesLocal.recupAllPassword();
-        if(lesProfils != null){
-            ListView lstHisto = (ListView)rootView.findViewById(R.id.miniHistoGenerate);
-            HistoListAdapter adapter = new HistoListAdapter(context, lesProfils);
-            lstHisto.setAdapter(adapter);
-        }
-    }
+
+
+
 
 
 }

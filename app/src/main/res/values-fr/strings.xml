@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafePass</string>
-    <string name="first_textview_menu">SafePassr</string>
+    <string name="first_textview_menu">SafePasse</string>
     <string name="menu_string_generer"> Generer</string>
     <string name="menu_sauveugarder"> Sauvegader</string>
     <string name="menu_noter">Noter</string>
+    <string name="switchCustomGenerate">Defauft</string>
+    <string name="generatebtnText">Génerer</string>
+    <string name="passLengthTxtView">longeur</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="hello_blank_fragment">Bonjout</string>
+    <string name="navigation_drawer_open">Ouvrir  la bare de navigation</string>
+    <string name="navigation_drawer_close">Fermer la bare de navigation</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">JerrykelJosephDev.fr</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Paramètre</string>
+    <string name="menu_home">Accueil</string>
+    <string name="toastText">Ajouter au presse-papier...</string>
 </resources>

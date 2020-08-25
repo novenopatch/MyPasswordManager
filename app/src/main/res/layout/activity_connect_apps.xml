@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn_connect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#126EA6"
@@ -11,9 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView1_titre"
@@ -31,46 +32,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="SafePass"
+            android:text="@string/app_name"
             android:textColor="#fff"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="30sp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0.5"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn_connect">
+            android:layout_height="0dp"
+            android:layout_weight="1"
 
-            <EditText
-                android:id="@+id/Password1"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent">
 
+                <EditText
+                    android:id="@+id/Password1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10sp"
+                    android:background="#fff"
+                    android:drawableStart="@drawable/password_icone"
+                    android:hint="Mot de passe"
+                    android:inputType="textPassword" />
 
-                android:drawableStart="@drawable/password_icone"
-                android:hint="Mot de passe"
-                android:inputType="textPassword" />
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
 
         <Button
-            android:layout_width="157dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_btn_connect_choua"
+            android:layout_marginTop="10sp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_connect_round"
             android:gravity="center"
             android:text="S'inscrire"
-            android:textColor="#FFF" />
+            android:textColor="#fff" />
+
 
     </LinearLayout>
 
@@ -84,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="TextView"
+            android:text="blablabla0"
             android:textColor="#fff"
             android:textSize="15sp" />
 
@@ -92,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Connection"
+            android:text="blabla blabla"
             android:textColor="#fff"
             android:textSize="15sp" />
     </LinearLayout>

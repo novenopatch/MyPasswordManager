@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn1"
+            android:background="@drawable/custom_btn1_red"
             android:text="@string/menu_string_generer"
             android:gravity="center"
             android:textColor="#fff"
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn2"
+            android:background="@drawable/custom_btn_blue"
             android:text="@string/menu_sauveugarder"
             android:gravity="center"
             android:textColor="#fff"
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn3"
+            android:background="@drawable/custom_btn3_green_cool"
             android:text="@string/menu_noter"
             android:gravity="center"
             android:textColor="#fff"
@@ -95,7 +95,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:fitsSystemWindows="true"
          tools:openDrawer="start"
          tools:context=".vue.MainActivity"
@@ -134,4 +133,4 @@
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-    <!-- </androidx.coordinatorlayout.widget.CoordinatorLayout> -->
+

@@ -4,17 +4,51 @@
 
 
 
-    <!--<color name="colorPrimaryDark">#98A9AB</color> -->
-   <!--  <color name="colorAccent">#FFF</color> -->
 
-    <!-- <color name="colorPrimary">#64acab</color>-->
-    <color name="colorPrimary">#77B3D5</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+
+
+
+    <color name="colorPrimary">#637986</color>
+    <color name="colorPrimaryDark">#77B3D5</color>
+
     <color name="colorAccent">#FFF</color>
+
+    <color name="colorSuperGreen">#E0F8</color>
+
+
+    <color name="colorSuperBlack">#100000</color>
 
     <color name="lightGray">#ededed</color>
 
-    <!-- <color name="colorPrimary">#6200EE</color> -->
+     <color name="colorPrimaryOld">#3C3F41</color>
+
+    <color name="colorSuperBlue0">#03989E</color>
+
+    <color name="colorSuperBlue1">#64acab</color>
+
+    <color name="colorSuperRed">#ff4b4c</color>
+
+    <color name="gray">#98A9AB</color>
+
+    <color name="grayTest1"> #7F7F7F</color>
+
+    <color name="grayTest2"> #8F8F8F</color>
+
+    <color name="grayTest3"> #677179</color>
+
+    <color name="grayTest4">#778899</color>
+
+    <color name="grayTest5">#CECECE</color>
+
+    <color name="grayTest6">#9E9E9E</color>
+
+    <color name="grayTest7"> #555B61</color>
+
+    <color name="grayTest8"> #9C9C9C</color>
+
+    <color name="grayTest9"> #303030</color>
+
+
 
 
 </resources>

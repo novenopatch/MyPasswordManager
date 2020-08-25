@@ -5,10 +5,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 
 import android.annotation.SuppressLint;
@@ -19,15 +21,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.vue.fragment.GenererFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
+import jin.jerrykel.mypasswordmanager.vue.fragment.SaveFragment;
 //couleur cool "#ddd"
 /*
 implementation "org.passay:passay:1.6.0"
@@ -48,7 +55,8 @@ implementation "org.passay:passay:1.6.0"
         <item name="android:textColorHint">@color/colorAccent</item>
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,NavDrawerMenuTestFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener ,
+        NavDrawerMenuTestFragment.OnFragmentInteractionListener{
 
 // public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
     private Button btnGenerer;
@@ -60,6 +68,8 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
+
 
 
 
@@ -111,17 +121,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void configureViewPagerAndTabs(){
-        //Get ViewPager from layout
-        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
-        //Set Adapter PageAdapter and glue it together
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
-
         // 1 - Get TabLayout from layout
         TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
         // 2 - Glue TabLayout and ViewPager together
+        //add fragment
+        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(),0);
+        pageAdapter.addFragmentAndFragmentTilte(GenererFragment.newInstance(),GenererFragment.getStringTitle());
+        pageAdapter.addFragmentAndFragmentTilte(SaveFragment.newInstance(),SaveFragment.getStringTitle());
+
+        //Get ViewPager from layout
+        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
+        //Set Adapter PageAdapter and glue it together
+        pager.setAdapter(pageAdapter);
+
+
         tabs.setupWithViewPager(pager);
         // 3 - Design purpose. Tabs have the same width
         tabs.setTabMode(TabLayout.MODE_FIXED);//Mode_Fixed
+
+        //tabs.getTabAt(0).setIcon(R.drawable.ic_baseline_settings_blue_24);
+        //BadgeDrawable badgeDrawable = tabs.getTabAt(1).getOrCreateBadge();
+        //badgeDrawable.setVisible(true);
+       // badgeDrawable.setNumber(0);
     }
 
 
@@ -131,8 +152,15 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+
+
+
+
+
         return true;
     }
+
+    //gère le click sur le menu
     @SuppressLint("WrongConstant")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -148,8 +176,9 @@ public class MainActivity extends AppCompatActivity
                if(!this.drawerLayout.isDrawerOpen(Gravity.START))
                    drawerLayout.openDrawer(Gravity.START);
                else drawerLayout.closeDrawer(Gravity.END);
-                return super.onOptionsItemSelected(item);
+
         }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {
@@ -178,14 +207,14 @@ public class MainActivity extends AppCompatActivity
                // TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
                 //tabLayout.setVisibility(View.INVISIBLE);
 
-                Intent intent2 = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent2 = new Intent(MainActivity.this, connectAppsActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_profile:
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(MainActivity.this, connectAppsActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
@@ -210,10 +239,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 
 
-      /*
+
+/*
     private void init(){
 
         btnGenerer = findViewById(R.id.btnGenerer);

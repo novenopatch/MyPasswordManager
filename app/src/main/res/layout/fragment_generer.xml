@@ -8,37 +8,27 @@
     android:layout_gravity="center_horizontal|center_vertical"
     android:gravity="center|center_horizontal|center_vertical"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context=".vue.fragment.GenererFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center|center_horizontal|center_vertical"
         android:layout_weight="0.2"
         android:baselineAligned="false"
+        android:gravity="center|center_horizontal|center_vertical"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btnLi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_refresh_24"
-                tools:ignore="VectorDrawableCompat" />
-        </LinearLayout>
-
-
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/miniHistoGenerate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:scrollbars="vertical" />
+
     </LinearLayout>
 
     <ScrollView
@@ -50,8 +40,7 @@
         <LinearLayout
             android:id="@+id/cora"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -62,32 +51,54 @@
                 android:paddingLeft="10sp"
                 android:paddingRight="10sp">
 
+
+
                 <Button
                     android:id="@+id/buttonGenerate"
                     android:layout_width="157dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/custom_btn3"
+                    android:background="@drawable/custom_btn1_red"
                     android:gravity="center"
-                    android:text="Generate"
-                    android:textColor="#FFF" />
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/generatebtnText"
+                    android:textColor="#fff"
+                    android:elevation="5dp"
+                    android:stateListAnimator="@null"
+                    />
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/custom_btn_connect"
-                    android:paddingLeft="10sp"
-                    android:paddingRight="10sp">
+                    android:background="@drawable/custom_btn_connect_white"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10dp">
 
-                    <EditText
-                        android:id="@+id/editTextPasswordGenerate"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:inputType="textLongMessage" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editTextPasswordGenerate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.80"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="textLongMessage"
+                            tools:ignore="TextFields" />
+
+                        <ImageButton
+                            android:id="@+id/superImgbtncopy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_baseline_file_copy_black_24" />
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -114,15 +125,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:paddingBottom="2sp"
-                    android:text="Default"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:text="@string/switchCustomGenerate"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded,UseSwitchCompatOrMaterialXml" />
 
                 <LinearLayout
+                    android:id="@+id/linearleayoutCustom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/custom_btn_connect_choua"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:visibility="visible">
 
 
                     <LinearLayout
@@ -137,7 +150,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Lowercase" />
+                            android:text="Lowercase"
+                            tools:ignore="NestedWeights" />
 
                         <CheckBox
                             android:id="@+id/checkBox_upperCase"
@@ -176,7 +190,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:focusable="false"
                             android:inputType="text"
                             android:text="#$%^&amp;* ()__+"
                             android:textColor="#FFF" />
@@ -193,8 +206,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:drawableLeft="@drawable/ic_baseline_filter_9_plus_24"
-                            android:text="length " />
+                            android:text="@string/passLengthTxtView"
+                            app:drawableLeftCompat="@drawable/ic_baseline_filter_9_plus_black_24"
+                            tools:ignore="NestedWeights" />
 
                         <EditText
                             android:id="@+id/editText_pass_lenght"
@@ -202,7 +216,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:ems="10"
-                            android:focusable="false"
                             android:inputType="number"
                             android:text="12"
                             android:textColor="#FFF" />
@@ -216,8 +229,7 @@
                                 android:id="@+id/imgBtn_remove"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:onClick="clickAction"
-                                app:srcCompat="@drawable/ic_baseline_remove_circle_outline_24"
+                                app:srcCompat="@drawable/ic_baseline_remove_circle_outline_black_24"
                                 tools:ignore="VectorDrawableCompat" />
 
                             <Space
@@ -228,8 +240,7 @@
                                 android:id="@+id/imgBtn_add"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:onClick="clickAction"
-                                app:srcCompat="@drawable/ic_baseline_add_circle_24"
+                                app:srcCompat="@drawable/ic_baseline_add_circle_black_24"
                                 tools:ignore="VectorDrawableCompat" />
 
                         </LinearLayout>
