@@ -151,6 +151,7 @@ public class GenererFragment extends Fragment {
         passwordGenerateListAdapter = new PasswordGenerateListAdapter(controle.getGeneratePasswordArrayList(),view.getContext());
 
         recycleView.setAdapter(passwordGenerateListAdapter);
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
         recycleView.addItemDecoration(dividerItemDecoration);
 

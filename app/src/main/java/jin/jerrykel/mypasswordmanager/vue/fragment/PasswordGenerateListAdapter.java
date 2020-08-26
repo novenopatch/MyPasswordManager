@@ -46,7 +46,8 @@ public class PasswordGenerateListAdapter extends
     @NonNull
     @Override
     public PasswordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_histo_genrate, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_histo_genrate,
+                parent,false);
         PasswordViewHolder passwordViewHolder = new PasswordViewHolder(view);
         return passwordViewHolder;
     }
@@ -81,6 +82,10 @@ public class PasswordGenerateListAdapter extends
         });
         holder.date.setTag(position);
     }
+    @Override
+    public int getItemCount() {
+        return generatePasswordArrayList.size();
+    }
 
     /**
      * my personal getString for take String for resource to get translate foncton all over
@@ -93,10 +98,7 @@ public class PasswordGenerateListAdapter extends
         return context.getString(resId);
     }
 
-    @Override
-    public int getItemCount() {
-        return generatePasswordArrayList.size();
-    }
+
 
 
 }

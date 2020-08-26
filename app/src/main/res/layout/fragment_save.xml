@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".vue.fragment.SaveFragment">
 
-    <SearchView
-        android:id="@+id/saveSearchView"
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        >
-
-    </SearchView>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".vue.fragment.SaveFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saveRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
 
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_margin="15dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorSuperRed"
+            android:clickable="true"
+
+
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_baseline_add_circle_black_24"
+            app:fabSize="auto" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -11,8 +11,10 @@ import java.util.Date;
 
 import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.RandomPasswordGenerator;
+import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.User;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
+import jin.jerrykel.mypasswordmanager.vue.fragment.SaveListCategoryAdapter;
 
 public class Controler {
 
@@ -20,18 +22,15 @@ public class Controler {
     private static Controler instance = null;
     private static Context contexte;
 
-
     //for future db
     private static  String nomFic = "saveProfil";
 
     //for generate password
     private RandomPasswordGenerator passGen = new RandomPasswordGenerator();
 
-
-
-
     private ArrayList<GeneratePassword> generatePasswordArrayList = new ArrayList<>();
 
+    private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
 
     //contructeur private
     private Controler(){
@@ -55,7 +54,22 @@ public class Controler {
             generatePasswordArrayList.add(new GeneratePassword(Utils.getDate(),password));
         }
 
+    /**
+     * return ArrayList SaveItemCategory
+     * @return
+     */
+    public ArrayList<SaveItemCategory> getSaveCategoryListArrayList() {
+        return  SaveCategoryListArrayList;
+    }
 
+    /**
+     * to add new category
+     * @param name
+     * @param description
+     */
+    public void addNewSaveCategoryList(String name,String description){
+        SaveCategoryListArrayList.add(new SaveItemCategory(name,description));
+    }
 
     /**
      * création de l'instance

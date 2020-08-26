@@ -59,10 +59,7 @@ public class MainActivity extends AppCompatActivity
         NavDrawerMenuTestFragment.OnFragmentInteractionListener{
 
 // public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
-    private Button btnGenerer;
-    private Button btnSauveugarder;
-    private Button btnNoter;
-    private Button imageViewOC;
+
 
     //FOR DESIGN
     private Toolbar toolbar;
@@ -78,16 +75,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        init();
 
-        // 6 - Configure all views
+    }
 
-        //init();
-       // 3 - Configure ViewPager
-        //this.configureViewPager();
-
-
-
-
+    public void init(){
         this.configureDrawerLayout();
         this.configureToolbar();
         this.configureNavigationView();
@@ -152,11 +144,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-
-
-
-
-
         return true;
     }
 
