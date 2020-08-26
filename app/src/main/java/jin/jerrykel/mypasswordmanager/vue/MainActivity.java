@@ -153,16 +153,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
         switch (item.getItemId()) {
-            case R.id.menu_activity_main_params:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_activity_main_search:
-                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
-                return true;
-            default:
-               if(!this.drawerLayout.isDrawerOpen(Gravity.START))
-                   drawerLayout.openDrawer(Gravity.START);
-               else drawerLayout.closeDrawer(Gravity.END);
+           // case R.id.menu_activity_main_params:
+               // Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                //return true;
+           // case R.id.menu_activity_main_search:
+                //Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
+               // return true;
+           // default:
+            //   if(!this.drawerLayout.isDrawerOpen(Gravity.START))
+             //      drawerLayout.openDrawer(Gravity.START);
+             //  else drawerLayout.closeDrawer(Gravity.END);
 
         }
         return super.onOptionsItemSelected(item);
