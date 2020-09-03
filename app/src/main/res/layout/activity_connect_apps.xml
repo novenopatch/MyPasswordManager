@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#126EA6"
     android:orientation="vertical"
+
     tools:context=".vue.connectAppsActivity">
 
     <LinearLayout
@@ -14,6 +15,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:layout_margin="16dp"
         android:orientation="vertical">
 
         <TextView
@@ -42,48 +44,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="30sp"
-        android:layout_marginRight="30sp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="10dp">
+        android:padding="30sp">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content">
 
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/editext_password"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:drawableStart="@drawable/password_icone"
+                android:hint="Mot de passe"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:selectAllOnFocus="true" />
 
-                <EditText
-                    android:id="@+id/Password1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10sp"
-                    android:background="#fff"
-                    android:drawableStart="@drawable/password_icone"
-                    android:hint="Mot de passe"
-                    android:inputType="textPassword" />
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <Button
+            android:id="@+id/buttonSiscrire"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10sp"
-            android:layout_weight="1"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginTop="30sp"
             android:background="@drawable/custom_btn_connect_round"
-            android:gravity="center"
             android:text="S'inscrire"
             android:textColor="#fff" />
 
@@ -94,6 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_margin="16dp"
         android:orientation="vertical">
 
         <TextView

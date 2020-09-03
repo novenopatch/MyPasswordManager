@@ -20,6 +20,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -31,10 +32,12 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.vue.drawer.DrawActivity;
 import jin.jerrykel.mypasswordmanager.vue.fragment.GenererFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
 import jin.jerrykel.mypasswordmanager.vue.fragment.SaveFragment;
+import jin.jerrykel.mypasswordmanager.vue.save.SaveActivity;
 //couleur cool "#ddd"
 /*
 implementation "org.passay:passay:1.6.0"
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_main);
 
         init();
@@ -96,14 +100,16 @@ public class MainActivity extends AppCompatActivity
 
     private void configureToolbar(){
         // Get the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Sets the Toolbar
         setSupportActionBar(toolbar);
 
         //// Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+
     }
 
     // 3 - Configure NavigationView
@@ -153,16 +159,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
         switch (item.getItemId()) {
-           // case R.id.menu_activity_main_params:
-               // Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
-                //return true;
-           // case R.id.menu_activity_main_search:
-                //Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
-               // return true;
-           // default:
-            //   if(!this.drawerLayout.isDrawerOpen(Gravity.START))
-             //      drawerLayout.openDrawer(Gravity.START);
-             //  else drawerLayout.closeDrawer(Gravity.END);
+           case R.id.menu_activity_main_params:
+                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_activity_main_search:
+                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
+               return true;
+
+            default:
+                if(!this.drawerLayout.isDrawerOpen(Gravity.START))
+                    drawerLayout.openDrawer(Gravity.START);
+                else drawerLayout.closeDrawer(Gravity.END);
 
         }
         return super.onOptionsItemSelected(item);
@@ -196,7 +203,7 @@ public class MainActivity extends AppCompatActivity
 
                 Intent intent2 = new Intent(MainActivity.this, connectAppsActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+              //  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
@@ -206,6 +213,9 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_settings:
+                Intent intent3 = new Intent(MainActivity.this, DrawActivity.class);
+                startActivity(intent3);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             default:
                 break;

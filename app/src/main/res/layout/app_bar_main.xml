@@ -6,30 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".vue.MainActivity">
 
-      <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:orientation="vertical">
 
 
-         <com.google.android.material.appbar.AppBarLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-             android:theme="@style/AppTheme.AppBarOverlay"
-             >
+            android:theme="@style/AppTheme.AppBarOverlay"
+            >
+            <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            >
 
-             <androidx.appcompat.widget.Toolbar
-                 android:id="@+id/toolbar"
-                 android:layout_width="match_parent"
-                 android:layout_height="?attr/actionBarSize"
-                 android:background="?attr/colorPrimary"
-                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                 app:popupTheme="@style/AppTheme.PopupOverlay"
-
-                 />
-
-             <com.google.android.material.tabs.TabLayout
+        </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/activity_main_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,19 +32,12 @@
                 app:tabIndicatorColor="@color/colorSuperGreen"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="#E0F8"
-                app:tabTextColor="@color/colorAccent"
-                >
-
-            </com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="@color/colorAccent"/>
 
 
         </com.google.android.material.appbar.AppBarLayout>
 
 
 
-        <include layout="@layout/content_main" />
 
-        </LinearLayout>
-
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

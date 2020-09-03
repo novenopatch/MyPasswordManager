@@ -11,7 +11,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.vue.save.appBord.AppBordActivity;
+import jin.jerrykel.mypasswordmanager.vue.MainActivity;
 
 public class SaveActivity extends AppCompatActivity {
     private EditText editTextIdentifiant;
@@ -59,7 +59,7 @@ public class SaveActivity extends AppCompatActivity {
         if(!editTextIdentifiant.getText().toString().isEmpty() && !editTextPassword.getText().toString().isEmpty()){
             if(controler.connectIdTest(editTextIdentifiant.getText().toString(),editTextPassword.getText().toString()) ){
 
-                Intent intent = new Intent(SaveActivity.this, AppBordActivity.class);
+                Intent intent = new Intent(SaveActivity.this, MainActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

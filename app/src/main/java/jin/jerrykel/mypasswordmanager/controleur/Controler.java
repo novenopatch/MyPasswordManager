@@ -20,6 +20,7 @@ public class Controler {
 
     //intialise property
     private static Controler instance = null;
+
     private static Context contexte;
 
     //for future db
@@ -32,10 +33,14 @@ public class Controler {
 
     private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
 
-    //contructeur private
+    /**
+     * contructeur private
+     */
     private Controler(){
         super();
     }
+
+
 
 
     /**

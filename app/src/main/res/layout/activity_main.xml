@@ -1,92 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  android:background="#FeFAD4" -->
-<!-- Importation de notre Toolbar -->
-<!--
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#64acab"
-    tools:context=".vue.MainActivity">
-
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:id="@+id/textv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/first_textview_menu"
-            android:textSize="30sp"
-            android:textColor="#fff"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical"
-        android:layout_margin="30sp">
-        <Button
-            android:id="@+id/btnGenerer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn1_red"
-            android:text="@string/menu_string_generer"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:onClick="btnaction"
-           />
-        <Button
-            android:id="@+id/btnSauveugarder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn_blue"
-            android:text="@string/menu_sauveugarder"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:onClick="btnaction"
-           />
-        <Button
-            android:id="@+id/btnNoter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_btn3_green_cool"
-            android:text="@string/menu_noter"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:onClick="btnaction"
-            />
-
-    </LinearLayout>
-
-</LinearLayout> -->
-
-<!--
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_layout_main"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"/>
-    -->
-
-<!-- style="@style/Widget.MaterialComponents.Toolbar.Primary" -->
-<!-- <androidx.coordinatorlayout.widget.CoordinatorLayout -->
 
 <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/activity_main_drawer_layout"
@@ -97,40 +9,30 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
          tools:openDrawer="start"
-         tools:context=".vue.MainActivity"
+
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            layout="@layout/content_main" />
+    </LinearLayout>
 
-       <include
-           layout="@layout/app_bar_main"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content" />
-
-
-
-
-        <!-- 1 | MainActivity RootView -->
-
-
-
-
-    <!--  <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />   -->
-
-    <!-- 2 | NavigationView -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/activity_main_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="start|left"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/activity_main_nav_header"
         app:menu="@menu/activity_main_menu_drawer"
         />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
