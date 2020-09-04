@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".vue.MainActivity"
+            android:name=".vue.AppActivity.MainActivity"
              >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.drawer.DrawActivity"/>
+        <activity android:name=".vue.DrawerActivity.DrawActivity"/>
         <activity android:name=".vue.save.SaveActivity" />
-        <activity android:name=".vue.connectAppsActivity"/>
+        <activity android:name=".vue.ConnectAppActivity.ConnectAppActivity"/>
         <activity android:name=".vue.save.appBord.AppBordActivity" />
         <activity android:name=".vue.save.createLogin.ConnectActivity" />
     </application>

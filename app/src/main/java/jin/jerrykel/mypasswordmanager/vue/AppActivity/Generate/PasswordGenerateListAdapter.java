@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.fragment;
+package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
@@ -46,7 +45,7 @@ public class PasswordGenerateListAdapter extends
     @NonNull
     @Override
     public PasswordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_histo_genrate,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_histo_generate_password,
                 parent,false);
         PasswordViewHolder passwordViewHolder = new PasswordViewHolder(view);
         return passwordViewHolder;

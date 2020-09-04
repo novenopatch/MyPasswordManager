@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue;
+package jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import jin.jerrykel.mypasswordmanager.R;
 
-public class connectAppsActivity extends AppCompatActivity {
+public class ConnectAppActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

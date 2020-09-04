@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.drawer.ui.home;
+package jin.jerrykel.mypasswordmanager.vue.DrawerActivity.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

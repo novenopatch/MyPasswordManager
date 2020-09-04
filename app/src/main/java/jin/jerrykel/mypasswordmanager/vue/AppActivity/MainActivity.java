@@ -1,16 +1,13 @@
-package jin.jerrykel.mypasswordmanager.vue;
+package jin.jerrykel.mypasswordmanager.vue.AppActivity;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 
 import android.annotation.SuppressLint;
@@ -19,25 +16,18 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.vue.drawer.DrawActivity;
-import jin.jerrykel.mypasswordmanager.vue.fragment.GenererFragment;
+import jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity.ConnectAppActivity;
+import jin.jerrykel.mypasswordmanager.vue.DrawerActivity.DrawActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate.GenererFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
-import jin.jerrykel.mypasswordmanager.vue.fragment.PageAdapter;
-import jin.jerrykel.mypasswordmanager.vue.fragment.SaveFragment;
-import jin.jerrykel.mypasswordmanager.vue.save.SaveActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveFragment;
 //couleur cool "#ddd"
 /*
 implementation "org.passay:passay:1.6.0"
@@ -201,14 +191,14 @@ public class MainActivity extends AppCompatActivity
                // TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
                 //tabLayout.setVisibility(View.INVISIBLE);
 
-                Intent intent2 = new Intent(MainActivity.this, connectAppsActivity.class);
+                Intent intent2 = new Intent(MainActivity.this, ConnectAppActivity.class);
                 //Intent intent = new Intent(SaveActivity.this, ConnectActivity.class);
               //  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_profile:
-                Intent intent = new Intent(MainActivity.this, connectAppsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ConnectAppActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;

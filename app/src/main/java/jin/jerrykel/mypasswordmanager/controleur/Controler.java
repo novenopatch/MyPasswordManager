@@ -1,20 +1,16 @@
 package jin.jerrykel.mypasswordmanager.controleur;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.RandomPasswordGenerator;
 import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.model.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.model.User;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
-import jin.jerrykel.mypasswordmanager.vue.fragment.SaveListCategoryAdapter;
 
 public class Controler {
 
@@ -32,6 +28,7 @@ public class Controler {
     private ArrayList<GeneratePassword> generatePasswordArrayList = new ArrayList<>();
 
     private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
+    private ArrayList<SaveNoteItem> saveNoteItemArrayList = new ArrayList<>();
 
     /**
      * contructeur private
@@ -41,7 +38,39 @@ public class Controler {
     }
 
 
+    public void addNewNote(String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
 
+        saveNoteItemArrayList.add(new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment));
+    }
+
+    /**
+     * found save item category for his name
+     * @param name
+     * @return
+     */
+    public SaveItemCategory findandreturnSaveItemCategory(String name){
+        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+            if(saveItemCategory.getName().equals(name))
+                return saveItemCategory;
+        }
+        return null;
+    }
+    public Integer findandreturnpositon(String name){
+        int kora = 0;
+        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+            kora++;
+            if(saveItemCategory.getName().equals(name))
+                return kora;
+        }
+        return null;
+    }
+    public ArrayList<CharSequence> returnSaveItemCategoryName(){
+        ArrayList<CharSequence> quit = new ArrayList<>();
+        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+                quit.add(saveItemCategory.getName());
+        }
+        return quit;
+    }
 
     /**
      * return password generate arrayList

@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.fragment;
+package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -48,7 +48,7 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
     @NonNull
     @Override
     public SaveViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_category_or_folder,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_see_category_or_folder,
                 parent,false);
         SaveViewHolder passwordViewHolder = new SaveViewHolder(view);
         return passwordViewHolder;

@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.drawer.ui.gallery;
+package jin.jerrykel.mypasswordmanager.vue.DrawerActivity.ui.gallery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

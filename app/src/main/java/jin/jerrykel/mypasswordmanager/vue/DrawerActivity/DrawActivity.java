@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.drawer;
+package jin.jerrykel.mypasswordmanager.vue.DrawerActivity;
 
 import android.os.Bundle;
 import android.view.Menu;

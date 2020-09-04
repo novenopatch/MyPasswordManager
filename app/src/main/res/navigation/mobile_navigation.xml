@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="jin.jerrykel.mypasswordmanager.vue.drawer.ui.home.HomeFragment"
+        android:name="jin.jerrykel.mypasswordmanager.vue.DrawerActivity.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home_new_t" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="jin.jerrykel.mypasswordmanager.vue.drawer.ui.gallery.GalleryFragment"
+        android:name="jin.jerrykel.mypasswordmanager.vue.DrawerActivity.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery_new_t" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="jin.jerrykel.mypasswordmanager.vue.drawer.ui.slideshow.SlideshowFragment"
+        android:name="jin.jerrykel.mypasswordmanager.vue.DrawerActivity.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow_new_t" />
 </navigation>

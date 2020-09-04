@@ -11,7 +11,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.vue.MainActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 
 public class SaveActivity extends AppCompatActivity {
     private EditText editTextIdentifiant;

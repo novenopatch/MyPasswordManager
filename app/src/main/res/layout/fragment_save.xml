@@ -6,7 +6,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".vue.fragment.SaveFragment">
+        tools:context=".vue.AppActivity.Save.SaveFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNoteListe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_margin="15dp"
+        android:layout_alignParentTop="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saveRecyclerView"
@@ -35,7 +43,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -49,7 +57,7 @@
                     android:id="@+id/floatingActionButtonAddCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="10dp"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_save_alt_24"
                     app:fabSize="mini" />
@@ -72,7 +80,7 @@
                     android:id="@+id/floatingActionButtonAddNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="10dp"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_save_alt_24"
                     app:fabSize="mini" />
