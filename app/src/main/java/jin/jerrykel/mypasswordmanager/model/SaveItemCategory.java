@@ -2,10 +2,9 @@ package jin.jerrykel.mypasswordmanager.model;
 
 import java.util.ArrayList;
 
-public class SaveItemCategory {
+public class SaveItemCategory extends SaveItem{
 
-    private  String name;
-    private String decription;
+
     private int rate;
 
 
@@ -14,20 +13,12 @@ public class SaveItemCategory {
     private int DrawableResource;
 
     public SaveItemCategory(String name, String decription){
-        this.name = name;
-        this.decription = decription;
+        super(name,decription);
         this.rate = 1;
 
     }
 
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDecription() {
-        return decription;
-    }
 
     public int getisRate() {
         return rate;

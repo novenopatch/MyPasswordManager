@@ -11,12 +11,15 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private FrameLayout frameLayoutContent;
+    ViewPager pager;
 
 
 
@@ -108,17 +113,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    @SuppressLint("ResourceType")
     private void configureViewPagerAndTabs(){
-        // 1 - Get TabLayout from layout
+        this.frameLayoutContent = (FrameLayout) findViewById(R.id.frameLayoutContent);
         TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
-        // 2 - Glue TabLayout and ViewPager together
+
         //add fragment
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(),0);
         pageAdapter.addFragmentAndFragmentTilte(GenererFragment.newInstance(),GenererFragment.getStringTitle());
         pageAdapter.addFragmentAndFragmentTilte(SaveFragment.newInstance(),SaveFragment.getStringTitle());
 
         //Get ViewPager from layout
-        ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
+        pager = new ViewPager(this);
+        pager.setId(199020);
+        frameLayoutContent.addView(pager);
+       // ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
         //Set Adapter PageAdapter and glue it together
         pager.setAdapter(pageAdapter);
 
@@ -212,7 +221,7 @@ public class MainActivity extends AppCompatActivity
         }
         if(fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.main_viewpager, fragment);
+            ft.replace(pager.getId(), fragment);
             ft.commit();
         }
         this.drawerLayout.closeDrawer(GravityCompat.START);

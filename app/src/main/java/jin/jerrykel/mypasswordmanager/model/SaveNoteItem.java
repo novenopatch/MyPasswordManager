@@ -1,23 +1,20 @@
 package jin.jerrykel.mypasswordmanager.model;
 
-public class SaveNoteItem {
-    private String title;
+public class SaveNoteItem extends SaveItem{
     private String id;
     private String password;
     private String homePage;
-    private String comment;
 
     public SaveNoteItem(String title, SaveItemCategory saveItemCategory, String id, String password,String homePage, String comment) {
-        this.title = title;
+        super(title,comment);
         this.id = id;
         this.password = password;
         this.homePage = homePage;
-        this.comment = comment;
         saveItemCategory.setsaveNoteItems(this);
     }
 
     public String getTitle() {
-        return title;
+        return this.getName();
     }
 
     public String getId() {
@@ -34,6 +31,6 @@ public class SaveNoteItem {
 
 
     public String getComment() {
-        return comment;
+        return this.getDecription();
     }
 }

@@ -45,7 +45,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewTNoteTitle"
+                    android:id="@+id/textViewNoteTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -73,15 +73,8 @@
                 android:layout_weight="0.1"
                 android:gravity="center|center_horizontal|right">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    app:srcCompat="@drawable/ic_baseline_settings_blue_24" />
-
                 <RatingBar
-                    android:id="@+id/CategoryRatingBar"
+                    android:id="@+id/categoryNoteRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="1"

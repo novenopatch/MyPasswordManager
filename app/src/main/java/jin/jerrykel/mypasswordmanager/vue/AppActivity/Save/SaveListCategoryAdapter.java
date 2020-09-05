@@ -33,7 +33,7 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
             categoryName = itemView.findViewById(R.id.textViewTitleCategoryName);
             categoryNameDescription = itemView.findViewById(R.id.textViewCategoryDescription);
             Number = itemView.findViewById(R.id.textViewCategorySaveNumber);
-            categoryRate = itemView.findViewById(R.id.CategoryRatingBar);
+            categoryRate = itemView.findViewById(R.id.categoryRatingBar);
             imageViewIconCategory  = itemView.findViewById(R.id.imageViewIconCategory);
 
 
