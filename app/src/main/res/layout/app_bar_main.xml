@@ -23,16 +23,6 @@
             >
 
         </androidx.appcompat.widget.Toolbar>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/activity_main_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:background="@color/colorPrimary"
-                app:tabIndicatorColor="@color/colorSuperGreen"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="#E0F8"
-                app:tabTextColor="@color/colorAccent"/>
 
 
         </com.google.android.material.appbar.AppBarLayout>

@@ -65,7 +65,7 @@ public class PasswordGenerateListAdapter extends
                 //controle.delPassword(lesPassword.get(position));
                 // raffraichir la liste
                 // notifyDataSetChanged();
-                Utils.copyPasswordInclipBoard(getString(R.string.toastText,v.getContext() ),generatePassword.getPassword(),v.getContext());
+                Utils.copyPasswordInclipBoard(Utils.getString(R.string.toastText,v.getContext() ),generatePassword.getPassword(),v.getContext());
                 String[] tom = Utils.getDate();
                 String dategetfromCalendare = tom[0];
                 String heuregetfromCalendare = tom[1];
@@ -86,16 +86,7 @@ public class PasswordGenerateListAdapter extends
         return generatePasswordArrayList.size();
     }
 
-    /**
-     * my personal getString for take String for resource to get translate foncton all over
-     * @param resId
-     * @param context
-     * @return
-     */
-    @NonNull
-    public  final String getString(@StringRes int resId,Context context) {
-        return context.getString(resId);
-    }
+
 
 
 

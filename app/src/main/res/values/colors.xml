@@ -15,7 +15,7 @@
 
     <color name="colorSuperGreen">#E0F8</color>
 
-
+    <color name="myColorTransparent">#00000000</color>
     <color name="colorSuperBlack">#100000</color>
 
     <color name="lightGray">#ededed</color>
@@ -47,6 +47,25 @@
     <color name="grayTest8"> #9C9C9C</color>
 
     <color name="grayTest9"> #303030</color>
+
+
+
+
+
+
+    <color name="background_light">#fafafa</color>
+
+    <color name="background_gray">#eeeeee</color>
+
+    <color name="text_normal_dark">#8a000000</color>
+    <color name="button_favorite">#F06292</color>
+
+
+    <color name="OpenColorPrimary">#233333</color>
+    <color name="OpenColorPrimaryDark">#292929</color>
+    <color name="OpenColorAccent">#E0F8</color>
+
+
 
 
 

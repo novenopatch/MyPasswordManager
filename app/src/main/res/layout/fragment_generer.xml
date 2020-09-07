@@ -58,7 +58,7 @@
                     android:layout_width="157dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/custom_btn1_red"
+                    android:background="@drawable/custom_btn1_primary_color"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/generatebtnText"
@@ -79,6 +79,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <EditText
@@ -96,6 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
+                            android:background="#00000000"
                             android:src="@drawable/ic_baseline_file_copy_black_24" />
                     </LinearLayout>
 
@@ -104,12 +107,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="As Default Genarate a aleatoire" />
+                    android:text="@string/as_default_genarate_a_aleatoire" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default blabla" />
+                    android:text="@string/default_blabla" />
 
             </LinearLayout>
 
@@ -150,7 +153,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Lowercase"
+                            android:text="@string/lowercase"
                             tools:ignore="NestedWeights" />
 
                         <CheckBox
@@ -159,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Uppercase" />
+                            android:text="@string/uppercase" />
 
                         <CheckBox
                             android:id="@+id/checkBox_number"
@@ -167,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Number" />
+                            android:text="@string/number" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -183,7 +186,7 @@
                             android:layout_weight="1"
                             android:checked="true"
 
-                            android:text="Special chars" />
+                            android:text="@string/special_chars" />
 
                         <EditText
                             android:id="@+id/editTextText_special_chars"
@@ -223,12 +226,14 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:orientation="horizontal">
 
                             <ImageButton
                                 android:id="@+id/imgBtn_remove"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:background="@color/myColorTransparent"
                                 app:srcCompat="@drawable/ic_baseline_remove_circle_outline_black_24"
                                 tools:ignore="VectorDrawableCompat" />
 
@@ -240,6 +245,7 @@
                                 android:id="@+id/imgBtn_add"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:background="@color/myColorTransparent"
                                 app:srcCompat="@drawable/ic_baseline_add_circle_black_24"
                                 tools:ignore="VectorDrawableCompat" />
 

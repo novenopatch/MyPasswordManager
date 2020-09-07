@@ -16,7 +16,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD new entry"
+            android:text="@string/add_new_note_entry"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:inputType="text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.01"
-                android:text="Category"
+                android:text="@string/category"
                 android:textSize="20sp" />
 
             <Spinner
@@ -74,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
+                android:background="@color/myColorTransparent"
                 app:srcCompat="@drawable/ic_baseline_add_circle_black_24" />
         </LinearLayout>
 
@@ -95,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Username or Identifiant"
+                android:hint="@string/username_or_identifiant"
                 android:inputType="text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -119,6 +120,14 @@
                 android:hint="Password"
                 android:inputType="textPassword" />
 
+            <ImageButton
+                android:id="@+id/imageButtonAddNewCategory2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:background="@color/myColorTransparent"
+                app:srcCompat="@drawable/ic_baseline_visibility_off_black_24" />
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -140,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text"
-                android:text="HomePage(optionanl)" />
+                android:hint="@string/homepage_optional" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -160,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Commentaire(optional)"
+                android:hint="@string/commentaire_optional"
                 android:inputType="textMultiLine|text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -178,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="@string/save" />
     </LinearLayout>
 
 </LinearLayout>

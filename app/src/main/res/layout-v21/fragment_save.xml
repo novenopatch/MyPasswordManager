@@ -220,7 +220,7 @@
             android:backgroundTint="@color/colorSuperRed"
             android:clickable="true"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_baseline_add_circle_black_24"
+            android:src="@drawable/ic_baseline_add_white_24"
             app:fabSize="auto" />
     </LinearLayout>
 

@@ -121,6 +121,15 @@ public abstract  class Utils {
 
         toast.show();
     }
-
+    /**
+     * my personal getString for take String for resource to get translate foncton all over
+     * @param resId
+     * @param context
+     * @return
+     */
+    @NonNull
+    public  static String getString(@StringRes int resId,Context context) {
+        return context.getString(resId);
+    }
 
 }

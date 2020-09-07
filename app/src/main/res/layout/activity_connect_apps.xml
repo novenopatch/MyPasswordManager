@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="secure password  app"
+            android:text="@string/secure_password_app"
 
             android:textColor="#fff"
             android:textSize="20sp" />

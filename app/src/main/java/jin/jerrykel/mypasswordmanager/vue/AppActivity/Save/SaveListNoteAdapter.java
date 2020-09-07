@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -25,17 +26,18 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
 
 
 
+
     public static class SaveViewHolder extends RecyclerView.ViewHolder{
-        EditText textViewNoteIndicatif;
-        EditText textViewNoteTitle;
-        RatingBar categoryRatingBar;
+        TextView textViewNoteIndicatif;
+        TextView textViewNoteTitle;
+        ImageButton categoryRatingBar;
 
 
         public SaveViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNoteIndicatif = itemView.findViewById(R.id.textViewNoteIndicatif);
             textViewNoteTitle = itemView.findViewById(R.id.textViewNoteTitle);
-            categoryRatingBar = itemView.findViewById(R.id.categoryNoteRatingBar);
+            categoryRatingBar = itemView.findViewById(R.id.imageViewRatebarSaveItem);
 
 
         }
@@ -57,10 +59,10 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
     @Override
     public void onBindViewHolder(@NonNull SaveViewHolder holder, int position) {
         SaveNoteItem  saveNoteItem = saveNoteItemArrayList.get(position);
-        if(!saveNoteItem.getHomePage().isEmpty() && !saveNoteItem.getHomePage().equals("")){
-            holder.textViewNoteIndicatif.setText(saveNoteItem.getTitle().indexOf(0,1));
+        if(saveNoteItem.getHomePage().isEmpty() && saveNoteItem.getHomePage().equals("")){
+            holder.textViewNoteIndicatif.setText(saveNoteItem.getTitle().substring(0,2));
         }else {
-            holder.textViewNoteIndicatif.setText(saveNoteItem.getHomePage().indexOf(0,1));
+            holder.textViewNoteIndicatif.setText(saveNoteItem.getHomePage().substring(0,2));
         }
         holder.textViewNoteTitle.setText(saveNoteItem.getTitle());
 

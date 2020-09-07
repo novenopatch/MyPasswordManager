@@ -7,6 +7,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.viewpager.widget.ViewPager;
 
 
@@ -14,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FrameLayout frameLayoutContent;
+    private  SaveFragment  saveFragment = SaveFragment.newInstance();
+    private GenererFragment genererFragment = GenererFragment.newInstance();
     ViewPager pager;
 
 
@@ -115,13 +120,14 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressLint("ResourceType")
     private void configureViewPagerAndTabs(){
+
         this.frameLayoutContent = (FrameLayout) findViewById(R.id.frameLayoutContent);
         TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
 
         //add fragment
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(),0);
-        pageAdapter.addFragmentAndFragmentTilte(GenererFragment.newInstance(),GenererFragment.getStringTitle());
-        pageAdapter.addFragmentAndFragmentTilte(SaveFragment.newInstance(),SaveFragment.getStringTitle());
+        pageAdapter.addFragmentAndFragmentTilte(genererFragment,genererFragment.getStringTitle());
+        pageAdapter.addFragmentAndFragmentTilte(saveFragment,saveFragment.getStringTitle());
 
         //Get ViewPager from layout
         pager = new ViewPager(this);
@@ -176,10 +182,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         // 5 - Handle back click to close menu
+        ;
+
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }
+        else {
+            if(saveFragment.isResumed()&&!(saveFragment.getRecycleView()==null)&& !(saveFragment.getRecycleView().getAdapter()==saveFragment.getSaveListCategoryAdapter())){
+                saveFragment.createListCategoriesView(drawerLayout);
+            }else {
+                super.onBackPressed();
+            }
+
 
         }
     }
@@ -243,6 +257,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
 /*
     private void init(){
 
@@ -283,6 +298,7 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
    */
 
 }
