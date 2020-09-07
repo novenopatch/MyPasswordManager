@@ -66,5 +66,6 @@
     <string name="confirmer_mot_de_passe">Confirme Password</string>
     <string name="answer">Answer</string>
     <string name="s_inscrire">Sign in</string>
+    <string name="all_note">All Note</string>
 
 </resources>

@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private FrameLayout frameLayoutContent;
     private  SaveFragment  saveFragment = SaveFragment.newInstance();
     private GenererFragment genererFragment = GenererFragment.newInstance();
+    private TabLayout tabs;
     ViewPager pager;
 
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity
     private void configureViewPagerAndTabs(){
 
         this.frameLayoutContent = (FrameLayout) findViewById(R.id.frameLayoutContent);
-        TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
+        tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
 
         //add fragment
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(),0);
@@ -138,8 +139,9 @@ public class MainActivity extends AppCompatActivity
         pager.setAdapter(pageAdapter);
 
 
+
         tabs.setupWithViewPager(pager);
-        // 3 - Design purpose. Tabs have the same width
+            // 3 - Design purpose. Tabs have the same width
         tabs.setTabMode(TabLayout.MODE_FIXED);//Mode_Fixed
 
         //tabs.getTabAt(0).setIcon(R.drawable.ic_baseline_settings_blue_24);
@@ -221,9 +223,13 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
             case R.id.activity_main_drawer_profile:
-                Intent intent = new Intent(MainActivity.this, ConnectAppActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                //Intent intent = new Intent(MainActivity.this, ConnectAppActivity.class);
+                //startActivity(intent);
+                //overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+               // pager.setCurrentItem(1,true);
+                tabs.getTabAt(1).select();
+
+
                 break;
             case R.id.activity_main_drawer_settings:
                 Intent intent3 = new Intent(MainActivity.this, DrawActivity.class);
