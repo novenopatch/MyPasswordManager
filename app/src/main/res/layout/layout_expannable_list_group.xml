@@ -17,6 +17,7 @@
         app:srcCompat="@drawable/ic_baseline_local_offer_gray_24" />
 
     <TextView
+        android:id="@+id/textViewCategoryName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

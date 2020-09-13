@@ -22,7 +22,7 @@
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">se connecter ou s\'enregistrer</string>
     <string name="action_sign_in_short">s\'enregistrer</string>
-    <string name="welcome">Bienvenue</string>
+    <string name="welcome">Bienvenue!</string>
     <string name="invalid_username">Non d\'utilsateur invalide</string>
     <string name="invalid_password">le mot de passe ne doit pas etre inférieur à 5</string>
     <string name="login_failed">Connexion echouer</string>
@@ -33,7 +33,7 @@
     <string name="title_activity_login">Connection</string>
     <string name="add_category">Ajouter un Dossier</string>
     <string name="add_note">Ajouter une Note</string>
-    <string name="description">Description(optionel)</string>
+    <string name="description">Description(optionnel)</string>
     <string name="note_title">Titre de la note</string>
     <string name="t3">T3</string>
     <string name="category_name">Nom du dossier</string>
@@ -42,8 +42,8 @@
     <string name="title">Titre</string>
     <string name="category">Catégorie</string>
     <string name="username_or_identifiant">Nom d\'utilsateur ou identifiant</string>
-    <string name="homepage_optional">Url de la page(optionel)</string>
-    <string name="commentaire_optional">Commentaire(optionel)</string>
+    <string name="homepage_optional">Url de la page(optionnel)</string>
+    <string name="commentaire_optional">Commentaire(optionnel )</string>
     <string name="save">Sauvegarder</string>
     <string name="cancel">Annuler</string>
     <string name="special_chars">Caratère spécial</string>
@@ -59,4 +59,6 @@
     <string name="confirmer_mot_de_passe">Confirmer le Mot de passe</string>
     <string name="answer">Reponse</string>
     <string name="s_inscrire">S\'enregistre</string>
+    <string name="Success">"Succès "</string>
+    <string name="all_note">Tout les enregistrement</string>
 </resources>

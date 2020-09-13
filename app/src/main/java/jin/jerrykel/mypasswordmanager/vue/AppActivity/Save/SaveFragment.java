@@ -43,6 +43,7 @@ import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.CustomExpandableListAdapter;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 
 
@@ -76,9 +77,13 @@ public class SaveFragment extends Fragment  {
     private ImageView imageViewIfHome;
 
 
+
+
+
     public SaveFragment() {
         // Required empty public constructor
     }
+
     public static SaveFragment newInstance() {
         return new SaveFragment();
     }
@@ -233,6 +238,7 @@ public class SaveFragment extends Fragment  {
                     }
                     saveListCategoryAdapter.notifyDataSetChanged();
 
+
                     makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
                     dialog.dismiss();
 
@@ -309,6 +315,7 @@ public class SaveFragment extends Fragment  {
                         saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
 
                         Utils.makeToast("Success",context);
+
                         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
                         dialog.dismiss();
 
@@ -332,8 +339,9 @@ public class SaveFragment extends Fragment  {
                         saveListCategoryAdapter.notifyDataSetChanged();
                         saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
                         //on changera ca un peu apres
-                        Utils.makeToast("Success",context);
+                        Utils.makeToast(Utils.getString(R.string.toastText,context),context);
                         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
+
                         dialog.dismiss();
                     }
                     else {
@@ -363,6 +371,7 @@ public class SaveFragment extends Fragment  {
      * @param view
      */
     public void createListCategoriesView(View view){
+       // customExpandableListAdapter = new CustomExpandableListAdapter(context,controler.getSaveCategoryListArrayList());
         imageViewIfHome.setVisibility(View.VISIBLE);
         imageButtonGoHome.setVisibility(View.INVISIBLE);
         textViewCategoryName.setText(Utils.getString(R.string.AllCategory,view.getContext()));

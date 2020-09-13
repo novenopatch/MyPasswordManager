@@ -7,21 +7,21 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleRegistry;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -29,6 +29,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.Controler;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveListCategoryAdapter;
 import jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity.ConnectAppActivity;
 import jin.jerrykel.mypasswordmanager.vue.DrawerActivity.DrawActivity;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate.GenererFragment;
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity
     private  SaveFragment  saveFragment = SaveFragment.newInstance();
     private GenererFragment genererFragment = GenererFragment.newInstance();
     private TabLayout tabs;
-    ViewPager pager;
+    private  ViewPager pager;
+    private Controler controler;
+    //private  ExpandableListView expandableListView;
 
 
 
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_main);
 
+        controler = Controler.getInstance(this);
         init();
 
     }
@@ -97,6 +102,9 @@ public class MainActivity extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+
     }
 
     private void configureToolbar(){
@@ -117,6 +125,7 @@ public class MainActivity extends AppCompatActivity
     private void configureNavigationView(){
         this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @SuppressLint("ResourceType")
@@ -203,13 +212,46 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewInNavigationDrawer);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        SaveListCategoryAdapter saveListCategoryAdapter  = new SaveListCategoryAdapter(
+                controler.getSaveCategoryListArrayList(),
+                saveFragment
+        );
+        recyclerView.setAdapter( saveListCategoryAdapter );
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
+
+        //expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+       // expandableListView.setAdapter(saveFragment.getCustomExpandableListAdapter());
+       // saveFragment.getCustomExpandableListAdapter().notifyDataSetChanged();
         // 4 - Handle Navigation Item Click
         int id = item.getItemId();
 
         //open new fragment
         Fragment fragment = null;
+        /*
+        //pour gerer le clic sur le cexpanda
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " List Expanded.", Toast.LENGTH_SHORT).show();
+            } });
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " List Collapsed.", Toast.LENGTH_SHORT).show();
+            } });
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Toast.makeText( getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " -> " + controler.getSaveCategoryListArrayList().get(groupPosition).getSaveItemCategories().get(childPosition).getTitle(), Toast.LENGTH_SHORT ).show();
+                return false;
+            } });
 
+         */
         switch (id){
             case R.id.activity_main_drawer_news :
                // fragment = new NavDrawerMenuTestFragment();

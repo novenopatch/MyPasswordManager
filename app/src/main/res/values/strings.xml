@@ -40,7 +40,7 @@
     <string name="AllCategory">All Folder</string>
     <string name="add_category">Add Folder</string>
     <string name="add_note">Add Note</string>
-    <string name="description">Description</string>
+    <string name="description">Description(optionnal)</string>
     <string name="note_title">Note title</string>
     <string name="t3">T3</string>
     <string name="category_name">Folder Name</string>
@@ -67,5 +67,7 @@
     <string name="answer">Answer</string>
     <string name="s_inscrire">Sign in</string>
     <string name="all_note">All Note</string>
+    <string name="Success">Succes</string>
+
 
 </resources>

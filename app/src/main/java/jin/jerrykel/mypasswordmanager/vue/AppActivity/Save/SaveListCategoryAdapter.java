@@ -68,11 +68,8 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
         holder.Number.setText(String.valueOf(saveCategory.getNomberSave()));
         holder.categoryRate.setImageResource(R.drawable.ic_baseline_favorite_orange_24);
         holder.imageViewIconCategory.setBackgroundResource(R.drawable.ic_baseline_folder_orange_24);
-        holder.categoryRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.categoryRate.setOnClickListener(v -> {
 
-            }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +80,13 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
 
             }
         });
+        holder.itemView.setOnClickListener(new SingleClickListener() {
+            @Override
+            public void performClick(View v) {
+
+            }
+        });
+        holder.itemView.setOnLongClickListener(v -> false);
     }
     @Override
     public int getItemCount() {
