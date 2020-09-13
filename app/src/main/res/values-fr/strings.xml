@@ -61,4 +61,6 @@
     <string name="s_inscrire">S\'enregistre</string>
     <string name="Success">"Succès "</string>
     <string name="all_note">Tout les enregistrement</string>
+    <string name="choice_color">Choisissez la couleur</string>
+    <string name="Recycler">Poubelle</string>
 </resources>

@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        /*
         RecyclerView recyclerView = findViewById(R.id.recyclerViewInNavigationDrawer);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -223,6 +224,8 @@ public class MainActivity extends AppCompatActivity
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+
+         */
 
         //expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
        // expandableListView.setAdapter(saveFragment.getCustomExpandableListAdapter());

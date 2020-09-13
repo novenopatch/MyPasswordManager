@@ -68,6 +68,12 @@
     <string name="s_inscrire">Sign in</string>
     <string name="all_note">All Note</string>
     <string name="Success">Succes</string>
+    <string name="choice_color">Choice Color</string>
+    <string name="Recycler">recycler</string>
+    <string name="configuration">Configuration</string>
+    <string name="communication">communication</string>
+    <string name="rate_us">Rate us</string>
+    <string name="share">Share</string>
 
 
 </resources>
