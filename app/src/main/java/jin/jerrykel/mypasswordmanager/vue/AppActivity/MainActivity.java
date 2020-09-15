@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_white_24);
 
     }
 
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity
         pager = new ViewPager(this);
         pager.setId(199020);
         frameLayoutContent.addView(pager);
+
        // ViewPager pager = (ViewPager)findViewById(R.id.main_viewpager);
         //Set Adapter PageAdapter and glue it together
         pager.setAdapter(pageAdapter);
@@ -256,7 +257,7 @@ public class MainActivity extends AppCompatActivity
 
          */
         switch (id){
-            case R.id.activity_main_drawer_news :
+            case R.id.activity_main_drawer_choice_color :
                // fragment = new NavDrawerMenuTestFragment();
                // TabLayout tabLayout = findViewById(R.id.activity_main_tabs);
                 //tabLayout.setVisibility(View.INVISIBLE);
@@ -267,7 +268,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
-            case R.id.activity_main_drawer_profile:
+            case R.id.activity_main_drawer_settings:
                 //Intent intent = new Intent(MainActivity.this, ConnectAppActivity.class);
                 //startActivity(intent);
                 //overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
@@ -276,7 +277,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 break;
-            case R.id.activity_main_drawer_settings:
+            case R.id.activity_main_drawer_recycler:
                 Intent intent3 = new Intent(MainActivity.this, DrawActivity.class);
                 startActivity(intent3);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);

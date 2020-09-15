@@ -80,12 +80,15 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
 
             }
         });
+        /*
         holder.itemView.setOnClickListener(new SingleClickListener() {
             @Override
             public void performClick(View v) {
 
             }
         });
+
+         */
         holder.itemView.setOnLongClickListener(v -> false);
     }
     @Override
