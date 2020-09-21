@@ -4,27 +4,20 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.ExpandableListView;
 
-import androidx.activity.OnBackPressedDispatcher;
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,8 +36,8 @@ import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.CustomExpandableListAdapter;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddCategoryDialog;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddNoteDialog;
 
 
 public class SaveFragment extends Fragment  {
@@ -211,13 +204,12 @@ public class SaveFragment extends Fragment  {
      */
     private void   showAddCategoryDialog(Context context){
         makeInvisibleFloatingButton();
-        Dialog dialog = new Dialog(context,R.style.Theme_AppCompat_DayNight_DialogWhenLarge);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_alert_dialogue_add_new_category);
-        Button buttonCancel = (Button)dialog.findViewById(R.id.buttonCancel);
-        Button buttonSave = (Button)dialog.findViewById(R.id.buttonSave);
-        EditText editextcategorieName = (EditText) dialog.findViewById(R.id.EditTextCategoryName);
-        EditText editextcategorieDescription = (EditText) dialog.findViewById(R.id.EditTextCategoryDescription);
+        ShowAddCategoryDialog showAddCategoryDialog = new ShowAddCategoryDialog(context);
+        Dialog dialog = showAddCategoryDialog.getDialog();
+        Button buttonCancel = showAddCategoryDialog.getButtonCancel();
+        Button buttonSave = showAddCategoryDialog.getButtonSave();
+        EditText editextcategorieName = showAddCategoryDialog.getEditextcategorieName();
+        EditText editextcategorieDescription = showAddCategoryDialog.getEditextcategorieDescription();
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -262,24 +254,25 @@ public class SaveFragment extends Fragment  {
      */
     private void   showAddNoteDialog(Context context){
         makeInvisibleFloatingButton();
-        Dialog dialog = new Dialog(context,R.style.Theme_AppCompat_DayNight_DialogWhenLarge);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_alert_dialogue_add_new_note);
+        ShowAddNoteDialog showAddNoteDialog = new ShowAddNoteDialog(context);
+        Dialog dialog = showAddNoteDialog.getDialog();
 
-        Spinner spinnerSelectCategory = (Spinner) dialog.findViewById(R.id.spinnerSelectCategory);
-        ImageButton imageButtonAddNewCategory = (ImageButton) dialog.findViewById(R.id.imageButtonAddNewCategory);
-        Button buttonSaveNote = (Button) dialog.findViewById(R.id.buttonSaveNote);
+        Spinner spinnerSelectCategory = showAddNoteDialog.getSpinnerSelectCategory();
+        ImageButton imageButtonAddNewCategory = showAddNoteDialog.getImageButtonAddNewCategory();
+        Button buttonSaveNote = showAddNoteDialog.getButtonSaveNote();
 
-        EditText EditTextNoteTitle = (EditText)dialog.findViewById(R.id.EditTextNoteTitle);
-        EditText EditTextNoteUserName = (EditText)dialog.findViewById(R.id.EditTextNoteUserName);
-        EditText EditTextPassword = (EditText)dialog.findViewById(R.id.EditTextPassword);
-        EditText EditTextHomepage = (EditText)dialog.findViewById(R.id.EditTextHomepage);
-        EditText EdiTextNoteCommentaire = (EditText)dialog.findViewById(R.id.EdiTextNoteCommentaire);
+        EditText EditTextNoteTitle = showAddNoteDialog.getEditTextNoteTitle();
+        EditText EditTextNoteUserName = showAddNoteDialog.getEditTextNoteUserName();
+        EditText EditTextPassword = showAddNoteDialog.getEditTextPassword();
+        EditText EditTextHomepage = showAddNoteDialog.getEditTextHomepage();
+        EditText EdiTextNoteCommentaire = showAddNoteDialog.getEdiTextNoteCommentaire();
         EditText[] editTexts = {
                 EditTextNoteTitle,EditTextNoteUserName,
                 EditTextPassword,EditTextHomepage,EdiTextNoteCommentaire};
         List<CharSequence> charSequenceList = controler.returnSaveItemCategoryName();
-        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(context,android.R.layout.simple_spinner_item,charSequenceList);
+        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(
+                context,android.R.layout.simple_spinner_item,charSequenceList
+        );
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSelectCategory.setAdapter(arrayAdapter);
 
@@ -312,7 +305,9 @@ public class SaveFragment extends Fragment  {
                             saveListCategoryAdapter.notifyDataSetChanged();
                         }
                         saveListCategoryAdapter.notifyDataSetChanged();
-                        saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
+                        saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(
+                                spinnerSelectCategory.getSelectedItem().toString())
+                        );
 
                         Utils.makeToast("Success",context);
 
@@ -337,7 +332,9 @@ public class SaveFragment extends Fragment  {
                             saveListCategoryAdapter.notifyDataSetChanged();
                         }
                         saveListCategoryAdapter.notifyDataSetChanged();
-                        saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
+                        saveListCategoryAdapter.notifyItemChanged(
+                                controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString())
+                        );
                         //on changera ca un peu apres
                         Utils.makeToast(Utils.getString(R.string.toastText,context),context);
                         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
@@ -355,6 +352,7 @@ public class SaveFragment extends Fragment  {
         dialog.show();
 
     }
+
     public RecyclerView  initRecycleView(View view){
         if(recycleView==null){
             recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);

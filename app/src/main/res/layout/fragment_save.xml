@@ -126,8 +126,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginBottom="15sp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -162,8 +162,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
 
                 android:orientation="horizontal">
@@ -173,8 +173,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
 
-                    android:gravity="center"
                     android:background="@color/colorSuperRed"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
@@ -194,6 +194,50 @@
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingActionButtonAddCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_create_new_folder_24"
+                    app:fabSize="mini" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:gravity="center"
+                    android:background="@color/colorSuperGreen"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8sp"
+                        android:layout_marginEnd="5sp"
+                        android:gravity="center"
+
+                        android:text="@string/add_category"
+                        android:textAlignment="center"
+                        android:textColor="#FFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButtonAddNoteType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8sp"
