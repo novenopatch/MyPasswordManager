@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity
 // public class MainActivity extends AppCompatActivity implements MainFragment.OnButtonClickedListener {
 
 
+    public SaveFragment getSaveFragment() {
+        return saveFragment;
+    }
+
     //FOR DESIGN
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -210,6 +214,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+    public TabLayout getTabs() {
+        return tabs;
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

@@ -1,6 +1,8 @@
 package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 
 public class PasswordGenerateListAdapter extends
         RecyclerView.Adapter<PasswordGenerateListAdapter.PasswordViewHolder> {
@@ -27,7 +30,6 @@ public class PasswordGenerateListAdapter extends
     public ArrayList<GeneratePassword> generatePasswordArrayList;
     private Context context;
     private Controler controler;
-    private int position;
 
 
     public static class PasswordViewHolder extends RecyclerView.ViewHolder{
@@ -64,7 +66,7 @@ public class PasswordGenerateListAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull PasswordViewHolder holder, int position) {
-        position = position;
+
         GeneratePassword generatePassword = generatePasswordArrayList.get(position);
         holder.date.setText(generatePassword.getDateString());
         holder.heuredate.setText(generatePassword.getHeuredate());
@@ -88,14 +90,14 @@ public class PasswordGenerateListAdapter extends
 
         holder.imageButtonMenu.setOnClickListener(v -> {
 
-            makePopMenu(v.getContext(),holder.imageButtonMenu);
+            makePopMenu(v.getContext(),holder.imageButtonMenu,position);
 
 
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                makePopMenu(v.getContext(),holder.imageButtonMenu,position);
             }
         });
 
@@ -107,7 +109,7 @@ public class PasswordGenerateListAdapter extends
     }
 
 
-    private void makePopMenu(Context context, ImageButton imageButtonMenu){
+    private void makePopMenu(Context context, ImageButton imageButtonMenu,int position){
         PopupMenu popupMenu = new PopupMenu(context,imageButtonMenu);
 
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -115,12 +117,17 @@ public class PasswordGenerateListAdapter extends
                 case R.id.menu_histo_search:
                     return true;
                 case R.id.menu_histo_share:
+                    Intent intent = new Intent(Intent.ACTION_SEND);// Uri.parse(generatePasswordArrayList.get(position).getPassword()));
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT,generatePasswordArrayList.get(position).getPassword());
+                    context.startActivity(Intent.createChooser(intent,"Share via"));
                     return true;
                 case R.id.menu_histo_add_new_note:
+                    MainActivity mainActivity = ((MainActivity)context);
+                    mainActivity.getTabs().getTabAt(1).select();
+                    mainActivity.getSaveFragment().showAddNoteDialog(mainActivity,generatePasswordArrayList.get(position).getPassword());
                     return true;
                 case R.id.menu_histo_delete:
-                    //passwordGenerateListAdapter.generatePasswordArrayList.remove(position);
-                    //passwordGenerateListAdapter.notifyItemRemoved(position);
                     generatePasswordArrayList.remove(position);
                     this.notifyItemRemoved(position);
                     return true;
