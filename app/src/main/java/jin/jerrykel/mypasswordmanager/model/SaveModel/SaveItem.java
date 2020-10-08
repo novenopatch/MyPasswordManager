@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.model;
+package jin.jerrykel.mypasswordmanager.model.SaveModel;
 
 public class SaveItem {
     private  String name;

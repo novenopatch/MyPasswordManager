@@ -4,10 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
-import jin.jerrykel.mypasswordmanager.model.SaveNoteItem;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 
 public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapter.SaveViewHolder>{
     private ArrayList<SaveNoteItem> saveNoteItemArrayList;

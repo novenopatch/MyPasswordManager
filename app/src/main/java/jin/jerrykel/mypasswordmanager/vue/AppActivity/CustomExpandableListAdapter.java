@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
-import jin.jerrykel.mypasswordmanager.model.SaveNoteItem;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 

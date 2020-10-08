@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.model;
+package jin.jerrykel.mypasswordmanager.model.UserModel;
 
 public class User {
     private String username ;

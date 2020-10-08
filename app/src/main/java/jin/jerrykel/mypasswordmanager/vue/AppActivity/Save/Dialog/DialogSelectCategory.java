@@ -25,10 +25,11 @@ public class DialogSelectCategory {
         this.buttonCancel = mainActivity.findViewById(R.id.buttonRestore);
         this.buttonRestore = mainActivity.findViewById(R.id.buttonRestore);
         this.recyclerView = mainActivity.findViewById(R.id.recyclerCategory);
+        this.imageButtonAddNewCategory = mainActivity.findViewById(R.id.imageButtonAddNewCategory);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_select_category);
 
-        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
 
 
     }

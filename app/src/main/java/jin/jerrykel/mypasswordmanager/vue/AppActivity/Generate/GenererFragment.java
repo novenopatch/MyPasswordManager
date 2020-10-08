@@ -419,17 +419,4 @@ public class GenererFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

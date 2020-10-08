@@ -17,7 +17,7 @@ public class ShowAddCategoryDialog {
     public ShowAddCategoryDialog(Context context) {
         this.dialog = new Dialog(context,R.style.Theme_AppCompat_DayNight_DialogWhenLarge);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_alert_dialogue_add_new_category);
+        dialog.setContentView(R.layout.activity_add_category);
         this.buttonCancel = (Button)dialog.findViewById(R.id.buttonCancel);
         this.buttonSave = (Button)dialog.findViewById(R.id.buttonSave);
         this.editextcategorieName = (EditText) dialog.findViewById(R.id.EditTextCategoryName);

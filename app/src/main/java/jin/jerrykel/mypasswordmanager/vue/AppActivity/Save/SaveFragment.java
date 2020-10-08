@@ -2,6 +2,7 @@ package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,8 +36,10 @@ import java.util.List;
 
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.DialogSelectCategory;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddCategoryDialog;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddNoteDialog;
 
@@ -84,6 +88,8 @@ public class SaveFragment extends Fragment  {
     public SaveListCategoryAdapter getSaveListCategoryAdapter() {
         return saveListCategoryAdapter;
     }
+
+
     public RecyclerView getRecycleView() {
         return recycleView;
     }
@@ -100,7 +106,7 @@ public class SaveFragment extends Fragment  {
 
         controler = Controler.getInstance(context);
         //default
-        controler.addNewSaveCategoryList("General","@exemple");
+        controler.addNewSaveCategoryList(context,"General","@exemple");
     }
 
     @Override
@@ -147,59 +153,56 @@ public class SaveFragment extends Fragment  {
      * @param view
      */
     public void initAllFloatingBouton(View view){
-        imageButtonGoHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!(recycleView==null) && !(recycleView.getAdapter()==saveListCategoryAdapter)){
-                        createListCategoriesView(view);
-                }
-
-            }
-        });
         linearLayoutFloatingActionButton = view.findViewById(R.id.linearLayoutOfFloatingActionButton);
         makevisibleFloatingActionButton = view.findViewById(R.id.floatingActionButtonMain);
         FloatingActionButton AddCategoryFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddCategory);
         FloatingActionButton AddNoteFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddNote);
+        FloatingActionButton AddNoteTypeFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddNoteType);
         linearLayoutFloatingActionButton.setVisibility(View.INVISIBLE);
-        makevisibleFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( linearLayoutFloatingActionButton.getVisibility()==View.INVISIBLE){
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                        makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_close_white_24);
-                    }
-                    else {
-                        makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_close_black_24);
-                    }
-                    linearLayoutFloatingActionButton.setVisibility(View.VISIBLE);
-                }else{
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                        makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_add_white_24);
-                    }
-                    else {
-                        makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_add_black_24);
-                    }
-                    linearLayoutFloatingActionButton.setVisibility(View.INVISIBLE);
-                }
 
+        imageButtonGoHome.setOnClickListener(v -> {
+            if(!(recycleView==null) && !(recycleView.getAdapter()==saveListCategoryAdapter)){
+                    createListCategoriesView(view);
             }
+
         });
-        AddCategoryFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddCategoryDialog(context);
+
+        makevisibleFloatingActionButton.setOnClickListener(v -> {
+            if( linearLayoutFloatingActionButton.getVisibility()==View.INVISIBLE){
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_close_white_24);
+                }
+                else {
+                    makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_close_black_24);
+                }
+                linearLayoutFloatingActionButton.setVisibility(View.VISIBLE);
+            }else{
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_add_white_24);
+                }
+                else {
+                    makevisibleFloatingActionButton.setImageResource(R.drawable.ic_baseline_add_black_24);
+                }
+                linearLayoutFloatingActionButton.setVisibility(View.INVISIBLE);
             }
+
         });
-        AddNoteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddNoteDialog(context);
-            }
-        });
+        AddCategoryFloatingActionButton.setOnClickListener(v -> showAddCategoryDialog(context));
+        //AddCategoryFloatingActionButton.setOnClickListener(v -> goToActivyAddCategory());
+        AddNoteFloatingActionButton.setOnClickListener(v -> showAddNoteDialog(context));
+        AddNoteTypeFloatingActionButton.setOnClickListener(v ->showAddNoteTypeDialog(
+                (MainActivity) context)
+        );
+    }
+    public void goToActivyAddCategory(){
+        Intent intent = new Intent(context,ActivityAddCategory.class);
+        startActivity(intent);
+
+
     }
 
     /**
-     * show ADD category  alert dialogu
+     * show ADD category  alert dialogue
      * @param context
      */
     private void   showAddCategoryDialog(Context context){
@@ -224,9 +227,9 @@ public class SaveFragment extends Fragment  {
             public void onClick(View v) {
                 if(!editextcategorieName.getText().toString().isEmpty()){
                     if(!editextcategorieDescription.getText().toString().isEmpty()){
-                        controler.addNewSaveCategoryList( editextcategorieName.getText().toString(),editextcategorieDescription.getText().toString());
+                        controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),editextcategorieDescription.getText().toString());
                     }else {
-                        controler.addNewSaveCategoryList( editextcategorieName.getText().toString(),"");
+                        controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),"");
                     }
                     saveListCategoryAdapter.notifyDataSetChanged();
 
@@ -340,6 +343,7 @@ public class SaveFragment extends Fragment  {
                         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
 
                         dialog.dismiss();
+
                     }
                     else {
 
@@ -353,6 +357,21 @@ public class SaveFragment extends Fragment  {
 
     }
 
+
+    /**
+     * show add note Dialog
+     * @param mainActivity
+     */
+    public void showAddNoteTypeDialog(MainActivity mainActivity){
+        DialogSelectCategory dialogSelectCategory = new DialogSelectCategory(mainActivity);
+        dialogSelectCategory.getDialog().show();
+    }
+
+    /**
+     * init tRecycleView
+     * @param view
+     * @return
+     */
     public RecyclerView  initRecycleView(View view){
         if(recycleView==null){
             recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);
@@ -412,7 +431,7 @@ public class SaveFragment extends Fragment  {
     }
 
     /**
-     *
+     * view Note List
      * @param saveItemCategory
      */
     public void viewNoteList(SaveItemCategory saveItemCategory) {
@@ -459,7 +478,12 @@ public class SaveFragment extends Fragment  {
 
 
 
-    //retour fragment Tile
+
+
+    /**
+     * return fragment Tile
+     * @return
+     */
     public static String getStringTitle(){
 
         return pageTitle;

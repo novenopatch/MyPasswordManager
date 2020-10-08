@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="jin.jerrykel.mypasswordmanager" >
+    package="jin.jerrykel.mypasswordmanager">
 
     <application
         android:allowBackup="true"
@@ -8,22 +8,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/new_icone_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-
-        <activity
-            android:name=".vue.AppActivity.MainActivity"
-             >
+        android:theme="@style/AppTheme">
+        <activity android:name=".vue.AppActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.DrawerActivity.DrawActivity"/>
+        <activity android:name=".vue.DrawerActivity.DrawActivity" />
         <activity android:name=".vue.save.SaveActivity" />
-        <activity android:name=".vue.ConnectAppActivity.ConnectAppActivity"/>
-        <activity android:name=".vue.save.appBord.AppBordActivity" />
+        <activity android:name=".vue.ConnectAppActivity.ConnectAppActivity" />
         <activity android:name=".vue.save.createLogin.ConnectActivity" />
+        <activity android:name=".vue.AppActivity.Save.ActivityAddCategory">
+
+        </activity>
     </application>
 
 </manifest>

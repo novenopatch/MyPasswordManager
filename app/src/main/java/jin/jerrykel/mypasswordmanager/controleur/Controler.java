@@ -5,11 +5,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import jin.jerrykel.mypasswordmanager.model.GeneratePassword;
-import jin.jerrykel.mypasswordmanager.model.RandomPasswordGenerator;
-import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
-import jin.jerrykel.mypasswordmanager.model.SaveNoteItem;
-import jin.jerrykel.mypasswordmanager.model.User;
+import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
+import jin.jerrykel.mypasswordmanager.model.GenerateModel.RandomPasswordGenerator;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
+import jin.jerrykel.mypasswordmanager.model.UserModel.User;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 public class Controler {
@@ -36,12 +36,82 @@ public class Controler {
     private Controler(){
         super();
     }
+    /**
+     * création de l'instance
+     * @return Controler.instance
+     */
+    public static Controler getInstance(Context contexte){
 
 
+        if(contexte == null){
+            Controler.contexte = contexte;
+        }
+        if(Controler.instance == null){
+            Controler.instance = new Controler();
+        }
+        return  Controler.instance;
+    }
+    /**
+     * test if category exist
+     * @param arrayListItem
+     * @param name
+     * @return
+     */
+    private boolean testIfCategoryExist( ArrayList<SaveItemCategory> arrayListItem,String name){
+        for (SaveItemCategory saveItemCategory : arrayListItem){
+            if(saveItemCategory.getName().equals(name))
+                return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * test if Item exist
+     * @param arrayListItem
+     * @param name
+     * @return
+     */
+    private boolean testIfItemExist( ArrayList<SaveNoteItem> arrayListItem,String name){
+        for (SaveNoteItem saveItemCategory : arrayListItem){
+            if(saveItemCategory.getName().equals(name))
+                return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * to add new category
+     * @param name
+     * @param description
+     */
+    public void addNewSaveCategoryList(Context context,String name,String description){
+        if(!testIfCategoryExist(SaveCategoryListArrayList,name)){
+            SaveCategoryListArrayList.add(new SaveItemCategory(name,description));
+        }else{
+
+                Utils.makeToast("bbb",context);
+
+
+        }
+
+    }
+
+    /**
+     * add note
+     * @param title
+     * @param saveItemCategoryName
+     * @param id
+     * @param password
+     * @param homePage
+     * @param comment
+     */
     public void addNewNote(String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
 
         saveNoteItemArrayList.add(new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment));
     }
+
 
     /**
      * found save item category for his name
@@ -55,15 +125,26 @@ public class Controler {
         }
         return null;
     }
+
+    /**
+     * find and return Item Category positon
+     * @param name
+     * @return
+     */
     public Integer findandreturnpositon(String name){
-        int kora = 0;
+        int count = 0;
         for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
-            kora++;
+            count++;
             if(saveItemCategory.getName().equals(name))
-                return kora;
+                return count;
         }
         return null;
     }
+
+    /**
+     * return Save Category Name ArrayList<CharSequence>
+     * @return
+     */
     public ArrayList<CharSequence> returnSaveItemCategoryName(){
         ArrayList<CharSequence> quit = new ArrayList<>();
         for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
@@ -96,30 +177,8 @@ public class Controler {
         return  SaveCategoryListArrayList;
     }
 
-    /**
-     * to add new category
-     * @param name
-     * @param description
-     */
-    public void addNewSaveCategoryList(String name,String description){
-        SaveCategoryListArrayList.add(new SaveItemCategory(name,description));
-    }
-
-    /**
-     * création de l'instance
-     * @return Controler.instance
-     */
-    public static Controler getInstance(Context contexte){
 
 
-        if(contexte == null){
-            Controler.contexte = contexte;
-        }
-        if(Controler.instance == null){
-            Controler.instance = new Controler();
-        }
-        return  Controler.instance;
-    }
 
 
     /**

@@ -1,8 +1,8 @@
-package jin.jerrykel.mypasswordmanager.model;
+package jin.jerrykel.mypasswordmanager.model.SaveModel;
 
 import java.util.ArrayList;
 
-public class SaveItemCategory extends SaveItem{
+public class SaveItemCategory extends SaveItem {
 
 
     private int rate;

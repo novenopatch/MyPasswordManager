@@ -1,11 +1,14 @@
-package jin.jerrykel.mypasswordmanager.model;
+package jin.jerrykel.mypasswordmanager.model.SaveModel;
 
-public class SaveNoteItem extends SaveItem{
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItem;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+
+public class SaveNoteItem extends SaveItem {
     private String id;
     private String password;
     private String homePage;
 
-    public SaveNoteItem(String title, SaveItemCategory saveItemCategory, String id, String password,String homePage, String comment) {
+    public SaveNoteItem(String title, SaveItemCategory saveItemCategory, String id, String password, String homePage, String comment) {
         super(title,comment);
         this.id = id;
         this.password = password;

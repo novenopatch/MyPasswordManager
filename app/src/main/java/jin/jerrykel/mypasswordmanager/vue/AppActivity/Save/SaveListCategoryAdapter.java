@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
-import jin.jerrykel.mypasswordmanager.model.SaveItemCategory;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 
 public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCategoryAdapter.SaveViewHolder> {
     private ArrayList<SaveItemCategory> saveCategoryArrayList;
