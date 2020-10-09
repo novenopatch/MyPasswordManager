@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save;
+package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveFragment;
 
 public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCategoryAdapter.SaveViewHolder> {
     private ArrayList<SaveItemCategory> saveCategoryArrayList;
@@ -69,24 +70,13 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
         holder.categoryRate.setOnClickListener(v -> {
 
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //demande à l'affichage de la liste de note
-                saveFragment.viewNoteList(saveCategoryArrayList.get(position));
+        holder.itemView.setOnClickListener(v -> {
+            //demande à l'affichage de la liste de note
+            saveFragment.viewNoteList(saveCategoryArrayList.get(position));
 
 
-            }
-        });
-        /*
-        holder.itemView.setOnClickListener(new SingleClickListener() {
-            @Override
-            public void performClick(View v) {
-
-            }
         });
 
-         */
         holder.itemView.setOnLongClickListener(v -> false);
     }
     @Override

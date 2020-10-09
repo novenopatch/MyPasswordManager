@@ -8,11 +8,19 @@ public class SaveNoteItem extends SaveItem {
     private String password;
     private String homePage;
 
+
+
+    private String  saveItemCategoryName;
+
+
+
+
     public SaveNoteItem(String title, SaveItemCategory saveItemCategory, String id, String password, String homePage, String comment) {
         super(title,comment);
         this.id = id;
         this.password = password;
         this.homePage = homePage;
+        this.saveItemCategoryName = saveItemCategory.getName();
         saveItemCategory.setsaveNoteItems(this);
     }
 
@@ -36,4 +44,8 @@ public class SaveNoteItem extends SaveItem {
     public String getComment() {
         return this.getDecription();
     }
+    public String getSaveItemCategoryName() {
+        return saveItemCategoryName;
+    }
+
 }

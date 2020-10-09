@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save;
+package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

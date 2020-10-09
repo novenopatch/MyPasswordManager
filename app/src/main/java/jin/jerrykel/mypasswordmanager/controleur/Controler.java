@@ -10,6 +10,7 @@ import jin.jerrykel.mypasswordmanager.model.GenerateModel.RandomPasswordGenerato
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.model.UserModel.User;
+import jin.jerrykel.mypasswordmanager.utils.LocalDatabase;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 public class Controler {
@@ -29,6 +30,7 @@ public class Controler {
 
     private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
     private ArrayList<SaveNoteItem> saveNoteItemArrayList = new ArrayList<>();
+    private static LocalDatabase localDatabase;
 
     /**
      * contructeur private
@@ -42,7 +44,7 @@ public class Controler {
      */
     public static Controler getInstance(Context contexte){
 
-
+        localDatabase = new LocalDatabase(contexte);
         if(contexte == null){
             Controler.contexte = contexte;
         }
@@ -108,8 +110,10 @@ public class Controler {
      * @param comment
      */
     public void addNewNote(String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
-
-        saveNoteItemArrayList.add(new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment));
+        SaveNoteItem saveNoteItem = new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment);
+        saveNoteItemArrayList.add(saveNoteItem);
+        localDatabase.insertSaveNote(saveNoteItem);
+        localDatabase.close();
     }
 
 

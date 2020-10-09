@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,8 +36,11 @@ import java.util.List;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+import jin.jerrykel.mypasswordmanager.utils.LocalDatabase;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter.SaveListCategoryAdapter;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter.SaveListNoteAdapter;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.DialogSelectCategory;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddCategoryDialog;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddNoteDialog;
@@ -73,6 +75,10 @@ public class SaveFragment extends Fragment  {
     private Context context;
     private ImageView imageViewIfHome;
 
+    private  ImageButton   imageButtonGoHome;
+    private  LinearLayout linearLayoutFloatingActionButton;
+    private FloatingActionButton makevisibleFloatingActionButton;
+   // private LocalDatabase localDatabase;
 
 
 
@@ -105,8 +111,9 @@ public class SaveFragment extends Fragment  {
         this.context = context;
 
         controler = Controler.getInstance(context);
-        //default
+        //default category
         controler.addNewSaveCategoryList(context,"General","@exemple");
+        //localDatabase = new LocalDatabase(context);
     }
 
     @Override
@@ -138,9 +145,7 @@ public class SaveFragment extends Fragment  {
         createListCategoriesView(rootView);
         initAllFloatingBouton(rootView);
     }
-    private  ImageButton   imageButtonGoHome;
-    private  LinearLayout linearLayoutFloatingActionButton;
-    private FloatingActionButton makevisibleFloatingActionButton;
+
 
     public void makeInvisibleFloatingButton(){
         linearLayoutFloatingActionButton.setVisibility(View.INVISIBLE);
@@ -213,38 +218,32 @@ public class SaveFragment extends Fragment  {
         Button buttonSave = showAddCategoryDialog.getButtonSave();
         EditText editextcategorieName = showAddCategoryDialog.getEditextcategorieName();
         EditText editextcategorieDescription = showAddCategoryDialog.getEditextcategorieDescription();
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonCancel.setOnClickListener(v -> {
+            makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
+            dialog.dismiss();
+
+
+        });
+        buttonSave.setOnClickListener(v -> {
+            if(!editextcategorieName.getText().toString().isEmpty()){
+                if(!editextcategorieDescription.getText().toString().isEmpty()){
+                    controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),editextcategorieDescription.getText().toString());
+                }else {
+                    controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),"");
+                }
+                saveListCategoryAdapter.notifyDataSetChanged();
+
+
                 makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
                 dialog.dismiss();
 
 
-            }
-        });
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!editextcategorieName.getText().toString().isEmpty()){
-                    if(!editextcategorieDescription.getText().toString().isEmpty()){
-                        controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),editextcategorieDescription.getText().toString());
-                    }else {
-                        controler.addNewSaveCategoryList( context,editextcategorieName.getText().toString(),"");
-                    }
-                    saveListCategoryAdapter.notifyDataSetChanged();
-
-
-                    makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
-                    dialog.dismiss();
-
-
-                }else {
-
-                }
-
-
+            }else {
 
             }
+
+
+
         });
         dialog.show();
         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
@@ -277,124 +276,15 @@ public class SaveFragment extends Fragment  {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSelectCategory.setAdapter(arrayAdapter);
 
-        imageButtonAddNewCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddCategoryDialog(context);
-            }
-        });
-        buttonSaveNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                    if(
-                        !EditTextNoteTitle.getText().toString().isEmpty()
-                        &!EditTextNoteUserName.getText().toString().isEmpty()
-                        &!EditTextPassword.getText().toString().isEmpty()
-                        &!EditTextHomepage.getText().toString().isEmpty()
-                        &!EdiTextNoteCommentaire.getText().toString().isEmpty()
-                    ){
-                        controler.addNewNote(
-                                EditTextNoteTitle.getText().toString(),
-                                spinnerSelectCategory.getSelectedItem().toString(),
-                                EditTextNoteUserName.getText().toString(),
-                                EditTextPassword.getText().toString(),
-                                EditTextHomepage.getText().toString(),
-                                EdiTextNoteCommentaire.getText().toString()
-                        );
-                        if(!(saveListNoteAdapter ==null)){
-                            saveListCategoryAdapter.notifyDataSetChanged();
-                        }
-                        saveListCategoryAdapter.notifyDataSetChanged();
-                        saveListCategoryAdapter.notifyItemChanged(controler.findandreturnpositon(
-                                spinnerSelectCategory.getSelectedItem().toString())
-                        );
-
-                        Utils.makeToast("Success",context);
-
-                        makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
-
-                    }
-                    if(
-                            !EditTextNoteTitle.getText().toString().isEmpty()
-                            &!EditTextNoteUserName.getText().toString().isEmpty()
-                            &!EditTextPassword.getText().toString().isEmpty()
-                    ){
-                        controler.addNewNote(
-                                EditTextNoteTitle.getText().toString(),
-                                spinnerSelectCategory.getSelectedItem().toString(),
-                                EditTextNoteUserName.getText().toString(),
-                                EditTextPassword.getText().toString(),
-                                "",
-                                ""
-                        );
-                        if(!(saveListNoteAdapter ==null)){
-                            saveListCategoryAdapter.notifyDataSetChanged();
-                        }
-                        saveListCategoryAdapter.notifyDataSetChanged();
-                        saveListCategoryAdapter.notifyItemChanged(
-                                controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString())
-                        );
-                        //on changera ca un peu apres
-                        Utils.makeToast(Utils.getString(R.string.toastText,context),context);
-                        makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
-
-                        dialog.dismiss();
-
-                    }
-                    else {
-
-                    }
-            }
-        });
-
-
-        makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
-        dialog.show();
-
-    }
-    public void   showAddNoteDialog(Context context,String passwordText){
-        showAddNoteDialog(context);
-        EditTextPassword.setText(passwordText);
-        /*
-        makeInvisibleFloatingButton();
-        ShowAddNoteDialog showAddNoteDialog = new ShowAddNoteDialog(context);
-        Dialog dialog = showAddNoteDialog.getDialog();
-
-        Spinner spinnerSelectCategory = showAddNoteDialog.getSpinnerSelectCategory();
-        ImageButton imageButtonAddNewCategory = showAddNoteDialog.getImageButtonAddNewCategory();
-        Button buttonSaveNote = showAddNoteDialog.getButtonSaveNote();
-
-        EditText EditTextNoteTitle = showAddNoteDialog.getEditTextNoteTitle();
-        EditText EditTextNoteUserName = showAddNoteDialog.getEditTextNoteUserName();
-        EditText EditTextPassword = showAddNoteDialog.getEditTextPassword();
-        EditTextPassword.setText(passwordText);
-        EditText EditTextHomepage = showAddNoteDialog.getEditTextHomepage();
-        EditText EdiTextNoteCommentaire = showAddNoteDialog.getEdiTextNoteCommentaire();
-        List<CharSequence> charSequenceList = controler.returnSaveItemCategoryName();
-        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(
-                context,android.R.layout.simple_spinner_item,charSequenceList
-        );
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSelectCategory.setAdapter(arrayAdapter);
-
-        imageButtonAddNewCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddCategoryDialog(context);
-            }
-        });
-        buttonSaveNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        imageButtonAddNewCategory.setOnClickListener(v -> showAddCategoryDialog(context));
+        buttonSaveNote.setOnClickListener(v -> {
 
                 if(
-                        !EditTextNoteTitle.getText().toString().isEmpty()
-                                &!EditTextNoteUserName.getText().toString().isEmpty()
-                                &!EditTextPassword.getText().toString().isEmpty()
-                                &!EditTextHomepage.getText().toString().isEmpty()
-                                &!EdiTextNoteCommentaire.getText().toString().isEmpty()
+                    !EditTextNoteTitle.getText().toString().isEmpty()
+                    &!EditTextNoteUserName.getText().toString().isEmpty()
+                    &!EditTextPassword.getText().toString().isEmpty()
+                    &!EditTextHomepage.getText().toString().isEmpty()
+                    &!EdiTextNoteCommentaire.getText().toString().isEmpty()
                 ){
                     controler.addNewNote(
                             EditTextNoteTitle.getText().toString(),
@@ -420,8 +310,8 @@ public class SaveFragment extends Fragment  {
                 }
                 if(
                         !EditTextNoteTitle.getText().toString().isEmpty()
-                                &!EditTextNoteUserName.getText().toString().isEmpty()
-                                &!EditTextPassword.getText().toString().isEmpty()
+                        &!EditTextNoteUserName.getText().toString().isEmpty()
+                        &!EditTextPassword.getText().toString().isEmpty()
                 ){
                     controler.addNewNote(
                             EditTextNoteTitle.getText().toString(),
@@ -448,14 +338,17 @@ public class SaveFragment extends Fragment  {
                 else {
 
                 }
-            }
         });
 
 
         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
         dialog.show();
 
-         */
+    }
+    public void   showAddNoteDialog(Context context,String passwordText){
+        showAddNoteDialog(context);
+        EditTextPassword.setText(passwordText);
+
 
     }
 

@@ -72,20 +72,18 @@ public class PasswordGenerateListAdapter extends
         holder.heuredate.setText(generatePassword.getHeuredate());
         holder.passwordString.setText(generatePassword.getPassword());
         holder.copyImgbtn.setTag(position);
-        holder.copyImgbtn.setOnClickListener(new  ImageButton.OnClickListener(){
-            public void onClick(View v){
-                int position = (int)v.getTag();
-                // demande de suppression au controlleur
-                //controle.delPassword(lesPassword.get(position));
-                // raffraichir la liste
-                // notifyDataSetChanged();
-                Utils.copyPasswordInclipBoard(Utils.getString(R.string.toastText,v.getContext() ),generatePassword.getPassword(),v.getContext());
-                String[] tom = Utils.getDate();
-                String dategetfromCalendare = tom[0];
-                String heuregetfromCalendare = tom[1];
+        holder.copyImgbtn.setOnClickListener(v -> {
+            int position1 = (int)v.getTag();
+            // demande de suppression au controlleur
+            //controle.delPassword(lesPassword.get(position));
+            // raffraichir la liste
+            // notifyDataSetChanged();
+            Utils.copyPasswordInclipBoard(Utils.getString(R.string.toastText,v.getContext() ),generatePassword.getPassword(),v.getContext());
+            String[] tom = Utils.getDate();
+            String dategetfromCalendare = tom[0];
+            String heuregetfromCalendare = tom[1];
 
 
-            }
         });
 
         holder.imageButtonMenu.setOnClickListener(v -> {
@@ -94,12 +92,7 @@ public class PasswordGenerateListAdapter extends
 
 
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makePopMenu(v.getContext(),holder.imageButtonMenu,position);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> makePopMenu(v.getContext(),holder.imageButtonMenu,position));
 
         holder.date.setTag(position);
     }
