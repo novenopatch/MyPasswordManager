@@ -10,27 +10,30 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
-import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItem;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 
-public class DatabaseManagerOrmlite extends OrmLiteSqliteOpenHelper {
+public class LocalDatabaseManager extends OrmLiteSqliteOpenHelper {
+    public   CallGeneratePassword callGeneratePassword;
+    public  CallSaveNoteItem callSaveNoteItem;
+    public  CallSaveItemCategory callSaveItemCategory;
 
-    public DatabaseManagerOrmlite(Context context, String databaseName, int databaseVersion) {
+    public LocalDatabaseManager(Context context, String databaseName, int databaseVersion) {
         super(context, databaseName, null, databaseVersion);
+        callGeneratePassword = new CallGeneratePassword(generatePasswordIntegerDao());
+        callSaveItemCategory = new CallSaveItemCategory(saveItemCategoryDao());
+        callSaveNoteItem  = new CallSaveNoteItem(saveNoteItemDao());
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, GeneratePassword.class);
-           // TableUtils.createTable(connectionSource, SaveItemCategory.class);
+            TableUtils.createTable(connectionSource, SaveItemCategory.class);
             TableUtils.createTable(connectionSource, SaveNoteItem.class);
-
+            Log.i("DATABASE","excution");
         }catch (Exception e){
             Log.e("DATABASE","error");
         }
@@ -51,49 +54,28 @@ public class DatabaseManagerOrmlite extends OrmLiteSqliteOpenHelper {
             return null;
         }
     }
-    public void insertGeneratePassword(GeneratePassword generatePassword){
-
+    public Dao<SaveItemCategory,Integer> saveItemCategoryDao(){
         try {
-            generatePasswordIntegerDao().create(generatePassword);
-            //this.close();
-            Log.i("DATABASE","insert success");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            Dao<SaveItemCategory,Integer> dao = getDao(SaveItemCategory.class);
+            return dao;
 
-    }
-    public ArrayList<GeneratePassword> getGeneratePasswords(){
-
-        try {
-            ArrayList<GeneratePassword> generatePasswords = (ArrayList<GeneratePassword>) generatePasswordIntegerDao().queryForAll();
-            Log.i("DATABASE","insert success");
-            return  generatePasswords;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-
-
     }
-    public void deleteGeneratePasswords(GeneratePassword generatePassword){
+    public Dao<SaveNoteItem,Integer> saveNoteItemDao(){
         try {
-
-            generatePasswordIntegerDao().delete(generatePassword);
-            Log.i("DATABASE","insert success");
+            Dao<SaveNoteItem,Integer> dao = getDao(SaveNoteItem.class);
+            return dao;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
     }
-    public void deleteGeneratePasswordsAll(List<GeneratePassword> generatePasswordList){
-        try {
 
-            generatePasswordIntegerDao().delete(generatePasswordList);
-            Log.i("DATABASE","insert success");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

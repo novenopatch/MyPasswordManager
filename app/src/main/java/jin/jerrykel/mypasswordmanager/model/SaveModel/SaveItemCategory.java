@@ -16,7 +16,11 @@ public class SaveItemCategory  {
     @DatabaseField
     private int rate;
 
+
+
     private ArrayList<SaveNoteItem> saveNoteItems = new ArrayList<>();
+
+
 
     private int DrawableResource;
 
@@ -57,11 +61,13 @@ public class SaveItemCategory  {
     public void setDrawableResource(int drawableResource) {
         DrawableResource = drawableResource;
     }
-
-
-    public void setSaveNoteItems(SaveNoteItem saveNoteItem) {
-        this.saveNoteItems.add(saveNoteItem);
-    } public ArrayList<SaveNoteItem> getSaveNoteItems() {
+    public ArrayList<SaveNoteItem> getSaveNoteItems() {
         return saveNoteItems;
+    }
+    public void setSaveNoteItem(SaveNoteItem saveNoteItem) {
+        this.saveNoteItems.add(saveNoteItem);
+    }
+    public void setSaveNoteItems(ArrayList<SaveNoteItem> saveNoteItems) {
+        this.saveNoteItems = saveNoteItems;
     }
 }

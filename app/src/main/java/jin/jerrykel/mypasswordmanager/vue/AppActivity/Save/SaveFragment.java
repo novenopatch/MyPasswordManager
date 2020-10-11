@@ -5,14 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
@@ -36,7 +35,6 @@ import java.util.List;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
-import jin.jerrykel.mypasswordmanager.utils.LocalDatabase;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter.SaveListCategoryAdapter;
@@ -112,7 +110,11 @@ public class SaveFragment extends Fragment  {
 
         controler = Controler.getInstance(context);
         //default category
-        controler.addNewSaveCategoryList(context,"General","@exemple");
+        //controler.addNewSaveCategoryList(context,"General","@exemple");
+
+
+        controler.getSaveItemCategoryForDB();
+        controler.getSaveNoteItemForDB();
         //localDatabase = new LocalDatabase(context);
     }
 
@@ -414,7 +416,7 @@ public class SaveFragment extends Fragment  {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                controler.getSaveCategoryListArrayList().remove(position);
+                controler.deleteSaveItemCategory(position);
                 saveListCategoryAdapter.notifyItemRemoved(position);
             }
         };
@@ -437,6 +439,7 @@ public class SaveFragment extends Fragment  {
         layoutManager = new LinearLayoutManager(recycleView.getContext());
         recycleView.setLayoutManager(layoutManager);
 
+        //ArrayList<SaveNoteItem> saveNoteItems = controler.findAndShortSaveItemByCategoryName(saveItemCategory.getName());
         saveListNoteAdapter  = new SaveListNoteAdapter(saveItemCategory.getSaveNoteItems());
         recycleView.setAdapter( saveListNoteAdapter );
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
@@ -461,7 +464,7 @@ public class SaveFragment extends Fragment  {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                saveItemCategory.getSaveNoteItems().remove(position);
+                controler.deleteSaveNoteItem(position,saveItemCategory);
                 saveListNoteAdapter.notifyItemRemoved(position);
             }
         };

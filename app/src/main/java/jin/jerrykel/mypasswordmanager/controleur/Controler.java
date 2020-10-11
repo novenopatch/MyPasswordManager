@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
-import jin.jerrykel.mypasswordmanager.model.GenerateModel.RandomPasswordGenerator;
-import jin.jerrykel.mypasswordmanager.model.LocalAcces;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.model.UserModel.User;
-import jin.jerrykel.mypasswordmanager.utils.DatabaseManagerOrmlite;
-import jin.jerrykel.mypasswordmanager.utils.LocalDatabase;
+import jin.jerrykel.mypasswordmanager.utils.LocalDatabaseManager;
+import jin.jerrykel.mypasswordmanager.utils.RandomPasswordGenerator;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 public class Controler {
@@ -31,10 +29,11 @@ public class Controler {
 
     private ArrayList<GeneratePassword> generatePasswordArrayList = new ArrayList<>();
 
-    private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
-    private ArrayList<SaveNoteItem> saveNoteItemArrayList = new ArrayList<>();
-    //private static LocalAcces localAcces;
-    private static DatabaseManagerOrmlite databaseManagerOrmlite;
+    private ArrayList<SaveItemCategory> saveCategoryListArrayList= new ArrayList<>();
+    //private ArrayList<SaveNoteItem> saveNoteItemArrayList = new ArrayList<>();
+
+    private static LocalDatabaseManager localDatabaseManager;
+
 
     /**
      * contructeur private
@@ -46,15 +45,19 @@ public class Controler {
      * création de l'instance
      * @return Controler.instance
      */
-    public static Controler getInstance(Context contexte){
+    public static Controler getInstance(Context context){
 
-        //localAcces = new LocalAcces(contexte);
-        databaseManagerOrmlite = new DatabaseManagerOrmlite(contexte,"generateScoreTest.db",1);
+
+
         if(contexte == null){
-            Controler.contexte = contexte;
+            Controler.contexte = context;
+
         }
         if(Controler.instance == null){
             Controler.instance = new Controler();
+            localDatabaseManager = new LocalDatabaseManager(contexte,"generateScoreTest.db",1);
+
+
         }
         return  Controler.instance;
     }
@@ -80,10 +83,13 @@ public class Controler {
      * @return
      */
     private boolean testIfItemExist( ArrayList<SaveNoteItem> arrayListItem,String name){
-        for (SaveNoteItem saveItemCategory : arrayListItem){
+        if(arrayListItem!=null){
+            for (SaveNoteItem saveItemCategory : arrayListItem){
             if(saveItemCategory.getTitle().equals(name))
                 return true;
         }
+        }
+
         return false;
 
     }
@@ -94,11 +100,13 @@ public class Controler {
      * @param description
      */
     public void addNewSaveCategoryList(Context context,String name,String description){
-        if(!testIfCategoryExist(SaveCategoryListArrayList,name)){
-            SaveCategoryListArrayList.add(new SaveItemCategory(name,description));
+        if(!testIfCategoryExist(saveCategoryListArrayList,name)){
+            SaveItemCategory saveItemCategory = new SaveItemCategory(name,description);
+            saveCategoryListArrayList.add(saveItemCategory);
+            localDatabaseManager.callSaveItemCategory.insertSaveItemCategory(saveItemCategory);
         }else{
 
-                Utils.makeToast("bbb",context);
+                Utils.makeToast("controler line 99",context);
 
 
         }
@@ -114,14 +122,40 @@ public class Controler {
      * @param homePage
      * @param comment
      */
+    public void addNewNotes(Context context,String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
+        SaveItemCategory saveItemCategory = findandreturnSaveItemCategory(saveItemCategoryName);
+        if(!testIfItemExist(saveItemCategory.getSaveNoteItems(),title)){
+            SaveNoteItem saveNoteItem = new SaveNoteItem(title,saveItemCategoryName,id,password,homePage,comment);
+            saveItemCategory.setSaveNoteItem(saveNoteItem);
+            //saveNoteItemArrayList.add(saveNoteItem);
+            localDatabaseManager.callSaveNoteItem.insertSaveNoteItem(saveNoteItem);
+
+        }else {
+            Utils.makeToast("controler line 121",context);
+        }
+
+    }
     public void addNewNote(String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
-        SaveNoteItem saveNoteItem = new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment);
-        findandreturnSaveItemCategory(saveItemCategoryName).setSaveNoteItems(saveNoteItem);
-        saveNoteItemArrayList.add(saveNoteItem);
-        //localAcces.insertSaveNote(saveNoteItem);
+        SaveNoteItem saveNoteItem = new SaveNoteItem(title,saveItemCategoryName,id,password,homePage,comment);
+        SaveItemCategory saveItemCategory = findandreturnSaveItemCategory(saveItemCategoryName);
+        saveItemCategory.setSaveNoteItem(saveNoteItem);
+        localDatabaseManager.callSaveNoteItem.insertSaveNoteItem(saveNoteItem);
+
+
 
     }
 
+    /*
+    public ArrayList<SaveNoteItem> findAndShortSaveItemByCategoryName(String name){
+        ArrayList<SaveNoteItem> arrayList = new ArrayList<>();
+        for (SaveNoteItem saveNoteItem : saveNoteItemArrayList){
+            if(saveNoteItem.getSaveItemCategoryName().equals(name))
+                arrayList.add(saveNoteItem);
+        }
+        return arrayList;
+    }
+
+     */
 
     /**
      * found save item category for his name
@@ -129,7 +163,7 @@ public class Controler {
      * @return
      */
     public SaveItemCategory findandreturnSaveItemCategory(String name){
-        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+        for (SaveItemCategory saveItemCategory : saveCategoryListArrayList){
             if(saveItemCategory.getName().equals(name))
                 return saveItemCategory;
         }
@@ -143,7 +177,7 @@ public class Controler {
      */
     public Integer findandreturnpositon(String name){
         int count = 0;
-        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+        for (SaveItemCategory saveItemCategory : saveCategoryListArrayList){
             count++;
             if(saveItemCategory.getName().equals(name))
                 return count;
@@ -157,7 +191,7 @@ public class Controler {
      */
     public ArrayList<CharSequence> returnSaveItemCategoryName(){
         ArrayList<CharSequence> quit = new ArrayList<>();
-        for (SaveItemCategory saveItemCategory : SaveCategoryListArrayList){
+        for (SaveItemCategory saveItemCategory : saveCategoryListArrayList){
                 quit.add(saveItemCategory.getName());
         }
         return quit;
@@ -178,7 +212,7 @@ public class Controler {
      * @return
      */
     public ArrayList<SaveItemCategory> getSaveCategoryListArrayList() {
-        return  SaveCategoryListArrayList;
+        return  saveCategoryListArrayList;
     }
 
 
@@ -315,18 +349,73 @@ public class Controler {
         GeneratePassword generatePassword = new GeneratePassword(Utils.getDate(),password);
         if(generatePasswordArrayList.size()>=4){
             generatePasswordArrayList.clear();
-            databaseManagerOrmlite.deleteGeneratePasswordsAll(generatePasswordArrayList);
+            localDatabaseManager.callGeneratePassword.deleteGeneratePasswordsAll(generatePasswordArrayList);
         }
         generatePasswordArrayList.add(generatePassword);
-        databaseManagerOrmlite.insertGeneratePassword(generatePassword);
+        localDatabaseManager.callGeneratePassword.insertGeneratePassword(generatePassword);
 
     }
     public void getGeneratePasswordForDB(){
-       generatePasswordArrayList = databaseManagerOrmlite.getGeneratePasswords();
+       generatePasswordArrayList = localDatabaseManager.callGeneratePassword.getGeneratePasswords();
        Collections.reverse(generatePasswordArrayList);
     }
+    public void getSaveItemCategoryForDB(){
+        saveCategoryListArrayList = localDatabaseManager.callSaveItemCategory.getSaveItemCategory();
+
+    }
+    public void getSaveNoteItemForDB(SaveItemCategory saveItemCategory){
+        ArrayList<SaveNoteItem> arrayList = new ArrayList<>();
+        if(localDatabaseManager.callSaveNoteItem.getSaveNoteItem()!=null){
+            for (SaveNoteItem saveNoteItem: localDatabaseManager.callSaveNoteItem.getSaveNoteItem()){
+                if(saveItemCategory.getName().equals(saveNoteItem.getSaveItemCategoryName())){
+                    arrayList.add(saveNoteItem);
+                }
+            }
+        }
+
+
+        saveItemCategory.setSaveNoteItems(arrayList) ;
+
+    }
+    public void getSaveNoteItemForDB(){
+        ArrayList<SaveNoteItem> arrayList = new ArrayList<>();
+        if (localDatabaseManager.callSaveNoteItem.getSaveNoteItem()!=null){
+            for (SaveItemCategory saveItemCategory :saveCategoryListArrayList){
+                for(SaveNoteItem saveNoteItem : localDatabaseManager.callSaveNoteItem.getSaveNoteItem()){
+                    if(saveNoteItem.compareTo(saveItemCategory)){
+                        arrayList.add(saveNoteItem);
+                    }
+                    saveItemCategory.setSaveNoteItems(arrayList) ;
+                }
+
+            }
+            Log.i("getSaveNoteItemForDB",arrayList.toString());
+        }
+
+
+    }
+
+
     public  void deleteGeneratePassword(GeneratePassword generatePassword){
         generatePasswordArrayList.remove(generatePassword);
-        databaseManagerOrmlite.deleteGeneratePasswords(generatePassword);
+        localDatabaseManager.callGeneratePassword.deleteGeneratePasswords(generatePassword);
     }
+    public  void deleteSaveItemCategory(SaveItemCategory saveItemCategory){
+        localDatabaseManager.callSaveItemCategory.deleteSaveItemCategorys(saveItemCategory);
+        saveCategoryListArrayList.remove(saveItemCategory);
+
+    }
+    public  void deleteSaveItemCategory(int saveItemCategory){
+        localDatabaseManager.callSaveItemCategory.deleteSaveItemCategorys(saveCategoryListArrayList.get(saveItemCategory));
+        saveCategoryListArrayList.remove(saveItemCategory);
+
+    }
+    public  void deleteSaveNoteItem(int position,SaveItemCategory saveItemCategory){
+        // TODO probleme
+        localDatabaseManager.callSaveNoteItem.deleteSaveNoteItems(saveItemCategory.getSaveNoteItems().get(position));
+        saveItemCategory.getSaveNoteItems().remove(position);
+       /// saveNoteItemArrayList.remove(position);
+
+    }
+
 }

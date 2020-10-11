@@ -1,6 +1,4 @@
-package jin.jerrykel.mypasswordmanager.model.GenerateModel;
-
-import android.util.Log;
+package jin.jerrykel.mypasswordmanager.utils;
 
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
