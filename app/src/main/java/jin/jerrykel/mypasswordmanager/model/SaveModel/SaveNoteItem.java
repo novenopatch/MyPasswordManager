@@ -1,31 +1,43 @@
 package jin.jerrykel.mypasswordmanager.model.SaveModel;
 
-import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItem;
-import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-public class SaveNoteItem extends SaveItem {
+@DatabaseTable(tableName = "T_SaveNoteItem")
+public class SaveNoteItem  {
+    @DatabaseField(columnName = "idSaveNoteItem", generatedId = true)
+    private int idSaveNoteItem;
+    @DatabaseField(canBeNull = false)
+    private String title;
+    @DatabaseField(canBeNull = false,foreign = true,foreignColumnName ="idSaveItemCategory" )
+    private SaveItemCategory  saveItemCategory;
+    @DatabaseField
     private String id;
+    @DatabaseField
     private String password;
+    @DatabaseField
     private String homePage;
+    @DatabaseField
+    private String comment ;
 
 
-
-    private String  saveItemCategoryName;
-
-
+    public SaveNoteItem() {
+    }
 
 
     public SaveNoteItem(String title, SaveItemCategory saveItemCategory, String id, String password, String homePage, String comment) {
-        super(title,comment);
+        //super(title,comment);
+        this.title = title;
+        this.saveItemCategory = saveItemCategory;
         this.id = id;
         this.password = password;
         this.homePage = homePage;
-        this.saveItemCategoryName = saveItemCategory.getName();
-        saveItemCategory.setsaveNoteItems(this);
+        this.comment = comment;
+
     }
 
     public String getTitle() {
-        return this.getName();
+        return title;
     }
 
     public String getId() {
@@ -42,10 +54,14 @@ public class SaveNoteItem extends SaveItem {
 
 
     public String getComment() {
-        return this.getDecription();
+        return comment;
     }
-    public String getSaveItemCategoryName() {
-        return saveItemCategoryName;
+    public SaveItemCategory getSaveItemCategory() {
+        return saveItemCategory;
     }
 
+
+    public String getSaveItemCategoryName() {
+        return saveItemCategory.getName();
+    }
 }

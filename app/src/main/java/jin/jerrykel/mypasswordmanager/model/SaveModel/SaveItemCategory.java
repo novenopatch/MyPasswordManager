@@ -1,29 +1,53 @@
 package jin.jerrykel.mypasswordmanager.model.SaveModel;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
+@DatabaseTable(tableName = "SaveItemCategory")
+public class SaveItemCategory  {
 
-public class SaveItemCategory extends SaveItem {
-
-
+    @DatabaseField(columnName = "idSaveItemCategory", generatedId = true)
+    private int idSaveItemCategory;
+    @DatabaseField
+    private String name;
+    @DatabaseField
+    private String description;
+    @DatabaseField
     private int rate;
-
 
     private ArrayList<SaveNoteItem> saveNoteItems = new ArrayList<>();
 
     private int DrawableResource;
 
+
+
+
+    public SaveItemCategory(){
+
+
+    }
+
     public SaveItemCategory(String name, String decription){
-        super(name,decription);
+        this.name = name;
+        this.description = decription;
         this.rate = 1;
 
     }
 
 
 
-    public int getisRate() {
-        return rate;
+
+    public String getName() {
+        return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+    public int getRate() {
+        return rate;
+    }
     public int getNomberSave() {
         return    saveNoteItems.size();
     }
@@ -34,11 +58,8 @@ public class SaveItemCategory extends SaveItem {
         DrawableResource = drawableResource;
     }
 
-    public ArrayList<SaveNoteItem> getSaveItemCategories() {
-        return saveNoteItems;
-    }
 
-    public void setsaveNoteItems(SaveNoteItem saveNoteItem) {
+    public void setSaveNoteItems(SaveNoteItem saveNoteItem) {
         this.saveNoteItems.add(saveNoteItem);
     } public ArrayList<SaveNoteItem> getSaveNoteItems() {
         return saveNoteItems;

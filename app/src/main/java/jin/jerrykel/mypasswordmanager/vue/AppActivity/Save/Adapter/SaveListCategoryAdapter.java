@@ -63,7 +63,7 @@ public class SaveListCategoryAdapter extends RecyclerView.Adapter<SaveListCatego
 
 
         holder.categoryName.setText(saveCategory.getName());
-        holder.categoryNameDescription.setText(saveCategory.getDecription());
+        holder.categoryNameDescription.setText(saveCategory.getDescription());
         holder.Number.setText(String.valueOf(saveCategory.getNomberSave()));
         holder.categoryRate.setImageResource(R.drawable.ic_baseline_favorite_orange_24);
         holder.imageViewIconCategory.setBackgroundResource(R.drawable.ic_baseline_folder_orange_24);

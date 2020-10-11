@@ -121,7 +121,8 @@ public class PasswordGenerateListAdapter extends
                     mainActivity.getSaveFragment().showAddNoteDialog(mainActivity,generatePasswordArrayList.get(position).getPassword());
                     return true;
                 case R.id.menu_histo_delete:
-                    generatePasswordArrayList.remove(position);
+                    controler.deleteGeneratePassword(generatePasswordArrayList.get(position));
+                   // generatePasswordArrayList.remove(position);
                     this.notifyItemRemoved(position);
                     return true;
                 default:

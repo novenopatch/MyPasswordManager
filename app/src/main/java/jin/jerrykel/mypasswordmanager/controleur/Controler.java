@@ -4,12 +4,15 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.RandomPasswordGenerator;
+import jin.jerrykel.mypasswordmanager.model.LocalAcces;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.model.UserModel.User;
+import jin.jerrykel.mypasswordmanager.utils.DatabaseManagerOrmlite;
 import jin.jerrykel.mypasswordmanager.utils.LocalDatabase;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
@@ -30,7 +33,8 @@ public class Controler {
 
     private ArrayList<SaveItemCategory> SaveCategoryListArrayList= new ArrayList<>();
     private ArrayList<SaveNoteItem> saveNoteItemArrayList = new ArrayList<>();
-    private static LocalDatabase localDatabase;
+    //private static LocalAcces localAcces;
+    private static DatabaseManagerOrmlite databaseManagerOrmlite;
 
     /**
      * contructeur private
@@ -44,7 +48,8 @@ public class Controler {
      */
     public static Controler getInstance(Context contexte){
 
-        localDatabase = new LocalDatabase(contexte);
+        //localAcces = new LocalAcces(contexte);
+        databaseManagerOrmlite = new DatabaseManagerOrmlite(contexte,"generateScoreTest.db",1);
         if(contexte == null){
             Controler.contexte = contexte;
         }
@@ -76,7 +81,7 @@ public class Controler {
      */
     private boolean testIfItemExist( ArrayList<SaveNoteItem> arrayListItem,String name){
         for (SaveNoteItem saveItemCategory : arrayListItem){
-            if(saveItemCategory.getName().equals(name))
+            if(saveItemCategory.getTitle().equals(name))
                 return true;
         }
         return false;
@@ -111,9 +116,10 @@ public class Controler {
      */
     public void addNewNote(String title, String saveItemCategoryName, String id, String password,String homePage, String comment ){
         SaveNoteItem saveNoteItem = new SaveNoteItem(title,findandreturnSaveItemCategory(saveItemCategoryName),id,password,homePage,comment);
+        findandreturnSaveItemCategory(saveItemCategoryName).setSaveNoteItems(saveNoteItem);
         saveNoteItemArrayList.add(saveNoteItem);
-        localDatabase.insertSaveNote(saveNoteItem);
-        localDatabase.close();
+        //localAcces.insertSaveNote(saveNoteItem);
+
     }
 
 
@@ -165,13 +171,7 @@ public class Controler {
         return generatePasswordArrayList;
     }
 
-    /**
-     * add new generate password
-     * @param password
-     */
-    public void addGeneratepassword( String password){
-            generatePasswordArrayList.add(new GeneratePassword(Utils.getDate(),password));
-        }
+
 
     /**
      * return ArrayList SaveItemCategory
@@ -273,33 +273,60 @@ public class Controler {
      */
     public String getPassword(){
         String password = passGen.generatePassayPassword();
+        addGeneratepassword(password);
         return password;
     }
 
     //change la longeur
     public String getPassword(int passwordLength){
         String password = passGen.generatePassayPassword(passwordLength);
+        addGeneratepassword(password);
         return password;
     }
     //touf sauf upercase et lower
     public String getPassword(boolean lowerCase,boolean upperCase, boolean numberCase,boolean specialCharsCase,int passwordLength){
         String password = passGen.generatePassayPassword(lowerCase,upperCase,numberCase,specialCharsCase,passwordLength);
+        addGeneratepassword(password);
         return password;
     }
     //pas de nombre pas de specialchars
     public String getPassword(boolean b, int parseInt) {
         String password = passGen.generatePassayPassword(b,parseInt);
+        addGeneratepassword(password);
         return password;
     }
     //pas special chars
     public String getPassword(String b, int parseInt) {
         String password = passGen.generatePassayPassword(b,parseInt);
+        addGeneratepassword(password);
         return password;
     }
     ///pas de nombre
     public String getPassword(int b, int parseInt) {
         String password = passGen.generatePassayPassword(b,parseInt);
+        addGeneratepassword(password);
         return password;
     }
+    /**
+     * add new generate password
+     * @param password
+     */
+    public void addGeneratepassword( String password){
+        GeneratePassword generatePassword = new GeneratePassword(Utils.getDate(),password);
+        if(generatePasswordArrayList.size()>=4){
+            generatePasswordArrayList.clear();
+            databaseManagerOrmlite.deleteGeneratePasswordsAll(generatePasswordArrayList);
+        }
+        generatePasswordArrayList.add(generatePassword);
+        databaseManagerOrmlite.insertGeneratePassword(generatePassword);
 
+    }
+    public void getGeneratePasswordForDB(){
+       generatePasswordArrayList = databaseManagerOrmlite.getGeneratePasswords();
+       Collections.reverse(generatePasswordArrayList);
+    }
+    public  void deleteGeneratePassword(GeneratePassword generatePassword){
+        generatePasswordArrayList.remove(generatePassword);
+        databaseManagerOrmlite.deleteGeneratePasswords(generatePassword);
+    }
 }

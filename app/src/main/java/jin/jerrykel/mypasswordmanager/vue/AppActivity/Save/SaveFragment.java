@@ -437,7 +437,7 @@ public class SaveFragment extends Fragment  {
         layoutManager = new LinearLayoutManager(recycleView.getContext());
         recycleView.setLayoutManager(layoutManager);
 
-        saveListNoteAdapter  = new SaveListNoteAdapter(saveItemCategory.getSaveItemCategories());
+        saveListNoteAdapter  = new SaveListNoteAdapter(saveItemCategory.getSaveNoteItems());
         recycleView.setAdapter( saveListNoteAdapter );
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
         recycleView.addItemDecoration(dividerItemDecoration);
@@ -453,7 +453,7 @@ public class SaveFragment extends Fragment  {
 
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                Collections.swap(saveItemCategory.getSaveItemCategories(), viewHolder.getAdapterPosition(),target.getAdapterPosition());
+                Collections.swap(saveItemCategory.getSaveNoteItems(), viewHolder.getAdapterPosition(),target.getAdapterPosition());
                 saveListNoteAdapter.notifyItemMoved(viewHolder.getAdapterPosition(),target.getAdapterPosition());
                 return true;
             }
@@ -461,7 +461,7 @@ public class SaveFragment extends Fragment  {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                saveItemCategory.getSaveItemCategories().remove(position);
+                saveItemCategory.getSaveNoteItems().remove(position);
                 saveListNoteAdapter.notifyItemRemoved(position);
             }
         };

@@ -172,7 +172,9 @@ public class GenererFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                passwordGenerateListAdapter.generatePasswordArrayList.remove(position);
+                //for delete in db
+                controle.deleteGeneratePassword(passwordGenerateListAdapter.generatePasswordArrayList.get(position));
+                //passwordGenerateListAdapter.generatePasswordArrayList.remove(position);
                 passwordGenerateListAdapter.notifyItemRemoved(position);
             }
         };
@@ -347,8 +349,9 @@ public class GenererFragment extends Fragment {
     public void updatePassword(String password){
         if(controle.getGeneratePasswordArrayList().size()>=4){
             controle.getGeneratePasswordArrayList().remove(0);
+
         }
-        controle.addGeneratepassword( password);
+       // controle.addGeneratepassword( password);
         //pour reverser la listr
         Collections.reverse(controle.getGeneratePasswordArrayList());
         passwordGenerateListAdapter.notifyDataSetChanged();
@@ -384,6 +387,7 @@ public class GenererFragment extends Fragment {
         this.context = rootView.getContext();
         //get Context
         this.controle = Controler.getInstance(rootView.getContext());
+        controle.getGeneratePasswordForDB();
         //this methode intialise graphique element
         initView(rootView);
         //creerListe(rootView.getContext());
