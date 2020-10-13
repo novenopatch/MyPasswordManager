@@ -2,21 +2,22 @@ package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Objects;
+
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
@@ -118,7 +119,7 @@ public class PasswordGenerateListAdapter extends
                 case R.id.menu_histo_add_new_note:
                     MainActivity mainActivity = ((MainActivity)context);
                     mainActivity.getTabs().getTabAt(1).select();
-                    mainActivity.getSaveFragment().showAddNoteDialog(mainActivity,generatePasswordArrayList.get(position).getPassword());
+                    mainActivity.getSaveFragment().startAddNewNoteOnGernerateFragment(generatePasswordArrayList.get(position).getPassword());
                     return true;
                 case R.id.menu_histo_delete:
                     controler.deleteGeneratePassword(generatePasswordArrayList.get(position));

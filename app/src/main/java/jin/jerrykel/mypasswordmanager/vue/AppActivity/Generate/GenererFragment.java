@@ -2,18 +2,9 @@ package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +17,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Collections;
 
@@ -60,6 +58,7 @@ public class GenererFragment extends Fragment {
     private ImageButton imgBtnAdd;
     private ImageButton imgBtnRemove;
     private ImageButton superImgbtncopy;
+    private SwipeRefreshLayout GenererFragmentSwipeRefreshLayout;
 
 
     private Controler controle;
@@ -81,7 +80,20 @@ public class GenererFragment extends Fragment {
     public static String getStringColor() {
         return  "#ff4b4c";
     }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_generer, container, false);
+        this.context = rootView.getContext();
+        //get Context
+        this.controle = Controler.getInstance(rootView.getContext());
+        controle.getGeneratePasswordForDB();
+        //this methode intialise graphique element
+        initView(rootView);
+        //creerListe(rootView.getContext());
+        return rootView;
+    }
 
     /**
      * initialise all view element
@@ -89,6 +101,7 @@ public class GenererFragment extends Fragment {
      */
 
     public void initView(View view){
+
 
         buttonGenerate =(Button) view.findViewById(R.id.buttonGenerate);
         switch_custom_or_default = (Switch)  view.findViewById(R.id.switch_custom_or_default);
@@ -115,7 +128,7 @@ public class GenererFragment extends Fragment {
 
         //add histopassword recicler
         createListView(view);
-
+        configureSwipeRefreshLayout();
 
         //btn generate listener
         buttonGenerate.setOnClickListener(btnGenerateListener);
@@ -137,11 +150,22 @@ public class GenererFragment extends Fragment {
 
 
     }
+    public void configureSwipeRefreshLayout(){
+        GenererFragmentSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateListView();
+
+            }
+        });
+    }
     /**
      * create content of RecyclerView
      * @param view
      */
     public void createListView(View view){
+
+        GenererFragmentSwipeRefreshLayout = view.findViewById(R.id.GenererFragmentSwipeRefreshLayout);
         recycleView = (RecyclerView)view.findViewById(R.id.miniHistoGenerate);
         layoutManager = new LinearLayoutManager(view.getContext());
         recycleView.setLayoutManager(layoutManager);
@@ -180,6 +204,11 @@ public class GenererFragment extends Fragment {
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemToucherHelperCallback);
         itemTouchHelper.attachToRecyclerView(recycleView);
+    }
+    public void updateListView(){
+        GenererFragmentSwipeRefreshLayout.setRefreshing(false);
+        passwordGenerateListAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -281,7 +310,7 @@ public class GenererFragment extends Fragment {
      */
     private View.OnClickListener ImgbtnListener = new View.OnClickListener() {
 
-        @SuppressLint("ResourceAsColor")
+        @SuppressLint({"ResourceAsColor", "SetTextI18n"})
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -355,18 +384,12 @@ public class GenererFragment extends Fragment {
         //pour reverser la listr
         Collections.reverse(controle.getGeneratePasswordArrayList());
         passwordGenerateListAdapter.notifyDataSetChanged();
-        updateEditTextPasswordGenerate(password);
+        editTextPasswordGenerate.setText(password);
         // copyInClipboardAndNotify(password,v);
     }
 
 
-    /**
-     *  update EditText PasswordGenerate
-     * @param password
-     */
-    public void updateEditTextPasswordGenerate(String password){
-        editTextPasswordGenerate.setText(password);
-    }
+
 
 
 
@@ -379,20 +402,7 @@ public class GenererFragment extends Fragment {
         return pageTitle;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_generer, container, false);
-        this.context = rootView.getContext();
-        //get Context
-        this.controle = Controler.getInstance(rootView.getContext());
-        controle.getGeneratePasswordForDB();
-        //this methode intialise graphique element
-        initView(rootView);
-        //creerListe(rootView.getContext());
-        return rootView;
-    }
 
 
     @Override

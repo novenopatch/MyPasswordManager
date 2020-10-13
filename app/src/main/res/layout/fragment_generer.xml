@@ -12,24 +12,28 @@
     android:paddingRight="20dp"
     tools:context=".vue.AppActivity.Generate.GenererFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center|center_horizontal|center_vertical"
-        android:layout_weight="0.2"
-        android:baselineAligned="false"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:orientation="horizontal">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/miniHistoGenerate"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/GenererFragmentSwipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:scrollbars="vertical" />
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_weight="0.2"
+            android:baselineAligned="false"
+            android:gravity="center|center_horizontal|center_vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/miniHistoGenerate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:scrollbars="vertical" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
+
+
+
+
 
     <ScrollView
         android:layout_width="match_parent"

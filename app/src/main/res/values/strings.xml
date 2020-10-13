@@ -77,7 +77,10 @@
     <string name="delete">Delete</string>
     <string name="delete_history">Clear history</string>
     <string name="Enlarge">Enlarge</string>
-
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="homepage">HomePage</string>
+    <string name="commentaire">Comment</string>
 
 
 </resources>

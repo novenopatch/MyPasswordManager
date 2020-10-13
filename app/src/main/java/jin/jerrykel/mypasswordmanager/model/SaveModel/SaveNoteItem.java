@@ -10,8 +10,7 @@ public class SaveNoteItem  {
     private int idSaveNoteItem;
     @DatabaseField(canBeNull = false,unique = true)
     private String title;
-    @DatabaseField
-    private String  saveItemCategoryName;
+
     @DatabaseField
     private String id;
     @DatabaseField
@@ -26,10 +25,8 @@ public class SaveNoteItem  {
     }
 
 
-    public SaveNoteItem(String title, String  saveItemCategoryName, String id, String password, String homePage, String comment) {
+    public SaveNoteItem(String title, String id, String password, String homePage, String comment) {
         this.title = title;
-        this.saveItemCategoryName = saveItemCategoryName;
-        this.id = id;
         this.password = password;
         this.homePage = homePage;
         this.comment = comment;
@@ -64,14 +61,7 @@ public class SaveNoteItem  {
      */
 
 
-    public String getSaveItemCategoryName() {
-        return this.saveItemCategoryName;
-    }
 
-    public boolean compareTo(SaveItemCategory o) {
-        if(this.getSaveItemCategoryName().equals(o.getName())){
-            return true;
-        }
-        return false;
-    }
+
+
 }

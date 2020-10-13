@@ -1,15 +1,5 @@
 package jin.jerrykel.mypasswordmanager.vue.AppActivity;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,16 +9,25 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate.GenererFragment;
+import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveFragment;
 import jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity.ConnectAppActivity;
 import jin.jerrykel.mypasswordmanager.vue.DrawerActivity.DrawActivity;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate.GenererFragment;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveFragment;
 //couleur cool "#ddd"
 /*
 implementation "org.passay:passay:1.6.0"
@@ -75,16 +74,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        setContentView(R.layout.activity_main);
 
-        controler = Controler.getInstance(this);
-        init();
-
-    }
 
     public void init(){
         this.configureDrawerLayout();
@@ -197,12 +187,15 @@ public class MainActivity extends AppCompatActivity
             this.drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
+            /*
             if(saveFragment.isResumed()&&!(saveFragment.getRecycleView()==null)&& !(saveFragment.getRecycleView().getAdapter()==saveFragment.getSaveListCategoryAdapter())){
                 saveFragment.createListCategoriesView(drawerLayout);
             }else {
                 super.onBackPressed();
             }
 
+             */
+            super.onBackPressed();
 
         }
     }
@@ -211,7 +204,16 @@ public class MainActivity extends AppCompatActivity
     public TabLayout getTabs() {
         return tabs;
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        setContentView(R.layout.activity_main);
 
+        controler = Controler.getInstance(this);
+        init();
+
+    }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         /*
@@ -303,9 +305,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        this.resumeBack();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+    public void resumeBack(){
+        boolean tag = getIntent().getBooleanExtra("noveno",false);
+        if(tag){
+            tabs.getTabAt(1).select();
+
+        }
+    }
+
 
 
 

@@ -7,10 +7,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
        <item name="colorAccent">@color/colorAccent</item>
-
-
-
-  </style>
+    </style>
 
     <style name="Base" parent="Theme.AppCompat.Light.DarkActionBar">
 
@@ -78,5 +75,10 @@
         <item name="android:scrollbarFadeDuration">800</item>
         <item name="android:scrollbarDefaultDelayBeforeFade">500</item>
     </style>
-
+    <style name="ADDNoteTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimaryADDNote</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDarkADDNote</item>
+    <item name="colorAccent">@color/colorAccentADDNote</item>
+</style>
 </resources>

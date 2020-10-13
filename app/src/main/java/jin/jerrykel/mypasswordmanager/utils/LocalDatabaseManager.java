@@ -12,18 +12,16 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
-import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveItemCategory;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 
 public class LocalDatabaseManager extends OrmLiteSqliteOpenHelper {
     public   CallGeneratePassword callGeneratePassword;
     public  CallSaveNoteItem callSaveNoteItem;
-    public  CallSaveItemCategory callSaveItemCategory;
+
 
     public LocalDatabaseManager(Context context, String databaseName, int databaseVersion) {
         super(context, databaseName, null, databaseVersion);
         callGeneratePassword = new CallGeneratePassword(generatePasswordIntegerDao());
-        callSaveItemCategory = new CallSaveItemCategory(saveItemCategoryDao());
         callSaveNoteItem  = new CallSaveNoteItem(saveNoteItemDao());
     }
 
@@ -31,7 +29,6 @@ public class LocalDatabaseManager extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, GeneratePassword.class);
-            TableUtils.createTable(connectionSource, SaveItemCategory.class);
             TableUtils.createTable(connectionSource, SaveNoteItem.class);
             Log.i("DATABASE","excution");
         }catch (Exception e){
@@ -54,16 +51,7 @@ public class LocalDatabaseManager extends OrmLiteSqliteOpenHelper {
             return null;
         }
     }
-    public Dao<SaveItemCategory,Integer> saveItemCategoryDao(){
-        try {
-            Dao<SaveItemCategory,Integer> dao = getDao(SaveItemCategory.class);
-            return dao;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
     public Dao<SaveNoteItem,Integer> saveNoteItemDao(){
         try {
             Dao<SaveNoteItem,Integer> dao = getDao(SaveNoteItem.class);

@@ -5,15 +5,12 @@ import android.content.Context;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 
 import jin.jerrykel.mypasswordmanager.R;
 
 public class ShowAddNoteDialog {
     private Dialog dialog;
-    private Spinner spinnerSelectCategory;
-    private ImageButton imageButtonAddNewCategory;
+
     private Button buttonSaveNote;
     private EditText EditTextNoteTitle;
     private EditText EditTextNoteUserName;
@@ -31,8 +28,7 @@ public class ShowAddNoteDialog {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_alert_dialogue_add_new_note);
 
-        this.spinnerSelectCategory = (Spinner) dialog.findViewById(R.id.spinnerSelectCategory);
-        this.imageButtonAddNewCategory = (ImageButton) dialog.findViewById(R.id.imageButtonAddNewCategory);
+
         this.buttonSaveNote = (Button) dialog.findViewById(R.id.buttonSaveNote);
 
         this.EditTextNoteTitle = (EditText)dialog.findViewById(R.id.EditTextNoteTitle);
@@ -41,13 +37,8 @@ public class ShowAddNoteDialog {
         this.EditTextHomepage = (EditText)dialog.findViewById(R.id.EditTextHomepage);
         this.EdiTextNoteCommentaire = (EditText)dialog.findViewById(R.id.EdiTextNoteCommentaire);
     }
-    public Spinner getSpinnerSelectCategory() {
-        return spinnerSelectCategory;
-    }
 
-    public ImageButton getImageButtonAddNewCategory() {
-        return imageButtonAddNewCategory;
-    }
+
 
     public Button getButtonSaveNote() {
         return buttonSaveNote;
