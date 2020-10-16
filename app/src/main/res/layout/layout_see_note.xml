@@ -14,6 +14,7 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
 
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -21,15 +22,32 @@
             android:layout_weight="0.2"
             android:gravity="center|center_horizontal"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewNoteIndicatif"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/circle_green_shape"
-                android:gravity="center"
-                android:padding="10sp"
-                android:text="@string/t3" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageViewCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_black_shape"
+                    android:gravity="center"
+                    android:padding="10sp"
+                    app:srcCompat="@drawable/ic_baseline_check_white_24"
+                    tools:ignore="VectorDrawableCompat"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/textViewNoteIndicatif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_green_shape"
+                    android:gravity="center"
+                    android:padding="10sp"
+                    android:text="@string/t3"
+                    />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
         </LinearLayout>
 

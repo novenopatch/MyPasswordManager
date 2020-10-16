@@ -10,7 +10,6 @@ public class SaveNoteItem  {
     private int idSaveNoteItem;
     @DatabaseField(canBeNull = false,unique = true)
     private String title;
-
     @DatabaseField
     private String id;
     @DatabaseField
@@ -19,6 +18,7 @@ public class SaveNoteItem  {
     private String homePage;
     @DatabaseField
     private String comment ;
+
 
 
     public SaveNoteItem() {
@@ -31,27 +31,39 @@ public class SaveNoteItem  {
         this.homePage = homePage;
         this.comment = comment;
 
+
     }
 
     public String getTitle() {
         return title;
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getId() {
         return id;
     }
-
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getPassword() {
         return password;
     }
-
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getHomePage() {
         return homePage;
     }
-
-
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
+    }
     public String getComment() {
         return comment;
+    }
+    public void setComment(String comment) {
+        this.comment = comment;
     }
     /*
     public SaveItemCategory getSaveItemCategory() {

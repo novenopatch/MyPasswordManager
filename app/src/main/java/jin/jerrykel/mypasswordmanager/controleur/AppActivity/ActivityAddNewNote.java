@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ public class ActivityAddNewNote extends AppCompatActivity {
     private Button buttonSaveNote;
     private EditText EditTextNoteTitle;
     private EditText EditTextNoteUserName;
-
     private EditText EditTextPassword;
     private EditText EditTextHomepage;
     private EditText EdiTextNoteCommentaire;
@@ -91,8 +90,10 @@ public class ActivityAddNewNote extends AppCompatActivity {
             if(
                     returnBoleanfirstTest()
 
+
             ){
-                controler.addNewNote(
+                controler.addNewNotes(
+                        this,
                         EditTextNoteTitle.getText().toString(),
                         EditTextNoteUserName.getText().toString(),
                         EditTextPassword.getText().toString(),
@@ -101,13 +102,14 @@ public class ActivityAddNewNote extends AppCompatActivity {
                 );
 
                 //saveListNoteAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
-
+                getResources().getDrawable(R.drawable.common_google_signin_btn_icon_dark);
 
             }
             if( returnBoleanSecondTest()
 
             ){
-                controler.addNewNote(
+                controler.addNewNotes(
+                        this,
                         EditTextNoteTitle.getText().toString(),
                         EditTextNoteUserName.getText().toString(),
                         EditTextPassword.getText().toString(),
@@ -150,4 +152,5 @@ public class ActivityAddNewNote extends AppCompatActivity {
         intent.putExtra("noveno",true);
         startActivity(intent);
     }
+
 }

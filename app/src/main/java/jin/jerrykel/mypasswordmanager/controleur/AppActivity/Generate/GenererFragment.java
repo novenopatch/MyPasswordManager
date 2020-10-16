@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Generate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -376,10 +376,10 @@ public class GenererFragment extends Fragment {
      * @param password
      */
     public void updatePassword(String password){
-        if(controle.getGeneratePasswordArrayList().size()>=4){
-            controle.getGeneratePasswordArrayList().remove(0);
+        //if(controle.getGeneratePasswordArrayList().size()>=4){
+           // controle.getGeneratePasswordArrayList().remove(0);
 
-        }
+       // }
        // controle.addGeneratepassword( password);
         //pour reverser la listr
         Collections.reverse(controle.getGeneratePasswordArrayList());

@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Generate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.MainActivity;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 
 public class PasswordGenerateListAdapter extends
         RecyclerView.Adapter<PasswordGenerateListAdapter.PasswordViewHolder> {

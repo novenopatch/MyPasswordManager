@@ -1,7 +1,5 @@
 package jin.jerrykel.mypasswordmanager.vue.save;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +7,12 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.MainActivity;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
 
 public class SaveActivity extends AppCompatActivity {
     private EditText editTextIdentifiant;

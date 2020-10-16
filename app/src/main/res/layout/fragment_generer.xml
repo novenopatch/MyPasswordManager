@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context=".vue.AppActivity.Generate.GenererFragment">
+    tools:context=".controleur.AppActivity.Generate.GenererFragment">
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

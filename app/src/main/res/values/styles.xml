@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
        <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!--  <item name="colorPrimaryDark">@color/colorPrimaryDark</item> -->
 
     <style name="Base" parent="Theme.AppCompat.Light.DarkActionBar">
 

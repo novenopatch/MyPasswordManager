@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

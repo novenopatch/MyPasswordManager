@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;

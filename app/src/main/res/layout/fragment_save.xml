@@ -8,7 +8,7 @@
         android:orientation="vertical"
 
 
-        tools:context=".vue.AppActivity.Save.SaveFragment">
+        tools:context=".controleur.AppActivity.Save.SaveFragment">
 
     <ScrollView
         android:layout_width="match_parent"

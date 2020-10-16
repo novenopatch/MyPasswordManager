@@ -1,20 +1,18 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity.Save;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,15 +26,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.ActivityAddNewNote;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.MainActivity;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save.Adapter.SaveListNoteAdapter;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.ActivityAddNewNote;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.MainActivity;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Adapter.SaveListNoteAdapter;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.Dialog.ShowAddNoteDialog;
 
 
-public class SaveFragment extends Fragment  {
+public class SaveFragment extends Fragment implements  SaveListNoteAdapter.MessageAdapterListener {
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +41,7 @@ public class SaveFragment extends Fragment  {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+   private MenuInflater myInflater;
 
 
     private static String pageTitle= "Save";
@@ -52,7 +50,6 @@ public class SaveFragment extends Fragment  {
     private View rootView;
     private RecyclerView.LayoutManager layoutManager;
     private SaveListNoteAdapter saveListNoteAdapter;
-    private TextView textViewCategoryName;
     private Controler controler;
     private Context context;
     private  LinearLayout linearLayoutFloatingActionButton;
@@ -97,11 +94,15 @@ public class SaveFragment extends Fragment  {
         controler.getSaveNoteItemForDB();
         //localDatabase = new LocalDatabase(context);
     }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        this.myInflater = inflater;
+        myInflater.inflate(R.menu.add_new_note_menu_activity_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -121,6 +122,8 @@ public class SaveFragment extends Fragment  {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 
@@ -159,7 +162,8 @@ public class SaveFragment extends Fragment  {
     }
 
     public void initView(View rootView){
-        textViewCategoryName = rootView.findViewById(R.id.textViewCategoryName);
+        //textViewCategoryName = rootView.findViewById(R.id.textViewCategoryName);
+
         viewNoteList(rootView);
         initAllFloatingBouton(rootView);
 
@@ -228,12 +232,15 @@ public class SaveFragment extends Fragment  {
         //DialogSelectCategory dialogSelectCategory = new DialogSelectCategory(mainActivity);
         // dialogSelectCategory.getDialog().show();
     }
+    /*
     public void   showAddNoteDialog(Context context,String passwordText){
         showAddNoteDialog(context);
         EditTextPassword.setText(passwordText);
 
 
     }
+
+     */
 
 
     /**
@@ -242,7 +249,7 @@ public class SaveFragment extends Fragment  {
      */
     public void viewNoteList(View view) {
 
-        saveListNoteAdapter  = new SaveListNoteAdapter(controler.getSaveNoteItemArrayList());
+        saveListNoteAdapter  = new SaveListNoteAdapter(controler.getSaveNoteItemArrayList(),this);
         RecyclerView recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);;
         layoutManager = new LinearLayoutManager(recycleView.getContext());
         recycleView.setLayoutManager(layoutManager);
@@ -289,11 +296,13 @@ public class SaveFragment extends Fragment  {
 
     }
 
+
     /**
      * show add not Dialog alerte
      * @param context
      */
     EditText EditTextPassword;
+    /*
     public void   showAddNoteDialog(Context context){
         makeInvisibleFloatingButton();
         ShowAddNoteDialog showAddNoteDialog = new ShowAddNoteDialog(context);
@@ -308,7 +317,7 @@ public class SaveFragment extends Fragment  {
         EditTextPassword = showAddNoteDialog.getEditTextPassword();
         EditText EditTextHomepage = showAddNoteDialog.getEditTextHomepage();
         EditText EdiTextNoteCommentaire = showAddNoteDialog.getEdiTextNoteCommentaire();
-        /*
+
         List<CharSequence> charSequenceList = controler.returnSaveItemCategoryName();
         ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<CharSequence>(
                 context,android.R.layout.simple_spinner_item,charSequenceList
@@ -316,7 +325,7 @@ public class SaveFragment extends Fragment  {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSelectCategory.setAdapter(arrayAdapter);
 
-         */
+
 
 
         buttonSaveNote.setOnClickListener(v -> {
@@ -333,7 +342,8 @@ public class SaveFragment extends Fragment  {
                             EditTextNoteUserName.getText().toString(),
                             EditTextPassword.getText().toString(),
                             EditTextHomepage.getText().toString(),
-                            EdiTextNoteCommentaire.getText().toString()
+                            EdiTextNoteCommentaire.getText().toString(),
+                            getRandomMaterialColor("400")
                     );
 
                     //saveListNoteAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
@@ -354,7 +364,8 @@ public class SaveFragment extends Fragment  {
                             EditTextNoteUserName.getText().toString(),
                             EditTextPassword.getText().toString(),
                             "",
-                            ""
+                            "",
+                            getRandomMaterialColor("400")
                     );
 
                     // TODO
@@ -373,6 +384,37 @@ public class SaveFragment extends Fragment  {
         makevisibleFloatingActionButton.setVisibility(View.VISIBLE);
         dialog.show();
     }
+
+
+    private int getRandomMaterialColor(String typeColor) {
+        int returnColor = Color.GRAY;
+        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", context.getPackageName());
+
+        if (arrayId != 0) {
+            TypedArray colors = getResources().obtainTypedArray(arrayId);
+            int index = (int) (Math.random() * colors.length());
+            returnColor = colors.getColor(index, Color.GRAY);
+            colors.recycle();
+        }
+        return returnColor;
+    }
+    */
+
+    @Override
+    public void onItemClicked(int position) {
+        Log.i("onItemClicked",controler.getSaveNoteItemArrayList().get(position).getTitle());
+
+
+    }
+
+    @Override
+    public void onRowLongClicked(int position) {
+        // long press is performed, enable action mode
+
+    }
+
+
+
 
 
 

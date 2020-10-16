@@ -15,7 +15,7 @@ import java.io.Writer;
 /**
  * Created by JerryKelDev on 12/10/2020
  */
-public class StoreUtils {
+public class StorageUtils {
 
     private static File createOrGetFile(File destination,String fileName, String folderName){
         //file chemin d' accees
@@ -75,7 +75,7 @@ public class StoreUtils {
 
 
     }
-    public static String getTextFormStorage(File rooDestination,Context context,String fileName,String folderName){
+    public static String getTextFromStorage(File rooDestination,Context context,String fileName,String folderName){
         File file= createOrGetFile(rooDestination,fileName,folderName);
         return  readOnFile(context,file);
     }

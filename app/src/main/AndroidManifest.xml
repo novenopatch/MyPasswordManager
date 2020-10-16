@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/new_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vue.AppActivity.ActivityBackup"></activity>
-        <activity android:name=".vue.AppActivity.MainActivity">
+        <activity android:name=".controleur.AppActivity.ActivityBackup">
+            
+        </activity>
+        <activity android:name=".controleur.AppActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,14 +20,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".vue.AppActivity.ActivityAddNewNote"
+            android:name=".controleur.AppActivity.ActivityAddNewNote"
             android:label="@string/add_note"
-            android:parentActivityName=".vue.AppActivity.MainActivity"
-            android:theme="@style/ADDNoteTheme"></activity>
+            android:parentActivityName=".controleur.AppActivity.MainActivity"
+            android:theme="@style/ADDNoteTheme"/>
         <activity android:name=".vue.DrawerActivity.DrawActivity" />
         <activity android:name=".vue.save.SaveActivity" />
         <activity android:name=".vue.ConnectAppActivity.ConnectAppActivity" />
         <activity android:name=".vue.save.createLogin.ConnectActivity" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

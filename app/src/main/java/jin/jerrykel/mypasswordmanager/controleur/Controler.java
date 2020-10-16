@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import jin.jerrykel.mypasswordmanager.model.GenerateModel.GenerateComparator;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.model.UserModel.User;
@@ -105,7 +106,7 @@ public class Controler {
         }
 
     }
-    public void addNewNote(String title, String id, String password,String homePage, String comment ){
+    public void addNewNote(String title, String id, String password,String homePage, String comment, int color ){
         SaveNoteItem saveNoteItem = new SaveNoteItem(title,id,password,homePage,comment);
         localDatabaseManager.callSaveNoteItem.insertSaveNoteItem(saveNoteItem);
 
@@ -122,7 +123,6 @@ public class Controler {
         }
         return arrayList;
     }
-
      */
 
 
@@ -135,11 +135,6 @@ public class Controler {
     public ArrayList<GeneratePassword> getGeneratePasswordArrayList() {
         return generatePasswordArrayList;
     }
-
-
-
-
-
 
 
     /**
@@ -168,14 +163,6 @@ public class Controler {
        }
        return false;
     }
-
-
-
-
-
-
-
-
 
     /**
      * this methode test  password
@@ -275,17 +262,20 @@ public class Controler {
             localDatabaseManager.callGeneratePassword.deleteGeneratePasswordsAll(generatePasswordArrayList);
         }
         generatePasswordArrayList.add(generatePassword);
+        Collections.sort(generatePasswordArrayList,new GenerateComparator());
         localDatabaseManager.callGeneratePassword.insertGeneratePassword(generatePassword);
 
     }
     public void getGeneratePasswordForDB(){
        generatePasswordArrayList = localDatabaseManager.callGeneratePassword.getGeneratePasswords();
-       Collections.reverse(generatePasswordArrayList);
+        Collections.sort(generatePasswordArrayList,new GenerateComparator());
+       //Collections.reverse(generatePasswordArrayList);
     }
 
     public void getSaveNoteItemForDB(){
         if(localDatabaseManager.callSaveNoteItem.getSaveNoteItem()!=null){
             saveNoteItemArrayList = localDatabaseManager.callSaveNoteItem.getSaveNoteItem();
+
         }
 
 
@@ -308,5 +298,6 @@ public class Controler {
        /// saveNoteItemArrayList.remove(position);
 
     }
+
 
 }

@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vue.AppActivity.ActivityBackup"
+    tools:context=".controleur.AppActivity.ActivityBackup"
     android:orientation="vertical">
 
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textViewToAnnonceExport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
@@ -26,16 +26,17 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonExportToFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Export to File" />
+            android:checked="true"
+            android:text="@string/export_to_file" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/RadioButtonSaveFileToSDCARD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save File To SDCARD" />
+            android:text="@string/save_file_to_sdcard" />
     </RadioGroup>
 
     <View
@@ -49,6 +50,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/linearLayoutExportFile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -78,10 +80,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutSaveFileToSDCARD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,13 +95,13 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="SavePath" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textViewSavePathText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="SavePathText" />
 
             <View
                 android:id="@+id/divider3"
@@ -109,19 +113,19 @@
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Backup File Password" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Avertissement" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Save File To SdCARD" />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

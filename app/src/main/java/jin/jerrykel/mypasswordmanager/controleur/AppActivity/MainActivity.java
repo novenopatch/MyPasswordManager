@@ -1,4 +1,4 @@
-package jin.jerrykel.mypasswordmanager.vue.AppActivity;
+package jin.jerrykel.mypasswordmanager.controleur.AppActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -22,9 +22,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Generate.GenererFragment;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save.SaveFragment;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Generate.GenererFragment;
-import jin.jerrykel.mypasswordmanager.vue.AppActivity.Save.SaveFragment;
 import jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity.ConnectAppActivity;
 import jin.jerrykel.mypasswordmanager.vue.DrawerActivity.DrawActivity;
 import jin.jerrykel.mypasswordmanager.vue.fragment.NavDrawerMenuTestFragment;
@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity
         //BadgeDrawable badgeDrawable = tabs.getTabAt(1).getOrCreateBadge();
         //badgeDrawable.setVisible(true);
        // badgeDrawable.setNumber(0);
+
     }
 
 
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
+       //getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return false;
     }
 
     //gère le click sur le menu
