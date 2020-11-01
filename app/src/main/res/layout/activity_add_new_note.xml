@@ -97,7 +97,7 @@
                         android:inputType="textPassword" />
 
                     <ImageButton
-                        android:id="@+id/imageButtonAddNewCategory2"
+                        android:id="@+id/imageButtonPasswordVisibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"

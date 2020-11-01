@@ -4,38 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:orientation="vertical">
 
+    android:layout_marginBottom="3dp"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
-
-
-        <LinearLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.2"
-            android:gravity="center|center_horizontal"
-            android:orientation="horizontal">
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            android:layout_weight="0.2">
 
-                <ImageView
-                    android:id="@+id/imageViewCheck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_black_shape"
-                    android:gravity="center"
-                    android:padding="10sp"
-                    app:srcCompat="@drawable/ic_baseline_check_white_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:visibility="invisible"/>
+            <LinearLayout
+                android:id="@+id/linearLayoutTextViewNoteIndicatif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|center_horizontal"
+                android:orientation="horizontal">
+
 
                 <TextView
                     android:id="@+id/textViewNoteIndicatif"
@@ -44,12 +34,29 @@
                     android:background="@drawable/circle_green_shape"
                     android:gravity="center"
                     android:padding="10sp"
-                    android:text="@string/t3"
-                    />
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    android:text="@string/t3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutActionModeItemSelected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end|right"
+                android:gravity="bottom|center|right"
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_black_shape"
+                    app:srcCompat="@drawable/ic_baseline_check_white_24"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -70,7 +77,8 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="5dp"
                     android:text="@string/note_title"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewNoteUserName"
@@ -97,12 +105,14 @@
                     android:layout_height="wrap_content"
                     android:background="@color/myColorTransparent"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_baseline_favorite_border_black_24" />
+                    app:srcCompat="@drawable/ic_baseline_favorite_border_black_24"
+                    tools:ignore="VectorDrawableCompat" />
 
 
             </LinearLayout>
-        </LinearLayout>
 
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

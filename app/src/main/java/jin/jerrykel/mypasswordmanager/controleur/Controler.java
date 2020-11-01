@@ -5,7 +5,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
+import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GenerateComparator;
 import jin.jerrykel.mypasswordmanager.model.GenerateModel.GeneratePassword;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
@@ -34,9 +36,7 @@ public class Controler {
 
     private static LocalDatabaseManager localDatabaseManager;
 
-    public ArrayList<SaveNoteItem> getSaveNoteItemArrayList() {
-        return saveNoteItemArrayList;
-    }
+
 
     /**
      * contructeur private
@@ -65,7 +65,9 @@ public class Controler {
         return  Controler.instance;
     }
 
-
+    public ArrayList<SaveNoteItem> getSaveNoteItemArrayList() {
+        return saveNoteItemArrayList;
+    }
     /**
      * test if Item exist
      * @param arrayListItem
@@ -96,8 +98,7 @@ public class Controler {
      */
     public void addNewNotes(Context context,String title, String id, String password,String homePage, String comment ){
         if(!testIfItemExist(saveNoteItemArrayList,title)){
-            SaveNoteItem saveNoteItem = new SaveNoteItem(title,id,password,homePage,comment);
-            //saveItemCategory.setSaveNoteItem(saveNoteItem);
+            SaveNoteItem saveNoteItem = new SaveNoteItem(title,id,password,homePage,comment,returnIntDrawable());
             saveNoteItemArrayList.add(saveNoteItem);
             localDatabaseManager.callSaveNoteItem.insertSaveNoteItem(saveNoteItem);
 
@@ -106,6 +107,9 @@ public class Controler {
         }
 
     }
+
+
+    /*
     public void addNewNote(String title, String id, String password,String homePage, String comment, int color ){
         SaveNoteItem saveNoteItem = new SaveNoteItem(title,id,password,homePage,comment);
         localDatabaseManager.callSaveNoteItem.insertSaveNoteItem(saveNoteItem);
@@ -113,8 +117,6 @@ public class Controler {
 
 
     }
-
-    /*
     public ArrayList<SaveNoteItem> findAndShortSaveItemByCategoryName(String name){
         ArrayList<SaveNoteItem> arrayList = new ArrayList<>();
         for (SaveNoteItem saveNoteItem : saveNoteItemArrayList){
@@ -297,6 +299,48 @@ public class Controler {
         saveNoteItemArrayList.remove(position);
        /// saveNoteItemArrayList.remove(position);
 
+    }
+    public  void updateSaveNoteItem(int position){
+        localDatabaseManager.callSaveNoteItem.updateNoteItem(saveNoteItemArrayList.get(position));
+    }
+    public int returnIntDrawable(){
+        int[] ints = {
+                R.drawable.circle_shape_1,
+                R.drawable.circle_shape_2,
+                R.drawable.circle_shape_3,
+                R.drawable.circle_shape_4,
+                R.drawable.circle_shape_5,
+                R.drawable.circle_shape_6,
+                R.drawable.circle_shape_7,
+                R.drawable.circle_shape_8,
+                R.drawable.circle_shape_9,
+                R.drawable.circle_shape_10,
+                R.drawable.circle_shape_11,
+                R.drawable.circle_shape_12,
+                R.drawable.circle_shape_13,
+                R.drawable.circle_shape_14,
+                R.drawable.circle_shape_15,
+                R.drawable.circle_shape_16,
+                R.drawable.circle_shape_17,
+                R.drawable.circle_shape_18,
+                R.drawable.circle_shape_19,
+                R.drawable.circle_shape_20,
+                R.drawable.circle_shape_21,
+                R.drawable.circle_shape_22,
+                R.drawable.circle_shape_23,
+                R.drawable.circle_shape_24,
+                R.drawable.circle_shape_25,
+                R.drawable.circle_shape_26,
+                R.drawable.circle_shape_27,
+                R.drawable.circle_shape_28,
+                R.drawable.circle_shape_29,
+                R.drawable.circle_shape_30,
+                R.drawable.circle_shape_31
+        };
+        Random r = new Random();
+        int i = r.nextInt(ints.length -1);
+
+        return ints[i];
     }
 
 

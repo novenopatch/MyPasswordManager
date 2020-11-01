@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
        //getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return false;
+        return true;
     }
 
     //gère le click sur le menu
@@ -240,26 +240,7 @@ public class MainActivity extends AppCompatActivity
 
         //open new fragment
         Fragment fragment = null;
-        /*
-        //pour gerer le clic sur le cexpanda
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " List Expanded.", Toast.LENGTH_SHORT).show();
-            } });
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " List Collapsed.", Toast.LENGTH_SHORT).show();
-            } });
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText( getApplicationContext(), controler.getSaveCategoryListArrayList().get(groupPosition).getName() + " -> " + controler.getSaveCategoryListArrayList().get(groupPosition).getSaveItemCategories().get(childPosition).getTitle(), Toast.LENGTH_SHORT ).show();
-                return false;
-            } });
 
-         */
         switch (id){
             case R.id.activity_main_drawer_choice_color :
                // fragment = new NavDrawerMenuTestFragment();
@@ -315,6 +296,8 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
     public void resumeBack(){
         boolean tag = getIntent().getBooleanExtra("noveno",false);
         if(tag){

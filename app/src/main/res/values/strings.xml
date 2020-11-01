@@ -83,6 +83,10 @@
     <string name="commentaire">Comment</string>
     <string name="export_to_file">Export to File</string>
     <string name="save_file_to_sdcard">Save File To SDCARD</string>
+    <string name="select_all">select All</string>
+    <string name="options">options</string>
+    <string name="itemSelected">Item Selected</string>
+    <string name="itemSelecteds">Items Selected</string>
 
 
 </resources>

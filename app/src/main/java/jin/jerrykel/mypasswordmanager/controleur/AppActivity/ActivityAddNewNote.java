@@ -2,10 +2,13 @@ package jin.jerrykel.mypasswordmanager.controleur.AppActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -23,7 +26,11 @@ public class ActivityAddNewNote extends AppCompatActivity {
     private EditText EditTextPassword;
     private EditText EditTextHomepage;
     private EditText EdiTextNoteCommentaire;
+    private ImageButton imageButtonPasswordVisibility;
     private Controler controler;
+    private TransformationMethod transformation;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +79,7 @@ public class ActivityAddNewNote extends AppCompatActivity {
         this.EditTextPassword = (EditText)findViewById(R.id.EditTextPassword);
         this.EditTextHomepage = (EditText)findViewById(R.id.EditTextHomepage);
         this.EdiTextNoteCommentaire = (EditText)findViewById(R.id.EdiTextNoteCommentaire);
+        this.imageButtonPasswordVisibility = (ImageButton)findViewById(R.id.imageButtonPasswordVisibility);
         AddNoteListener();
     }
    public void configureToobar(){
@@ -81,8 +89,28 @@ public class ActivityAddNewNote extends AppCompatActivity {
        actionBar.setDisplayHomeAsUpEnabled(true);
    }
     public void   AddNoteListener(){
+        imageButtonPasswordVisibility.setOnClickListener(v -> {
+            changeEditTextPasswordAndImageButtonPasswordVisibility();
+        });
 
         buttonSaveNote.setOnClickListener(v -> saveNoteAction());
+
+    }
+
+    public void changeEditTextPasswordAndImageButtonPasswordVisibility(){
+
+        if(this.EditTextPassword.getTransformationMethod() == null){
+            this.EditTextPassword.setTransformationMethod(new PasswordTransformationMethod());
+            transformation = this.EditTextPassword.getTransformationMethod();
+            imageButtonPasswordVisibility.setImageResource(R.drawable.ic_baseline_visibility_off_black_24);
+
+        }
+        else {
+            this.EditTextPassword.setTransformationMethod(null);
+            imageButtonPasswordVisibility.setImageResource(R.drawable.ic_baseline_visibility_black_24);
+
+
+        }
 
     }
     public void saveNoteAction(){
@@ -102,7 +130,7 @@ public class ActivityAddNewNote extends AppCompatActivity {
                 );
 
                 //saveListNoteAdapter.notifyItemChanged(controler.findandreturnpositon(spinnerSelectCategory.getSelectedItem().toString()));
-                getResources().getDrawable(R.drawable.common_google_signin_btn_icon_dark);
+
 
             }
             if( returnBoleanSecondTest()
@@ -117,6 +145,7 @@ public class ActivityAddNewNote extends AppCompatActivity {
                         ""
                 );
 
+
                 // TODO
                 //on changera ca un peu apres
 
@@ -126,6 +155,10 @@ public class ActivityAddNewNote extends AppCompatActivity {
         }
 
     }
+    /**
+     *
+     * @return boolean
+     */
     public boolean returnBoleanSecondTest(){
         if( !EditTextNoteTitle.getText().toString().isEmpty()
                 &!EditTextNoteUserName.getText().toString().isEmpty()
@@ -135,6 +168,11 @@ public class ActivityAddNewNote extends AppCompatActivity {
         }
         return false;
     }
+
+    /**
+     *
+     * @return boolean
+     */
     public boolean returnBoleanfirstTest(){
         if( !EditTextNoteTitle.getText().toString().isEmpty()
                 &!EditTextNoteUserName.getText().toString().isEmpty()
@@ -147,10 +185,12 @@ public class ActivityAddNewNote extends AppCompatActivity {
         return false;
     }
     public void returnToMainActivity(){
+
         Intent intent = new Intent(ActivityAddNewNote.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("noveno",true);
         startActivity(intent);
+
     }
 
 }

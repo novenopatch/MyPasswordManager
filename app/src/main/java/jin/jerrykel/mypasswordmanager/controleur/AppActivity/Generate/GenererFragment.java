@@ -3,7 +3,6 @@ package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Generate;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ public class GenererFragment extends Fragment {
     private TextView textViewPassLenght;
     private View rootView ;
     private Button buttonGenerate;
-    private EditText editTextPasswordGenerate;
+    private TextView textViewPasswordGenerate;
     private EditText editTextPasswordLength;
     private EditText editTextSpecialchars;
     private Context context;
@@ -106,7 +105,7 @@ public class GenererFragment extends Fragment {
         buttonGenerate =(Button) view.findViewById(R.id.buttonGenerate);
         switch_custom_or_default = (Switch)  view.findViewById(R.id.switch_custom_or_default);
 
-        editTextPasswordGenerate = (EditText)  view.findViewById(R.id.editTextPasswordGenerate);
+        textViewPasswordGenerate = (TextView)  view.findViewById(R.id.TextViewPasswordGenerate);
 
         editTextSpecialchars = (EditText)  view.findViewById(R.id.editTextText_special_chars);
         editTextPasswordLength = (EditText)  view.findViewById(R.id.editText_pass_lenght);
@@ -140,7 +139,7 @@ public class GenererFragment extends Fragment {
 
         //img btn and switch tab
         View[] viewsBoxes = {switch_custom_or_default,imgBtnAdd,imgBtnRemove,superImgbtncopy,
-                editTextPasswordGenerate};
+                textViewPasswordGenerate};
         for(View v : viewsBoxes){
             v.setOnClickListener(ImgbtnListener);
         }
@@ -326,9 +325,9 @@ public class GenererFragment extends Fragment {
                     }
                     break;
                 case R.id.superImgbtncopy:
-                    if(!editTextPasswordGenerate.getText().toString().isEmpty()){
+                    if(!textViewPasswordGenerate.getText().toString().isEmpty()){
                         Utils.copyPasswordInclipBoard(getString(R.string.toastText),
-                                editTextPasswordGenerate.getText().toString(),v.getContext()
+                                textViewPasswordGenerate.getText().toString(),v.getContext()
                         );
                     }
                     break;
@@ -350,6 +349,7 @@ public class GenererFragment extends Fragment {
 
                     }
                     break;
+                    /*
                 case R.id.editTextPasswordGenerate:
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         editTextPasswordGenerate.setFocusable(View.FOCUSABLE_AUTO);
@@ -363,6 +363,8 @@ public class GenererFragment extends Fragment {
                     }
                     editTextPasswordGenerate.hasFocusable();
                     break;
+
+                     */
 
                 default:
                     break;
@@ -384,7 +386,7 @@ public class GenererFragment extends Fragment {
         //pour reverser la listr
         Collections.reverse(controle.getGeneratePasswordArrayList());
         passwordGenerateListAdapter.notifyDataSetChanged();
-        editTextPasswordGenerate.setText(password);
+        textViewPasswordGenerate.setText(password);
         // copyInClipboardAndNotify(password,v);
     }
 

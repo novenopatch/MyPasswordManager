@@ -87,15 +87,14 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/editTextPasswordGenerate"
+                        <TextView
+                            android:id="@+id/TextViewPasswordGenerate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.80"
-                            android:cursorVisible="false"
-                            android:focusable="false"
-                            android:inputType="textLongMessage"
-                            tools:ignore="TextFields" />
+                            android:padding="3dp"
+                            android:textSize="24sp"
+                            android:textStyle="italic" />
 
                         <ImageButton
                             android:id="@+id/superImgbtncopy"

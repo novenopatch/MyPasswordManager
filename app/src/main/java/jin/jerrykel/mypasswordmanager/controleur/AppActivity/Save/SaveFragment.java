@@ -1,7 +1,9 @@
 package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,8 +31,8 @@ import java.util.Collections;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.ActivityAddNewNote;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.MainActivity;
-import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save.Adapter.SaveListNoteAdapter;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
+import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 
@@ -54,6 +57,8 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
     private Context context;
     private  LinearLayout linearLayoutFloatingActionButton;
     private FloatingActionButton makevisibleFloatingActionButton;
+    private  LinearLayout linearLayoutActionMode;
+    private boolean allSelected = false;
 
 
 
@@ -163,6 +168,8 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
     public void initView(View rootView){
         //textViewCategoryName = rootView.findViewById(R.id.textViewCategoryName);
+        linearLayoutActionMode = rootView.findViewById(R.id.LinearLayoutActionMode);
+        linearLayoutActionMode.setVisibility(View.INVISIBLE);
 
         viewNoteList(rootView);
         initAllFloatingBouton(rootView);
@@ -178,7 +185,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
     public void initAllFloatingBouton(View view){
         linearLayoutFloatingActionButton = view.findViewById(R.id.linearLayoutOfFloatingActionButton);
         makevisibleFloatingActionButton = view.findViewById(R.id.floatingActionButtonMain);
-        FloatingActionButton AddCategoryFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddCategory);
+       // FloatingActionButton AddCategoryFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddCategory);
         FloatingActionButton AddNoteFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddNote);
         FloatingActionButton AddNoteTypeFloatingActionButton = view.findViewById(R.id.floatingActionButtonAddNoteType);
         linearLayoutFloatingActionButton.setVisibility(View.INVISIBLE);
@@ -207,9 +214,9 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
         //AddNoteFloatingActionButton.setOnClickListener(v -> showAddNoteDialog(context));
         AddNoteFloatingActionButton.setOnClickListener(v -> startAddNewNote());
-        AddNoteTypeFloatingActionButton.setOnClickListener(v ->showAddNoteTypeDialog(
-                (MainActivity) context)
-        );
+       /// AddNoteTypeFloatingActionButton.setOnClickListener(v ->showAddNoteTypeDialog(
+         //       (MainActivity) context)
+       // );
     }
     public void startAddNewNote(){
         Intent intent = new Intent(context, ActivityAddNewNote.class);
@@ -249,7 +256,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
      */
     public void viewNoteList(View view) {
 
-        saveListNoteAdapter  = new SaveListNoteAdapter(controler.getSaveNoteItemArrayList(),this);
+        saveListNoteAdapter  = new SaveListNoteAdapter(controler.getSaveNoteItemArrayList(),this,context);
         RecyclerView recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);;
         layoutManager = new LinearLayoutManager(recycleView.getContext());
         recycleView.setLayoutManager(layoutManager);
@@ -257,8 +264,9 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
         //ArrayList<SaveNoteItem> saveNoteItems = controler.findAndShortSaveItemByCategoryName(saveItemCategory.getName());
 
         recycleView.setAdapter( saveListNoteAdapter );
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
-        recycleView.addItemDecoration(dividerItemDecoration);
+
+       DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycleView.getContext(),DividerItemDecoration.VERTICAL);
+       recycleView.addItemDecoration(dividerItemDecoration);
 
 
         ItemTouchHelper.Callback itemToucherHelperCallback = new ItemTouchHelper.Callback() {
@@ -297,11 +305,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
     }
 
 
-    /**
-     * show add not Dialog alerte
-     * @param context
-     */
-    EditText EditTextPassword;
+
     /*
     public void   showAddNoteDialog(Context context){
         makeInvisibleFloatingButton();
@@ -400,18 +404,96 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
     }
     */
 
+
+    @Override
+    public void onIconCategoryRatingBarClicked(int position, ImageButton categoryRatingBarClicked) {
+        if(!saveListNoteAdapter.isActionMode()){
+            if(controler.getSaveNoteItemArrayList().get(position).isRate()){
+                categoryRatingBarClicked.setImageResource(R.drawable.ic_baseline_favorite_border_black_24);
+                controler.getSaveNoteItemArrayList().get(position).setRate(false);
+            }
+            else {
+                categoryRatingBarClicked.setImageResource(R.drawable.ic_favorite_24dp);
+                controler.getSaveNoteItemArrayList().get(position).setRate(true);
+            }
+            controler.updateSaveNoteItem(position);
+        }
+
+
+    }
+
     @Override
     public void onItemClicked(int position) {
-        Log.i("onItemClicked",controler.getSaveNoteItemArrayList().get(position).getTitle());
+        if(!saveListNoteAdapter.isActionMode()){
+            Log.i("onItemClicked",controler.getSaveNoteItemArrayList().get(position).getTitle());
+            Uri mUri = Uri.parse("https://api.whatsapp.com/send?phone=+22899885902&text='Hello User'");
+            Intent intent = new Intent(Intent.ACTION_VIEW,mUri);
+            intent.setPackage("com.whatsapp");
+            startActivity(intent);
+        }
 
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onRowLongClicked(int position) {
-        // long press is performed, enable action mode
+    public void actionModeActon(boolean actionMode) {
+
+        TextView textViewSelectedItemsCount = rootView.findViewById(R.id.textViewSelectedItemsCount);
+        LinearLayout linearLayoutCancel = rootView.findViewById(R.id.LinearLayoutCancel);
+        LinearLayout linearLayoutSelectAll = rootView.findViewById(R.id.LinearLayoutSelectAll);
+        int size = saveListNoteAdapter.getActionModeList().size();
+        if( actionMode){
+            linearLayoutActionMode.setVisibility(View.VISIBLE);
+            if(size <1){
+                textViewSelectedItemsCount.setText(String.valueOf(size +1) + " "+ getString(R.string.itemSelected));
+            }else {
+                textViewSelectedItemsCount.setText(String.valueOf(size + 1) + " "+ getString(R.string.itemSelecteds));
+            }
+
+            linearLayoutCancel.setOnClickListener(v -> {
+                saveListNoteAdapter.setActionMode(false);
+                linearLayoutActionMode.setVisibility(View.INVISIBLE);
+                saveListNoteAdapter.notifyDataSetChanged();
+            });
+
+             linearLayoutSelectAll.setOnClickListener(v -> {
+                 //TODO
+
+                 for (SaveNoteItem saveNoteItem: controler.getSaveNoteItemArrayList()){
+
+                     if(!allSelected){
+                         saveNoteItem.itemSelected = true;
+
+                     }else {
+                         saveNoteItem.itemSelected = false;
+                     }
+                 }
+                 if(!allSelected){
+                     allSelected = true;
+                 }
+                 else {
+
+                     allSelected = false;
+                 }
+                 saveListNoteAdapter.notifyDataSetChanged();
+             });
+        }
+        else {
+            linearLayoutActionMode.setVisibility(View.INVISIBLE);
+        }
+    }
+    /*
+
+    //@Override
+    public  void onRowLongClicked(int position) {
+           actionMode(saveListNoteAdapter.getActionModeList());
 
     }
+
+     */
+
+
 
 
 

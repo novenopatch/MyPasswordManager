@@ -64,5 +64,16 @@ public class CallSaveNoteItem {
             e.printStackTrace();
         }
     }
+    public void updateNoteItem(SaveNoteItem saveNoteItem){
+        try {
+
+            dao.update(saveNoteItem);
+
+            Log.i("DATABASE","insert success");
+
+        } catch (SQLException e) {
+            Log.e("DATABASE","insert error");
+        }
+    }
 
 }

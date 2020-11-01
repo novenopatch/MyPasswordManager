@@ -18,6 +18,12 @@ public class SaveNoteItem  {
     private String homePage;
     @DatabaseField
     private String comment ;
+    @DatabaseField
+    private int drawableInt ;
+    @DatabaseField
+    private boolean isRate =false;
+    public Boolean itemSelected = false;
+
 
 
 
@@ -25,13 +31,22 @@ public class SaveNoteItem  {
     }
 
 
-    public SaveNoteItem(String title, String id, String password, String homePage, String comment) {
+    public SaveNoteItem(String title, String id, String password, String homePage, String comment,int drawableInt) {
         this.title = title;
         this.password = password;
         this.homePage = homePage;
         this.comment = comment;
+        this.drawableInt = drawableInt;
 
 
+    }
+
+    public boolean isRate() {
+        return isRate;
+    }
+
+    public void setRate(boolean rate) {
+        isRate = rate;
     }
 
     public String getTitle() {
@@ -72,8 +87,11 @@ public class SaveNoteItem  {
 
      */
 
+    public int getDrawableInt() {
+        return drawableInt;
+    }
 
-
-
-
+    public void setDrawableInt(int drawableInt) {
+        this.drawableInt = drawableInt;
+    }
 }
