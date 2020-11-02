@@ -26,13 +26,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.ActivityAddNewNote;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.MainActivity;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
-import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 import jin.jerrykel.mypasswordmanager.utils.Utils;
 
 
@@ -249,7 +250,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
      */
 
-
+    RecyclerView recycleView;
     /**
      * view Note List
      * @param
@@ -257,7 +258,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
     public void viewNoteList(View view) {
 
         saveListNoteAdapter  = new SaveListNoteAdapter(controler.getSaveNoteItemArrayList(),this,context);
-        RecyclerView recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);;
+        recycleView = (RecyclerView)view.findViewById(R.id.saveRecyclerView);;
         layoutManager = new LinearLayoutManager(recycleView.getContext());
         recycleView.setLayoutManager(layoutManager);
 
@@ -434,6 +435,7 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
 
     }
+    List<View> selection = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -459,7 +461,11 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
              linearLayoutSelectAll.setOnClickListener(v -> {
                  //TODO
+                // saveNoteItem.itemSelected = true;
+                 //holder.linearLayoutActionModeItemSelected.setVisibility(View.VISIBLE);
+                // actionModeList.add(saveNoteItem);
 
+                 /*
                  for (SaveNoteItem saveNoteItem: controler.getSaveNoteItemArrayList()){
 
                      if(!allSelected){
@@ -476,6 +482,8 @@ public class SaveFragment extends Fragment implements  SaveListNoteAdapter.Messa
 
                      allSelected = false;
                  }
+
+                  */
                  saveListNoteAdapter.notifyDataSetChanged();
              });
         }

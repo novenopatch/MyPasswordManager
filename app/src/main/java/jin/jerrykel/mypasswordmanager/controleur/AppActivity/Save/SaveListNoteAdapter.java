@@ -96,9 +96,9 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
         if(!actionMode){
             holder.linearLayoutActionModeItemSelected.setVisibility(View.INVISIBLE);
             saveNoteItem.itemSelected = false;
+            applyClickEvents(holder, position);
         }else {
-            //holder.linearLayoutActionModeItemSelected.setVisibility(View.VISIBLE);
-            //saveNoteItem.itemSelected = true;
+
         }
         // apply click events
         holder.itemView.setOnClickListener(v -> {
@@ -114,10 +114,14 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
                         holder.linearLayoutActionModeItemSelected.setVisibility(View.INVISIBLE);
                         actionModeList.remove(saveNoteItem);
                         listener.actionModeActon(true);
-                        if (actionModeList.size()==0){
+                        if (actionModeList.size() ==0&& actionModeList.isEmpty()){
                             actionMode = false;
                             listener.actionModeActon(false);//actionMode();
-                            actionModeList = new ArrayList<>();
+                            for (SaveNoteItem saveNoteItemo: saveNoteItemArrayList){
+                                    saveNoteItemo.itemSelected = false;
+
+                            }
+                            notifyDataSetChanged();
                             applyClickEvents(holder, position);
                         }
                     }
@@ -133,6 +137,7 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
                 actionMode = true;
                 listener.actionModeActon(true);
                 saveNoteItem.itemSelected = true;
+                holder.itemView.setActivated(false);
                 holder.linearLayoutActionModeItemSelected.setVisibility(View.VISIBLE);
                 return true;
             }
