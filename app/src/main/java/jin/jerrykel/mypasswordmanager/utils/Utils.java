@@ -103,7 +103,7 @@ public abstract  class Utils {
     public static void copyPasswordInclipBoard(String toastText, String generatePassword, Context contexte) {
         ClipboardManager clipboardManager = (ClipboardManager)contexte.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText("copy Text",generatePassword);
-
+        clipboardManager.setPrimaryClip(clipData);
 
         makeToast(toastText,contexte);
 

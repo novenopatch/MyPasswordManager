@@ -327,7 +327,7 @@ public class GenererFragment extends Fragment {
                 case R.id.superImgbtncopy:
                     if(!textViewPasswordGenerate.getText().toString().isEmpty()){
                         Utils.copyPasswordInclipBoard(getString(R.string.toastText),
-                                textViewPasswordGenerate.getText().toString(),v.getContext()
+                                textViewPasswordGenerate.getText().toString(),context
                         );
                     }
                     break;
