@@ -87,6 +87,7 @@
     <string name="options">options</string>
     <string name="itemSelected">Item Selected</string>
     <string name="itemSelecteds">Items Selected</string>
+    <string name="edit">edit</string>
 
 
 </resources>

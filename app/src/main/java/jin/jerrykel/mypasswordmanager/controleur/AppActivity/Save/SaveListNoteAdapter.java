@@ -2,27 +2,35 @@ package jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jin.jerrykel.mypasswordmanager.R;
+import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.model.SaveModel.SaveNoteItem;
 
 public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapter.SaveViewHolder> {
     private ArrayList<SaveNoteItem> saveNoteItemArrayList;
     private MessageAdapterListener listener;
     private Context contexte;
+    private Controler controler;
     private boolean actionMode = false;
     private List<SaveNoteItem> actionModeList = new ArrayList<>();
 
@@ -32,6 +40,7 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
         this.saveNoteItemArrayList = saveNoteItemArrayList;
         this.listener = listener;
         this.contexte = context;
+        this.controler = Controler.getInstance(context);
 
 
     }
@@ -133,6 +142,9 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
 
         });
         holder.itemView.setOnLongClickListener(v -> {
+            makePopMenu(contexte,holder.textViewNoteIndicatif,holder.itemView,position,saveNoteItem,holder.linearLayoutActionModeItemSelected);
+            /*
+
             if(!actionMode){
                 actionMode = true;
                 listener.actionModeActon(true);
@@ -143,7 +155,70 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
             }
             return false;
 
+             */
+            return true;
+
         });
+
+
+    }
+    private void makePopMenu(Context context,TextView textView, android.view.View view,int position,SaveNoteItem saveNoteItem,LinearLayout linearLayout){
+        PopupMenu popupMenu = new PopupMenu(context,textView);
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch(item.getItemId()){
+                case R.id.menu_histo_search:
+                    ////
+                    return true;
+                case R.id.menu_histo_edit:
+                    //// //
+                    return true;
+                case R.id.menu_histo_share:
+                    Intent intent = new Intent(Intent.ACTION_SEND);// Uri.parse(generatePasswordArrayList.get(position).getPassword()));
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT,saveNoteItemArrayList.get(position).getPassword());
+                    //TODO
+                    context.startActivity(Intent.createChooser(intent,"Share via"));
+                    return true;
+                case R.id.menu_histo_delete:
+                    controler.deleteSaveNoteItem(position);
+                    // generatePasswordArrayList.remove(position);
+                    this.notifyItemRemoved(position);
+                    return true;
+                case R.id.menu_histo_select:
+                    if(!actionMode){
+                        actionMode = true;
+                        listener.actionModeActon(true);
+                        saveNoteItem.itemSelected = true;
+                        view.setActivated(false);
+                        linearLayout.setVisibility(View.VISIBLE);
+
+                    }
+                    ///
+                    return true;
+                default:
+                    return true;
+
+            }
+
+        });
+        popupMenu.inflate(R.menu.menu_save_popup);
+        try {
+
+            Field field = popupMenu.getClass().getDeclaredField("mPopup");
+            field.setAccessible(true);
+            Object menuPopupHelper = field.get(popupMenu);
+            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
+            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            method.setAccessible(true);
+            method.invoke(menuPopupHelper, new Object[]{true});
+
+
+        }catch (Exception e){
+            Log.d("popupMenu error", Objects.requireNonNull(e.getMessage()));
+        }finally {
+            popupMenu.show();
+        }
 
     }
     private void applyClickEvents(SaveViewHolder holder, final int position) {
@@ -186,4 +261,6 @@ public class SaveListNoteAdapter extends RecyclerView.Adapter<SaveListNoteAdapte
 
        void actionModeActon(boolean actionMode);
     }
+
+
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_histo_search"
+        android:title="@string/Enlarge"
+        android:icon="@drawable/ic_baseline_search_gray_24"/>
+    <item
+        android:id="@+id/menu_histo_edit"
+        android:title="@string/edit"
+        android:icon="@drawable/ic_baseline_edit_gray_24"/>
+    <item
+        android:id="@+id/menu_histo_share"
+        android:title="@string/share"
+        android:icon="@drawable/ic_baseline_share_gray_24"/>
+    <item
+        android:id="@+id/menu_histo_delete"
+        android:icon="@drawable/ic_baseline_delete_gray_24"
+        android:title="@string/delete" />
+    <item
+        android:id="@+id/menu_histo_select"
+        android:icon="@drawable/ic_baseline_check_gray_24"
+        android:title="@string/select_all" />
+
+</menu>

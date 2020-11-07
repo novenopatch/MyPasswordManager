@@ -104,7 +104,6 @@ public abstract  class Utils {
         ClipboardManager clipboardManager = (ClipboardManager)contexte.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText("copy Text",generatePassword);
         clipboardManager.setPrimaryClip(clipData);
-
         makeToast(toastText,contexte);
 
     }
