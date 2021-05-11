@@ -74,7 +74,6 @@ public class SendMessageActivity extends AppCompatActivity {
             txtContact.setText("");
             contactButton.setText("afficher les contact");
 
-
         }else {
 
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
@@ -92,31 +91,42 @@ public class SendMessageActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(SendMessageActivity.this,permissions,2);
                 }else {
                     // afficher un message precisant que la permission est indispensable
-                    messageAddPermissionF();
+                    messageAddPermissionF("Persmission READ contact Obligatoire");
                 }
             }
 
         }
     }
-public  void messageAddPermissionF(){
-    Snackbar.make(myLinearLayout,"Persmission READ contact Obligatoire",Snackbar.LENGTH_SHORT).setAction("Paramètres", new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+
+    public void sendMessage(View view) {
+       if(ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+           String phoneString = txtPhone.getText().toString();
+           String messageString = txtMessage.getText().toString();
+           if(phoneString !=null && messageString !=null){
+               SmsManager.getDefault().sendTextMessage(phoneString,null,messageString,null,null);
+               Toast.makeText(this,"Sms envoyé",Toast.LENGTH_SHORT).show();
+               txtMessage.setText("");
+           }
+       }else {
+
+           if(!ActivityCompat.shouldShowRequestPermissionRationale(SendMessageActivity.this,Manifest.permission.SEND_SMS)){
+               String[] permissions = {Manifest.permission.SEND_SMS};
+
+               ActivityCompat.requestPermissions(SendMessageActivity.this,permissions,3);
+           }else {
+               messageAddPermissionF("Persmission SEND SMS Obligatoire");
+           }
+       }
+
+
+
+    }
+    public  void messageAddPermissionF(String msj){
+        Snackbar.make(myLinearLayout,msj,Snackbar.LENGTH_SHORT).setAction("TODO Paramètres", view -> {
             final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             final Uri uri = Uri.fromParts("package",SendMessageActivity.this.getPackageName(),null);
             intent.setData(uri);
             startActivity(intent);
-        }
-    }).show();
-}
-    public void sendMessage(View view) {
-       String phoneString = txtPhone.getText().toString();
-       String messageString = txtMessage.getText().toString();
-       if(phoneString !=null && messageString !=null){
-           SmsManager.getDefault().sendTextMessage(phoneString,null,messageString,null,null);
-           Toast.makeText(this,"Sms envoyé",Toast.LENGTH_SHORT).show();
-           txtMessage.setText("");
-       }
-
+        }).show();
     }
 }

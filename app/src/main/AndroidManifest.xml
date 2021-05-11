@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/new_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controleur.AppActivity.smsProgamCode.SendMessageActivity"></activity>
+        <activity android:name=".controleur.AppActivity.smsProgamCode.SendMessageActivity" />
         <activity android:name=".controleur.AppActivity.ActivityBackup"></activity>
         <activity android:name=".controleur.AppActivity.MainActivity">
             <intent-filter>
