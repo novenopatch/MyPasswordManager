@@ -43,13 +43,13 @@ public class SendMessageActivity extends AppCompatActivity {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public void recupContact(){
         // access
         ContentResolver contentResolver = this.getContentResolver();
         //recup
         Cursor cursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_ALTERNATIVE,
-                ContactsContract.CommonDataKinds.Phone.NUMBER},null ,null);
+                ContactsContract.CommonDataKinds.Phone.NUMBER},null ,null,null);
 
         if(cursor== null){
             Log.d("recup","*************error cursor");
@@ -78,11 +78,11 @@ public class SendMessageActivity extends AppCompatActivity {
         }else {
 
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
                     viewListContact = true;
                     recupContact();
                     contactButton.setText("cacher les contact");
-                }
+                
 
             }else {
                 // demande une fois de donner la permission
