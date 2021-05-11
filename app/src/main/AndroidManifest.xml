@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jin.jerrykel.mypasswordmanager">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/new_icone"
@@ -9,9 +14,8 @@
         android:roundIcon="@mipmap/new_icone_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controleur.AppActivity.ActivityBackup">
-            
-        </activity>
+        <activity android:name=".controleur.AppActivity.smsProgamCode.SendMessageActivity"></activity>
+        <activity android:name=".controleur.AppActivity.ActivityBackup"></activity>
         <activity android:name=".controleur.AppActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +27,11 @@
             android:name=".controleur.AppActivity.ActivityAddNewNote"
             android:label="@string/add_note"
             android:parentActivityName=".controleur.AppActivity.MainActivity"
-            android:theme="@style/ADDNoteTheme"/>
+            android:theme="@style/ADDNoteTheme" />
         <activity android:name=".vue.DrawerActivity.DrawActivity" />
         <activity android:name=".vue.save.SaveActivity" />
         <activity android:name=".vue.ConnectAppActivity.ConnectAppActivity" />
         <activity android:name=".vue.save.createLogin.ConnectActivity" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

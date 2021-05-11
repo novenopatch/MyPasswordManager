@@ -88,6 +88,7 @@
     <string name="itemSelected">Item Selected</string>
     <string name="itemSelecteds">Items Selected</string>
     <string name="edit">edit</string>
+    <string name="test_sms_program">sms program</string>
 
 
 </resources>

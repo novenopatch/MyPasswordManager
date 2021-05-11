@@ -24,6 +24,7 @@ import com.google.android.material.tabs.TabLayout;
 import jin.jerrykel.mypasswordmanager.R;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Generate.GenererFragment;
 import jin.jerrykel.mypasswordmanager.controleur.AppActivity.Save.SaveFragment;
+import jin.jerrykel.mypasswordmanager.controleur.AppActivity.smsProgamCode.SendMessageActivity;
 import jin.jerrykel.mypasswordmanager.controleur.Controler;
 import jin.jerrykel.mypasswordmanager.vue.ConnectAppActivity.ConnectAppActivity;
 import jin.jerrykel.mypasswordmanager.vue.DrawerActivity.DrawActivity;
@@ -215,6 +216,7 @@ public class MainActivity extends AppCompatActivity
         init();
 
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         /*
@@ -267,14 +269,24 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent3);
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 break;
+            case R.id.activity_main_drawer_go_to_sms_program:
+                Intent intent4 = new Intent(MainActivity.this, SendMessageActivity.class);
+                startActivity(intent4);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                break;
             default:
                 break;
+
+
         }
+        /*
         if(fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(pager.getId(), fragment);
             ft.commit();
         }
+
+         */
         this.drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;

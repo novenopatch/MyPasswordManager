@@ -38,6 +38,11 @@
                     android:id="@+id/activity_main_drawer_share"
                     android:icon="@drawable/ic_baseline_share_black_24"
                     android:title="@string/share"/>
+
+                <item
+                    android:id="@+id/activity_main_drawer_go_to_sms_program"
+                    android:icon="@drawable/for_test_ic_baseline_sms_24"
+                    android:title="@string/test_sms_program"/>
             </group>
         </menu>
     </item>
